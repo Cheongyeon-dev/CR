@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUISE: THREE DAYS OF SUN</title>
+  <style>
+    :root {
+      --bg-color: #0b101a;
+      --text-color: #e0e5ec;
+      --accent-gold: #d4af37;
+      --accent-red: #8b0000;
+      --glass-bg: rgba(11, 16, 26, 0.6);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* 네비게이션 바 */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass-border);
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+    }
+
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent-gold);
+    }
+
+    /* 공통 섹션 스타일 */
+    section {
+      min-height: 100vh;
+      padding: 6rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Nanum Myeongjo', serif;
+    }
+
+    /* 1. Hero 섹션 (브로셔형) */
+    #hero {
+      position: relative;
+      justify-content: center;
+      text-align: center;
+      background: radial-gradient(circle at center, rgba(21, 40, 60, 0.8), var(--bg-color));
+      overflow: hidden;
+    }
+
+    /* 물결 효과 배경 */
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(to bottom, transparent, var(--bg-color)),
+                  url('https://images.unsplash.com/photo-1498330177096-689e3fc9aec0?q=80&w=2000&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.3;
+      z-index: -1;
+      animation: gentleWaves 20s infinite alternate ease-in-out;
+    }
+
+    @keyframes gentleWaves {
+      0% { transform: scale(1.0); filter: brightness(1); }
+      100% { transform: scale(1.05); filter: brightness(0.8); }
+    }
+
+    #hero h1 {
+      font-size: 4rem;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+      letter-spacing: 0.2rem;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    .hero-glass-panel {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 600px;
+      margin-top: 2rem;
+    }
+
+    /* 아코디언 메뉴 (업데이트 내역 등) */
+    .accordion {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 2rem;
+    }
+
+    .accordion-item {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      margin-bottom: 0.5rem;
+      border-radius: 4px;
+    }
+
+    .accordion-header {
+      padding: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--accent-gold);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .accordion-content {
+      padding: 0 1rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .accordion-item.active .accordion-content {
+      padding: 1rem;
+      max-height: 500px;
+    }
+
+    /* 2. Guide 섹션 (안내판형) */
+    #guide {
+      background: var(--bg-color);
+      align-items: center;
+    }
+
+    #guide h2 {
+      font-size: 2.5rem;
+      color: var(--accent-gold);
+      margin-bottom: 2rem;
+    }
+
+    .guide-board {
+      background: #111822;
+      border: 1px solid #2a3b50;
+      width: 100%;
+      max-width: 800px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .tabs {
+      display: flex;
+      background: #1a2533;
+      border-bottom: 1px solid #2a3b50;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 1rem;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.3s;
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: #2a3b50;
+      color: var(--accent-gold);
+    }
+
+    .tab-content {
+      display: none;
+      padding: 2rem;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 미세한 위화감 효과 */
+    .creepy-text {
+      transition: opacity 0.3s;
+    }
+    .creepy-text:hover {
+      opacity: 0.3;
+      text-shadow: 2px 0 2px var(--accent-red);
+    }
+
+    /* 3. Cast 섹션 (초대장형) */
+    #cast {
+      background: radial-gradient(circle at top, #1a1010, var(--bg-color));
+    }
+
+    #cast h2 {
+      font-size: 2.5rem;
+      color: var(--accent-gold);
+      margin-bottom: 3rem;
+    }
+
+    .invitation-card {
+      background: rgba(10, 0, 0, 0.4);
+      border: 1px solid var(--accent-gold);
+      padding: 3rem;
+      max-width: 800px;
+      text-align: center;
+      margin-bottom: 4rem;
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+    }
+
+    .invitation-card p {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 1.1rem;
+      color: #e0d0b0;
+    }
+
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .char-card {
+      position: relative;
+      aspect-ratio: 2/3;
+      background: #111;
+      border: 1px solid #333;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .char-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: grayscale(20%);
+    }
+
+    .char-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .char-card:hover .char-img {
+      transform: scale(1.05);
+      filter: grayscale(0%);
+    }
+
+    .char-card:hover .char-info {
+      transform: translateY(0);
+    }
+
+    .char-name {
+      color: var(--accent-gold);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .char-role {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero">MAIN</a>
+    <a href="#guide">GUIDE</a>
+    <a href="#cast">CAST</a>
+  </nav>
+
+  <!-- 1. Hero 섹션 -->
+  <section id="hero">
+    <h1>THREE DAYS OF SUN</h1>
+    
+    <div class="hero-glass-panel">
+      <p style="font-family: 'Nanum Myeongjo', serif; font-size: 1.1rem; text-align: left;">
+        태양이 수평선을 하얗게 지우는 한여름, 당신은 각자의 사연을 안고 이 호화 여객선에 승선했습니다.<br><br>
+        끝없이 펼쳐진 맑은 바다, 찰랑이는 얼음 잔, 유쾌한 웃음소리. 
+        육지와 단절되었다는 사실마저 낭만으로 치부될 만큼, 이 선상에서의 시간은 더할 나위 없이 눈부신 휴가 그 자체입니다.<br><br>
+        모든 것이 완벽하게 흘러가고 있습니다.
+      </p>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>업데이트 내역</span>
+          <span>▼</span>
+        </div>
+        <div class="accordion-content">
+          <p>2026.06.27 - 크루즈 출항</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span>이용 안내</span>
+          <span>▼</span>
+        </div>
+        <div class="accordion-content">
+          <p>안전한 항해를 위해 야간 갑판 출입을 자제해 주십시오.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Guide 섹션 -->
+  <section id="guide">
+    <h2>선내 가이드</h2>
+    
+    <div class="guide-board">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'deck')">갑판 (Deck)</button>
+        <button class="tab-btn" onclick="openTab(event, 'lounge')">라운지 (Lounge)</button>
+        <button class="tab-btn" onclick="openTab(event, 'system')">상태창 안내</button>
+      </div>
+
+      <div id="deck" class="tab-content active">
+        <h3 style="color: var(--accent-gold); margin-bottom: 1rem;">야외 갑판 및 수영장</h3>
+        <p>눈부신 햇살과 시원한 바닷바람을 즐길 수 있는 메인 덱입니다. 칵테일 바가 상시 운영됩니다.</p>
+        <ul style="margin-left: 1.5rem; margin-top: 1rem; color: #aaa;">
+          <li>주간: 일광욕 및 수영장 이용 가능</li>
+          <li>야간: 별빛 파티 및 <span class="creepy-text">지정되지 않은 항로 관측</span></li>
+        </ul>
+      </div>
+
+      <div id="lounge" class="tab-content">
+        <h3 style="color: var(--accent-gold); margin-bottom: 1rem;">실내 라운지</h3>
+        <p>잔잔한 라이브 음악과 함께 최고급 주류를 즐길 수 있는 공간입니다. 드레스 코드가 요구될 수 있습니다.</p>
+      </div>
+
+      <div id="system" class="tab-content">
+        <h3 style="color: var(--accent-gold); margin-bottom: 1rem;">상태창 표시 안내</h3>
+        <p>채팅 하단에 현재의 환경이 표시됩니다.</p>
+        <div style="background: #0b101a; padding: 1rem; border: 1px solid #2a3b50; margin-top: 1rem; font-family: monospace;">
+          📍 갑판 · 🌞 낮 · ☀️ 맑음 · 🌊 잔잔 · 안개:없음
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">※ 기상 악화(짙은 안개) 시, 명단에 없는 승객과의 대화는 권장하지 않습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Cast 섹션 -->
+  <section id="cast">
+    <h2>승선 명단</h2>
+    
+    <div class="invitation-card">
+      <p>
+        "이 눈부신 바다 위에서, 며칠간의 완벽한 여유를 즐기시길 바랍니다."<br><br>
+        - 귀하를 환영하며.
+      </p>
+    </div>
+
+    <div class="character-grid">
+      <!-- 캐릭터 1 -->
+      <div class="char-card">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" alt="캐릭터 1" class="char-img">
+        <div class="char-info">
+          <div class="char-name">이름 미상</div>
+          <div class="char-role">항해 / 갑판 담당</div>
+        </div>
+      </div>
+      <!-- 캐릭터 2 -->
+      <div class="char-card">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop" alt="캐릭터 2" class="char-img">
+        <div class="char-info">
+          <div class="char-name">이름 미상</div>
+          <div class="char-role">라운지 / 바 담당</div>
+        </div>
+      </div>
+      <!-- 캐릭터 3 -->
+      <div class="char-card">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=400&auto=format&fit=crop" alt="캐릭터 3" class="char-img">
+        <div class="char-info">
+          <div class="char-name">이름 미상</div>
+          <div class="char-role">객실 / 안내 담당</div>
+        </div>
+      </div>
+      <!-- 캐릭터 4 -->
+      <div class="char-card">
+        <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=80&w=400&auto=format&fit=crop" alt="캐릭터 4" class="char-img">
+        <div class="char-info">
+          <div class="char-name">이름 미상</div>
+          <div class="char-role">기록 / 의무 담당</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // 아코디언 스크립트
+    function toggleAccordion(element) {
+      const item = element.parentElement;
+      item.classList.toggle('active');
+    }
+
+    // 탭 스크립트
+    function openTab(evt, tabName) {
+      const tabContents = document.getElementsByClassName('tab-content');
+      for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove('active');
+      }
+      const tabBtns = document.getElementsByClassName('tab-btn');
+      for (let i = 0; i < tabBtns.length; i++) {
+        tabBtns[i].classList.remove('active');
+      }
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+</html>
