@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>선내 안내 | THREE DAYS OF SUN</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body class="theme-b">
+
+  <nav class="top-nav" aria-label="사이트 메뉴">
+    <a class="brand" href="index.html">
+      <span class="brand-mark brand-mark--dark" aria-hidden="true">⚓</span>
+      THREE DAYS OF SUN
+      <small>Onboard Directory</small>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">대문</a>
+      <a href="guide.html" class="active">선내 안내</a>
+      <a href="cast.html">승선 명단</a>
+    </div>
+  </nav>
+
+  <header class="masthead-b wrap">
+    <p class="masthead-b__tag">DECK PLAN · PROGRAM GUIDE</p>
+    <h1>선내 안내판</h1>
+    <p class="masthead-b__sub">Passenger Information · Rev. 2026.06</p>
+  </header>
+
+  <main class="wrap guide-layout">
+    <aside class="deck-diagram" aria-label="선박 층별 안내">
+      <p class="deck-diagram__title">DECK PLAN — SIDE PROFILE</p>
+      <div class="deck-stack">
+        <button type="button" class="deck-layer active" data-tab="pool"><span>10F</span>수영장</button>
+        <button type="button" class="deck-layer" data-tab="deck"><span>9F</span>갑판</button>
+        <button type="button" class="deck-layer" data-tab="lounge"><span>7F</span>라운지</button>
+        <button type="button" class="deck-layer" data-tab="cabin"><span>5–8F</span>객실</button>
+      </div>
+    </aside>
+
+    <div class="program-sheet">
+      <div id="deck" class="program-pane">
+        <h3>야외 갑판 · Deck 9</h3>
+        <p class="program-pane__lead">눈부신 햇살과 바닷바람. 칵테일 바 주간 상시 운영.</p>
+        <ul class="program-list">
+          <li><strong>주간</strong> 일광욕 · 산책 · 칵테일 바</li>
+          <li><strong>야간</strong> 별빛 파티 · 라이브 DJ</li>
+          <li class="glitch-line"><strong>연결</strong> B Deck 통로 — 승객 출입 제한</li>
+        </ul>
+      </div>
+      <div id="lounge" class="program-pane">
+        <h3>실내 라운지 · Deck 7</h3>
+        <p class="program-pane__lead">라이브 음악과 최고급 주류.</p>
+        <ul class="program-list">
+          <li><strong>17:00</strong> 선셋 칵테일 리셉션</li>
+          <li><strong>20:00</strong> 정장 디너 · 파티</li>
+          <li class="glitch-line"><strong>20:00</strong> 정장 디너 · 파티</li>
+        </ul>
+      </div>
+      <div id="cabin" class="program-pane">
+        <h3>객실 · Deck 5–8</h3>
+        <p class="program-pane__lead">오션뷰 스위트 · 발코니 · 룸서비스 24h</p>
+        <ul class="program-list">
+          <li>체크인 14:00 · 체크아웃 11:00</li>
+          <li>비상 시 객실 내 안내 방송</li>
+        </ul>
+      </div>
+      <div id="pool" class="program-pane active">
+        <h3>수영장 · Deck 10</h3>
+        <p class="program-pane__lead">인피니티 풀 · 자acuzzi</p>
+        <ul class="program-list">
+          <li>06:00–22:00 개방</li>
+          <li>타월 · 선크림 데크 옆 수령</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <section class="wrap status-plaque">
+    <div class="status-plaque__inner">
+      <h2>상태창 표시</h2>
+      <p>날씨 · 시간 · 안개 등 환경 정보만 표시됩니다.</p>
+      <div class="status-plaque__readout">📍 갑판 · 🌞 낮 · ☀️ 맑음 · 🌊 잔잔 · 안개: 없음</div>
+      <p class="status-plaque__note">※ 짙은 안개 시, 명단에 없는 승객과의 대화는 권장하지 않습니다.</p>
+    </div>
+  </section>
+
+  <footer class="site-footer--b wrap">
+    <p>THREE DAYS OF SUN · For Passenger Use Only</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.deck-layer').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.deck-layer').forEach(function (b) { b.classList.remove('active'); });
+        document.querySelectorAll('.program-pane').forEach(function (p) { p.classList.remove('active'); });
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

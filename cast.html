@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>승선 명단 | THREE DAYS OF SUN</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body class="theme-c">
+
+  <!-- 1) Embarkation gate -->
+  <div class="embark-gate" id="embark-gate" role="dialog" aria-modal="true" aria-labelledby="embark-title">
+    <div class="embark-gate__veil" aria-hidden="true"></div>
+    <div class="embark-gate__panel embark-pamphlet">
+      <div class="embark-pamphlet__punch embark-pamphlet__punch--top" aria-hidden="true"></div>
+      <div class="embark-pamphlet__punch embark-pamphlet__punch--bottom" aria-hidden="true"></div>
+      <div class="embark-pamphlet__foil" aria-hidden="true"></div>
+      <span class="corner-gold tl" aria-hidden="true"></span>
+      <span class="corner-gold tr" aria-hidden="true"></span>
+      <span class="corner-gold bl" aria-hidden="true"></span>
+      <span class="corner-gold br" aria-hidden="true"></span>
+      <p class="embark-gate__tag">Embarkation · 승선 안내</p>
+      <h2 class="embark-gate__title" id="embark-title">THREE DAYS OF SUN</h2>
+      <p class="embark-gate__lead">VIP 초대장이 확인되었습니다.<br>승선 절차를 진행해 주십시오.</p>
+      <button type="button" class="btn btn-boarding btn-embark" id="btn-embark">승선하기</button>
+    </div>
+  </div>
+
+  <!-- 2) Real boarding pass (승선 시에만) -->
+  <div class="pass-overlay" id="pass-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="pass-title">
+    <div class="pass-overlay__veil" aria-hidden="true"></div>
+    <div class="pass-overlay__stage">
+      <p class="pass-overlay__hint">Boarding Pass · 승선권</p>
+      <div class="cruise-pass" id="cruise-pass">
+        <div class="cruise-pass__stub">
+          <div class="cruise-pass__stub-body">
+            <span class="cruise-pass__stub-mark">VIP</span>
+            <span class="cruise-pass__ref">TDS-2026</span>
+          </div>
+          <div class="cruise-pass__stub-foot">
+            <span class="cruise-pass__gate">GATE A</span>
+            <svg class="cruise-pass__barcode" viewBox="0 0 120 16" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <rect x="0" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="3" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="5" y="0" width="3" height="16" fill="#d4b86a"/>
+              <rect x="9" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="11" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="14" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="16" y="0" width="4" height="16" fill="#d4b86a"/>
+              <rect x="21" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="24" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="26" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="29" y="0" width="3" height="16" fill="#d4b86a"/>
+              <rect x="33" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="35" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="38" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="40" y="0" width="3" height="16" fill="#d4b86a"/>
+              <rect x="44" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="47" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="49" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="52" y="0" width="4" height="16" fill="#d4b86a"/>
+              <rect x="57" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="59" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="62" y="0" width="3" height="16" fill="#d4b86a"/>
+              <rect x="66" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="68" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="71" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="73" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="76" y="0" width="3" height="16" fill="#d4b86a"/>
+              <rect x="80" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="82" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="85" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="87" y="0" width="4" height="16" fill="#d4b86a"/>
+              <rect x="92" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="95" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="97" y="0" width="3" height="16" fill="#d4b86a"/>
+              <rect x="101" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="104" y="0" width="1" height="16" fill="#d4b86a"/>
+              <rect x="106" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="109" y="0" width="3" height="16" fill="#d4b86a"/>
+              <rect x="113" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="116" y="0" width="2" height="16" fill="#d4b86a"/>
+              <rect x="119" y="0" width="1" height="16" fill="#d4b86a"/>
+            </svg>
+          </div>
+        </div>
+        <div class="cruise-pass__main">
+          <div class="cruise-pass__punch cruise-pass__punch--top" aria-hidden="true"></div>
+          <div class="cruise-pass__punch cruise-pass__punch--bottom" aria-hidden="true"></div>
+          <div class="cruise-pass__foil" aria-hidden="true"></div>
+          <span class="corner-gold tl" aria-hidden="true"></span>
+          <span class="corner-gold tr" aria-hidden="true"></span>
+          <span class="corner-gold bl" aria-hidden="true"></span>
+          <span class="corner-gold br" aria-hidden="true"></span>
+
+          <p class="cruise-pass__ship" id="pass-title">THREE DAYS OF SUN</p>
+          <p class="cruise-pass__type">BOARDING PASS</p>
+
+          <dl class="cruise-pass__grid">
+            <div class="cruise-pass__field">
+              <dt>Guest</dt>
+              <dd>{{user}}</dd>
+            </div>
+            <div class="cruise-pass__field">
+              <dt>Stateroom</dt>
+              <dd>VIP Suite</dd>
+            </div>
+            <div class="cruise-pass__field">
+              <dt>Deck</dt>
+              <dd>7 · Lounge</dd>
+            </div>
+            <div class="cruise-pass__field">
+              <dt>Embark</dt>
+              <dd>Day 1 · 17:00</dd>
+            </div>
+            <div class="cruise-pass__field">
+              <dt>Disembark</dt>
+              <dd>Day 3 · 09:00</dd>
+            </div>
+            <div class="cruise-pass__field">
+              <dt>Route</dt>
+              <dd>Western Pacific · 3N</dd>
+            </div>
+          </dl>
+
+          <p class="cruise-pass__event">Evening Reception · Deck 7 Lounge</p>
+        </div>
+      </div>
+      <button type="button" class="btn btn-boarding" id="btn-pass-confirm">승선권 확인</button>
+    </div>
+  </div>
+
+  <!-- 3) Main cast page -->
+  <div class="cast-page" id="cast-page" aria-hidden="true">
+
+    <nav class="top-nav" aria-label="사이트 메뉴">
+      <a class="brand" href="index.html">
+        <span class="brand-mark brand-mark--gold" aria-hidden="true">✦</span>
+        THREE DAYS OF SUN
+        <small>VIP Invitation</small>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">대문</a>
+        <a href="guide.html">선내 안내</a>
+        <a href="cast.html" class="active">승선 명단</a>
+      </div>
+    </nav>
+
+    <header class="cast-hero wrap">
+      <div class="invite-frame">
+        <div class="invite-frame__foil" aria-hidden="true"></div>
+        <span class="corner-gold tl" aria-hidden="true"></span>
+        <span class="corner-gold tr" aria-hidden="true"></span>
+        <span class="corner-gold bl" aria-hidden="true"></span>
+        <span class="corner-gold br" aria-hidden="true"></span>
+
+        <div class="invite-frame__headline">
+          <h1 class="invite-frame__title">THREE DAYS OF SUN</h1>
+          <p class="invite-frame__subtitle">You're Cordially Invited</p>
+        </div>
+
+        <div class="invite-frame__copy">
+          <p>"이 눈부신 바다 위에서, 며칠간의 완벽한 여유를 즐기시길 바랍니다."</p>
+          <p>저녁 리셉션에 귀하를 정중히 초대합니다. 승선권을 지참하시고, 7층 라운지로 오시기 바랍니다.</p>
+          <p class="invite-frame__sign">— THREE DAYS OF SUN</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+
+      <section class="cast-roster" aria-label="승선 명단">
+
+        <article class="cast-profile">
+          <div class="cast-profile__portrait">
+            <span class="cast-profile__numeral" aria-hidden="true">I</span>
+          </div>
+          <div class="cast-profile__bio">
+            <p class="cast-profile__role">Deck Staff</p>
+            <h2 class="cast-profile__post">갑판 승무원</h2>
+            <p class="cast-profile__desc">야외 갑판 순찰과 승객 안내를 맡는다. 햇볕 아래에서도 제복 주름이 흐트러지지 않는다. 시선이 자주 갑판 난간 너머 수평선으로 향한다.</p>
+          </div>
+        </article>
+
+        <article class="cast-profile cast-profile--flip">
+          <div class="cast-profile__portrait">
+            <span class="cast-profile__numeral" aria-hidden="true">II</span>
+          </div>
+          <div class="cast-profile__bio">
+            <p class="cast-profile__role">Bartender</p>
+            <h2 class="cast-profile__post">바텐더</h2>
+            <p class="cast-profile__desc">라운지 바에서 칵테일을 맞춘다. 잔을 기울일 때 손끝이 잠깐 멈춘다. 웃음의 온도는 늘 적당하다.</p>
+          </div>
+        </article>
+
+        <article class="cast-profile">
+          <div class="cast-profile__portrait">
+            <span class="cast-profile__numeral" aria-hidden="true">III</span>
+          </div>
+          <div class="cast-profile__bio">
+            <p class="cast-profile__role">Cabin Steward</p>
+            <h2 class="cast-profile__post">객실 승무원</h2>
+            <p class="cast-profile__desc">객실 복도 안내와 룸서비스 접수를 담당한다. 복도에서 발소리를 가장 먼저 안다. 이름표는 항상 반듯하다.</p>
+          </div>
+        </article>
+
+        <article class="cast-profile cast-profile--flip">
+          <div class="cast-profile__portrait">
+            <span class="cast-profile__numeral" aria-hidden="true">IV</span>
+          </div>
+          <div class="cast-profile__bio">
+            <p class="cast-profile__role">Concierge</p>
+            <h2 class="cast-profile__post">컨시어지</h2>
+            <p class="cast-profile__desc">VIP 승객 예약·안내를 맡는다. 안내 데스크 뒤에서 일정과 명단을 확인한다. 펜끝만큼은 흔들리지 않는다.</p>
+          </div>
+        </article>
+
+      </section>
+
+    </main>
+
+    <footer class="footer-note">
+      Evening Reception · Deck 7 Lounge
+    </footer>
+
+  </div>
+
+  <script src="cast-ticket.js"></script>
+</body>
+</html>
