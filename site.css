@@ -1562,6 +1562,10 @@ body.is-boarded .cast-page {
   scroll-margin-top: 88px;
 }
 
+.cast-profile--flip {
+  grid-template-columns: 1fr minmax(240px, 38%);
+}
+
 .cast-profile--flip .cast-profile__portrait { order: 2; }
 .cast-profile--flip .cast-profile__bio { order: 1; text-align: right; }
 .cast-profile--flip .cast-profile__bio .cast-profile__role,
@@ -1687,6 +1691,9 @@ body.is-boarded .cast-page {
   .cast-profile {
     grid-template-columns: clamp(180px, 36vw, 280px) 1fr;
     gap: clamp(20px, 3vw, 32px);
+  }
+  .cast-profile--flip {
+    grid-template-columns: clamp(180px, 36vw, 280px) 1fr;
   }
   .cast-profile--flip .cast-profile__portrait { order: 0; }
   .cast-profile--flip .cast-profile__bio { order: 0; text-align: left; }
