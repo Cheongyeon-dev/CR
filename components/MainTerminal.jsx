@@ -1,0 +1,698 @@
+// 크루즈 코즈믹 호러 TRPG 통합 UI 컴포넌트
+// type prop에 따라 단말기, 다이스, 아이템, 엔딩 등을 렌더링합니다.
+
+// 크루즈 코즈믹 호러 TRPG 통합 UI 컴포넌트
+
+function CustomComponent({
+  type = "main", // "main"(상시메뉴), "dice"(판정), "item_discover"(최초발견연출), "ending"(엔딩)
+
+  // Main Menu Props
+  playerName = "VIP 승객",
+  weather = "맑음",
+  time = "Day 1 - 18:00",
+  fogLevel = "없음",
+  sanity = 100,
+  events = [],
+  inventoryIds = [], // 수집품 메뉴에서 확인할 ID 배열
+
+  // Dice Props
+  diceType = "1d20",
+  diceResult = null,
+  diceReason = "탐색",
+
+  // Item Props
+  id = "", // 최초 발견 시 연출할 단서 ID
+
+  // Ending Props
+  title = "",
+  verdict = "",
+  body = ""
+}) {
+  const [activeTab, setActiveTab] = React.useState("map");
+  const [viewItem, setViewItem] = React.useState(null);
+
+  // 탭 변경 시 상세 보기 초기화
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    if (tab !== "inventory") {
+      setViewItem(null);
+    }
+  };
+  const [isRolling, setIsRolling] = React.useState(false);
+  const [showResult, setShowResult] = React.useState(false);
+
+  // 다이스 굴리기 액션
+  const handleRoll = () => {
+    if (isRolling || showResult) return;
+    setIsRolling(true);
+    setTimeout(() => {
+      setIsRolling(false);
+      setShowResult(true);
+    }, 1500); // 1.5초 애니메이션
+  };
+
+  // 1. 상시 메뉴 UI (지도/상태창/수집품)
+  if (type === "main") {
+    return (
+      <div
+        style={{
+          maxWidth: "400px",
+          margin: "0 auto",
+          background: "linear-gradient(180deg, #0a1f3d 0%, #061528 100%)",
+          border: "1px solid #d4b86a",
+          borderRadius: "12px",
+          color: "#f5f0e6",
+          fontFamily: '"Pretendard", sans-serif',
+          boxShadow:
+            "0 16px 32px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05)",
+          overflow: "hidden",
+        }}
+      >
+        {/* 헤더 영역 */}
+        <div
+          style={{
+            padding: "16px 20px",
+            borderBottom: "1px solid rgba(212, 184, 106, 0.3)",
+            background: "rgba(255,255,255,0.02)",
+          }}
+        >
+          <h3
+            style={{
+              margin: 0,
+              fontSize: "12px",
+              letterSpacing: "0.2em",
+              color: "#d4b86a",
+              textTransform: "uppercase",
+            }}
+          >
+            THREE DAYS OF SUN
+          </h3>
+          <p
+            style={{ margin: "4px 0 0", fontSize: "18px", fontWeight: "bold" }}
+          >
+            {playerName}
+          </p>
+        </div>
+
+        {/* 탭 버튼 */}
+        <div
+          style={{
+            display: "flex",
+            borderBottom: "1px solid rgba(212, 184, 106, 0.2)",
+          }}
+        >
+          {["map", "status", "inventory"].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => handleTabChange(tab)}
+              style={{
+                flex: 1,
+                padding: "12px 0",
+                background:
+                  activeTab === tab
+                    ? "rgba(212, 184, 106, 0.15)"
+                    : "transparent",
+                border: "none",
+                borderBottom:
+                  activeTab === tab
+                    ? "2px solid #d4b86a"
+                    : "2px solid transparent",
+                color: activeTab === tab ? "#f0e4c4" : "#8a7f6e",
+                fontSize: "13px",
+                fontWeight: "bold",
+                cursor: "pointer",
+                transition: "all 0.2s",
+              }}
+            >
+              {tab === "map" ? "지도" : tab === "status" ? "상태창" : "수집품"}
+            </button>
+          ))}
+        </div>
+
+        {/* 콘텐츠 */}
+        <div style={{ padding: "24px 20px", minHeight: "280px" }}>
+          {/* 지도 탭 */}
+          {activeTab === "map" && (
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+            >
+              <div
+                style={{
+                  fontSize: "11px",
+                  color: "#d4b86a",
+                  letterSpacing: "0.1em",
+                }}
+              >
+                ◆ DECK PLAN & EVENTS
+              </div>
+              {[
+                { id: "10F", name: "야외 수영장 & 자쿠지" },
+                { id: "9F", name: "갑판 산책로" },
+                { id: "7F", name: "라운지 바" },
+                { id: "4F", name: "레스토랑" },
+                { id: "5-8F", name: "여객 객실 구역" },
+              ].map((deck) => {
+                const deckEvents = events.filter((e) => e.location === deck.id);
+                return (
+                  <div
+                    key={deck.id}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                    }}
+                  >
+                    <div style={mapBtnStyle}>
+                      <span style={deckNumStyle}>{deck.id}</span>
+                      <span style={{ flex: 1, textAlign: "left" }}>
+                        {deck.name}
+                      </span>
+                      <span style={indicatorStyle}>이동 가능</span>
+                    </div>
+                    {deckEvents.length > 0 && (
+                      <div
+                        style={{
+                          padding: "6px 12px",
+                          background: "rgba(0,0,0,0.2)",
+                          borderLeft: "2px solid #7fd4df",
+                          borderRadius: "0 4px 4px 0",
+                          marginTop: "2px",
+                          fontSize: "12px",
+                          color: "#f5f0e6",
+                        }}
+                      >
+                        {deckEvents.map((ev, idx) => (
+                          <div key={idx} style={{ padding: "4px 0" }}>
+                            <span
+                              style={{ color: "#d4b86a", fontWeight: "bold" }}
+                            >
+                              {ev.name}
+                            </span>{" "}
+                            | {ev.mood} 💭{deck.id} & {ev.action}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {/* 상태창 탭 */}
+          {activeTab === "status" && (
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+            >
+              <div
+                style={{
+                  background: "#040d1a",
+                  padding: "16px",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(127, 212, 223, 0.3)",
+                  boxShadow: "inset 0 0 16px rgba(0,0,0,0.8)",
+                }}
+              >
+                <div
+                  style={{
+                    color: "#7fd4df",
+                    fontFamily: "monospace",
+                    fontSize: "13px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "12px",
+                  }}
+                >
+                  <span>TIME</span> <span>{time}</span>
+                </div>
+                <div
+                  style={{
+                    color: "#7fd4df",
+                    fontFamily: "monospace",
+                    fontSize: "13px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "12px",
+                  }}
+                >
+                  <span>WEATHER</span> <span>{weather}</span>
+                </div>
+                <div
+                  style={{
+                    color: fogLevel !== "없음" ? "#e8925a" : "#7fd4df",
+                    fontFamily: "monospace",
+                    fontSize: "13px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span>FOG WARN</span> <span>{fogLevel}</span>
+                </div>
+              </div>
+              <div
+                style={{
+                  textAlign: "center",
+                  marginTop: "12px",
+                  padding: "16px",
+                  background: "rgba(255,255,255,0.02)",
+                  borderRadius: "8px",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "11px",
+                    color: "#d4b86a",
+                    marginBottom: "8px",
+                  }}
+                >
+                  심리 상태
+                </div>
+                <div style={{ fontSize: "24px", marginBottom: "4px" }}>
+                  {sanity > 70 ? "🍸" : sanity > 30 ? "🍹" : "🍷"}
+                </div>
+                <div
+                  style={{
+                    fontSize: "13px",
+                    color: sanity > 30 ? "#f5f0e6" : "#e8925a",
+                  }}
+                >
+                  {sanity > 70
+                    ? "평온함. 기분 좋은 파도 소리가 들립니다."
+                    : sanity > 30
+                      ? "조금 어지럽습니다. 안개가 짙어집니다."
+                      : "위험합니다. 귓가에 누군가의 웃음소리가 들립니다."}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 수집품 탭 */}
+          {activeTab === "inventory" && (
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+            >
+              <div
+                style={{
+                  fontSize: "11px",
+                  color: "#d4b86a",
+                  marginBottom: "8px",
+                  letterSpacing: "0.1em",
+                }}
+              >
+                ◆ COLLECTED LOGS
+              </div>
+              
+              {/* 아이템 상세 보기 모드 */}
+              {viewItem ? (
+                <div style={{ background: "rgba(0,0,0,0.3)", border: "1px solid #d4b86a", borderRadius: "8px", padding: "16px", position: "relative" }}>
+                  <button 
+                    onClick={() => setViewItem(null)}
+                    style={{ position: "absolute", top: "12px", right: "12px", background: "transparent", border: "none", color: "#8a7f6e", cursor: "pointer", fontSize: "16px" }}
+                  >
+                    ✖
+                  </button>
+                  <div style={{ fontSize: "24px", marginBottom: "8px" }}>{viewItem.icon}</div>
+                  <div style={{ fontSize: "16px", fontWeight: "bold", color: "#f0e4c4", marginBottom: "4px" }}>{viewItem.title}</div>
+                  <div style={{ fontSize: "11px", color: "#8a7f6e", marginBottom: "16px" }}>{viewItem.desc}</div>
+                  
+                  {/* 종이/일기장일 경우 찢어진 느낌의 디자인 적용 */}
+                  {viewItem.type.includes("paper") ? (
+                    <div style={{
+                      background: viewItem.type === "bloody_paper" ? "rgba(92, 36, 56, 0.1)" : "rgba(245, 240, 230, 0.05)",
+                      borderLeft: viewItem.type === "bloody_paper" ? "3px solid #8b1a1a" : "3px solid #8a7f6e",
+                      padding: "16px",
+                      fontFamily: '"Nanum Myeongjo", serif',
+                      fontSize: "14px",
+                      lineHeight: "1.8",
+                      color: viewItem.type === "wet_paper" ? "rgba(245, 240, 230, 0.6)" : "#d1d8e5",
+                      textShadow: viewItem.type === "wet_paper" ? "0 0 2px rgba(245, 240, 230, 0.4)" : "none",
+                      whiteSpace: "pre-wrap"
+                    }}>
+                      {viewItem.content}
+                    </div>
+                  ) : viewItem.type === "photo" ? (
+                    <div style={{
+                      background: "#000",
+                      padding: "12px",
+                      border: "8px solid #fff",
+                      borderBottom: "32px solid #fff",
+                      fontFamily: '"Nanum Myeongjo", serif',
+                      fontSize: "12px",
+                      color: "#333",
+                      textAlign: "center"
+                    }}>
+                      <div style={{ height: "120px", background: "linear-gradient(45deg, #111, #333)", marginBottom: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#555" }}>
+                        [ 흐릿한 형상 ]
+                      </div>
+                      {viewItem.content}
+                    </div>
+                  ) : (
+                    <div style={{ padding: "12px", background: "rgba(255,255,255,0.02)", fontSize: "13px", color: "#a6b0c2", lineHeight: "1.6" }}>
+                      {viewItem.content}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* 아이템 목록 모드 */
+                inventoryIds.length > 0 ? (
+                  inventoryIds.map(id => {
+                    const item = ITEM_DB[id];
+                    if (!item) return null;
+                    return (
+                      <div 
+                        key={id}
+                        onClick={() => setViewItem(item)}
+                        style={{
+                          display: "flex", alignItems: "center", gap: "12px", padding: "12px",
+                          background: "rgba(0,0,0,0.2)", borderLeft: "2px solid #d4b86a", cursor: "pointer",
+                          transition: "background 0.2s"
+                        }}
+                        onMouseOver={e => e.currentTarget.style.background = "rgba(212, 184, 106, 0.1)"}
+                        onMouseOut={e => e.currentTarget.style.background = "rgba(0,0,0,0.2)"}
+                      >
+                        <span style={{ fontSize: "16px" }}>{item.icon}</span>
+                        <div>
+                          <div style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</div>
+                          <div style={{ fontSize: "11px", color: "#8a7f6e" }}>{item.desc}</div>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div style={{ fontSize: "13px", color: "#8a7f6e", textAlign: "center", padding: "20px" }}>
+                    아직 발견된 단서가 없습니다.
+                  </div>
+                )
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // 2. 다이스 롤러 UI
+  if (type === "dice") {
+    // 1~20 중 랜덤 숫자 (실제 렌더링용, AI 결과값이 있으면 그걸 씀)
+    const resultValue = diceResult || Math.floor(Math.random() * 20) + 1;
+    const isSuccess = resultValue >= 11;
+    const isCritical = resultValue >= 16;
+    const isFumble = resultValue <= 5;
+
+    return (
+      <div
+        style={{
+          maxWidth: "300px",
+          margin: "20px auto",
+          padding: "24px",
+          background: "linear-gradient(135deg, #0a1f3d, #061528)",
+          border: "1px solid #d4b86a",
+          borderRadius: "12px",
+          textAlign: "center",
+          color: "#f5f0e6",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* 데굴데굴 애니메이션 및 CSS */}
+        <style>
+          {`
+            @keyframes rollDice {
+              0% { transform: rotate(0deg) scale(1); }
+              25% { transform: rotate(-45deg) scale(1.1) translateY(-10px); }
+              50% { transform: rotate(180deg) scale(0.9) translateY(5px); }
+              75% { transform: rotate(315deg) scale(1.05) translateY(-5px); }
+              100% { transform: rotate(360deg) scale(1); }
+            }
+            @keyframes pulseGlow {
+              0% { box-shadow: 0 0 10px rgba(212, 184, 106, 0.2); }
+              50% { box-shadow: 0 0 20px rgba(212, 184, 106, 0.6); }
+              100% { box-shadow: 0 0 10px rgba(212, 184, 106, 0.2); }
+            }
+          `}
+        </style>
+
+        <div
+          style={{
+            fontSize: "12px",
+            color: "#8a7f6e",
+            letterSpacing: "0.2em",
+            marginBottom: "16px",
+          }}
+        >
+          ROLL: {diceReason}
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "80px",
+            marginBottom: "20px",
+          }}
+        >
+          {/* 주사위 아이콘/애니메이션 */}
+          <div
+            onClick={handleRoll}
+            style={{
+              width: "64px",
+              height: "64px",
+              background: showResult
+                ? isCritical
+                  ? "#2c8aa0"
+                  : isFumble
+                    ? "#5c2438"
+                    : "#1d456a"
+                : "#1d456a",
+              borderRadius: "12px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: "24px",
+              fontWeight: "bold",
+              color: "#fff",
+              cursor: showResult ? "default" : "pointer",
+              animation: isRolling
+                ? "rollDice 1.5s cubic-bezier(0.25, 1, 0.5, 1)"
+                : showResult
+                  ? "none"
+                  : "pulseGlow 2s infinite",
+              border: "2px solid #d4b86a",
+              transition: "background 0.5s",
+            }}
+          >
+            {isRolling ? "🎲" : showResult ? resultValue : "?"}
+          </div>
+        </div>
+
+        {/* 결과 텍스트 */}
+        <div style={{ height: "40px" }}>
+          {!isRolling && !showResult && (
+            <div style={{ fontSize: "13px", color: "#d4b86a" }}>
+              주사위를 눌러 판정하세요
+            </div>
+          )}
+          {showResult && (
+            <div
+              style={{
+                fontSize: "18px",
+                fontWeight: "bold",
+                color: isCritical
+                  ? "#7fd4df"
+                  : isFumble
+                    ? "#e8925a"
+                    : "#d4b86a",
+              }}
+            >
+              {isCritical
+                ? "대성공!"
+                : isFumble
+                  ? "대실패..."
+                  : isSuccess
+                    ? "성공"
+                    : "실패"}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (type === "item_discover") {
+    const item = ITEM_DB[id];
+    if (!item) return null;
+    
+    return (
+      <div style={{ maxWidth: '480px', margin: '32px auto', position: 'relative' }}>
+        <div style={{ position: 'absolute', top: '-10px', left: '20px', background: '#d4b86a', color: '#040914', fontSize: '11px', fontWeight: 'bold', padding: '4px 12px', borderRadius: '2px', letterSpacing: '0.1em', zIndex: 10 }}>NEW DISCOVERY</div>
+        
+        <div style={{ 
+          background: "rgba(0,0,0,0.5)", border: "1px solid #d4b86a", borderRadius: "8px", padding: "24px", position: "relative",
+          boxShadow: '0 16px 32px rgba(0,0,0,0.8)'
+        }}>
+          <div style={{ fontSize: "32px", marginBottom: "12px", textAlign: 'center' }}>{item.icon}</div>
+          <div style={{ fontSize: "18px", fontWeight: "bold", color: "#f0e4c4", marginBottom: "8px", textAlign: 'center' }}>{item.title}</div>
+          <div style={{ fontSize: "12px", color: "#8a7f6e", marginBottom: "24px", textAlign: 'center' }}>{item.desc}</div>
+          
+          {item.type.includes("paper") ? (
+            <div style={{
+              background: item.type === "bloody_paper" ? "rgba(92, 36, 56, 0.15)" : "rgba(245, 240, 230, 0.08)",
+              borderLeft: item.type === "bloody_paper" ? "4px solid #8b1a1a" : "4px solid #8a7f6e",
+              padding: "20px",
+              fontFamily: '"Nanum Myeongjo", serif',
+              fontSize: "15px",
+              lineHeight: "1.9",
+              color: item.type === "wet_paper" ? "rgba(245, 240, 230, 0.6)" : "#d1d8e5",
+              textShadow: item.type === "wet_paper" ? "0 0 4px rgba(245, 240, 230, 0.5)" : "none",
+              whiteSpace: "pre-wrap"
+            }}>
+              {item.content}
+            </div>
+          ) : item.type === "photo" ? (
+            <div style={{
+              background: "#0a0a0a",
+              padding: "16px",
+              border: "12px solid #f5f0e6",
+              borderBottom: "48px solid #f5f0e6",
+              fontFamily: '"Nanum Myeongjo", serif',
+              fontSize: "14px",
+              color: "#333",
+              textAlign: "center",
+              boxShadow: '0 8px 16px rgba(0,0,0,0.5)'
+            }}>
+              <div style={{ height: "160px", background: "linear-gradient(45deg, #111, #222)", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center", color: "#555" }}>
+                [ 빛바랜 형상 ]
+              </div>
+              {item.content}
+            </div>
+          ) : (
+            <div style={{ padding: "16px", background: "rgba(255,255,255,0.03)", fontSize: "14px", color: "#a6b0c2", lineHeight: "1.7" }}>
+              {item.content}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // 4. 엔딩 카드 UI
+  if (type === "ending") {
+    return (
+      <div
+        style={{
+          maxWidth: "480px",
+          margin: "40px auto",
+          padding: "48px 32px",
+          background: "linear-gradient(180deg, #040914 0%, #081222 100%)",
+          borderTop: "2px solid #d4b86a",
+          borderBottom: "2px solid #d4b86a",
+          textAlign: "center",
+          color: "#f5f0e6",
+          fontFamily: '"Nanum Myeongjo", serif',
+          boxShadow: "0 24px 48px rgba(0,0,0,0.8)",
+        }}
+      >
+        <div
+          style={{
+            color: "#d4b86a",
+            fontSize: "11px",
+            letterSpacing: "0.4em",
+            marginBottom: "32px",
+          }}
+        >
+          THREE DAYS OF SUN
+        </div>
+        <h1
+          style={{
+            fontSize: "36px",
+            margin: "0 0 20px",
+            fontWeight: "normal",
+            color: "#f0e4c4",
+            letterSpacing: "0.05em",
+          }}
+        >
+          {title}
+        </h1>
+        <div
+          style={{
+            width: "60px",
+            height: "1px",
+            background: "rgba(212,184,106,0.5)",
+            margin: "0 auto 32px",
+          }}
+        ></div>
+        <p
+          style={{
+            fontSize: "16px",
+            fontWeight: "bold",
+            color: "#a6b0c2",
+            marginBottom: "24px",
+          }}
+        >
+          {verdict}
+        </p>
+
+        {body && (
+          <div
+            style={{
+              marginTop: "32px",
+              padding: "24px",
+              background: "rgba(0,0,0,0.3)",
+              border: "1px solid rgba(212, 184, 106, 0.2)",
+              textAlign: "left",
+              fontSize: "14px",
+              lineHeight: "1.9",
+              color: "#d1d8e5",
+              whiteSpace: "pre-wrap",
+              fontFamily: '"Pretendard", sans-serif',
+            }}
+          >
+            {body}
+          </div>
+        )}
+
+        <div
+          style={{
+            marginTop: "40px",
+            fontSize: "11px",
+            color: "#5a6578",
+            fontFamily: "monospace",
+            letterSpacing: "0.1em",
+          }}
+        >
+          END OF LOG
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+
+// 재사용 스타일
+const mapBtnStyle = {
+  display: "flex",
+  alignItems: "center",
+  width: "100%",
+  padding: "16px",
+  background: "rgba(255,255,255,0.03)",
+  border: "1px solid rgba(212, 184, 106, 0.2)",
+  borderRadius: "6px",
+  color: "#f5f0e6",
+  fontSize: "14px",
+};
+const deckNumStyle = {
+  width: "40px",
+  fontWeight: "bold",
+  color: "#d4b86a",
+  fontFamily: "serif",
+};
+const indicatorStyle = {
+  fontSize: "11px",
+  color: "#7fd4df",
+  background: "rgba(127, 212, 223, 0.1)",
+  padding: "4px 8px",
+  borderRadius: "4px",
+};
