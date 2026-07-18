@@ -30,6 +30,7 @@ function CustomComponent({
 }) {
   const [activeTab, setActiveTab] = React.useState("map");
   const [viewItem, setViewItem] = React.useState(null);
+  const [expandedDeck, setExpandedDeck] = React.useState(null);
 
   // 탭 변경 시 상세 보기 초기화
   const handleTabChange = (tab) => {
@@ -162,37 +163,57 @@ function CustomComponent({
                       gap: "4px",
                     }}
                   >
-                    <div style={mapBtnStyle}>
+                    <div 
+                      style={{...mapBtnStyle, cursor: "pointer"}}
+                      onClick={() => setExpandedDeck(expandedDeck === deck.id ? null : deck.id)}
+                    >
                       <span style={deckNumStyle}>{deck.id}</span>
                       <span style={{ flex: 1, textAlign: "left" }}>
                         {deck.name}
                       </span>
-                      <span style={indicatorStyle}>이동 가능</span>
+                      <span style={{...indicatorStyle, transition: "transform 0.2s", transform: expandedDeck === deck.id ? "rotate(180deg)" : "rotate(0deg)"}}>
+                        ▼
+                      </span>
                     </div>
-                    {deckEvents.length > 0 && (
+                    {/* 아코디언 펼침 내용 */}
+                    <div
+                      style={{
+                        maxHeight: expandedDeck === deck.id ? "500px" : "0",
+                        overflow: "hidden",
+                        transition: "max-height 0.3s ease-in-out",
+                        opacity: expandedDeck === deck.id ? 1 : 0,
+                      }}
+                    >
                       <div
                         style={{
-                          padding: "6px 12px",
+                          padding: "12px 16px",
                           background: "rgba(0,0,0,0.2)",
                           borderLeft: "2px solid #7fd4df",
                           borderRadius: "0 4px 4px 0",
                           marginTop: "2px",
-                          fontSize: "12px",
-                          color: "#f5f0e6",
+                          fontSize: "13px",
+                          color: "#a6b0c2",
+                          lineHeight: "1.6",
                         }}
                       >
-                        {deckEvents.map((ev, idx) => (
-                          <div key={idx} style={{ padding: "4px 0" }}>
-                            <span
-                              style={{ color: "#d4b86a", fontWeight: "bold" }}
-                            >
-                              {ev.name}
-                            </span>{" "}
-                            | {ev.mood} 💭{deck.id} & {ev.action}
+                        {deckEvents.length > 0 ? (
+                          deckEvents.map((ev, idx) => (
+                            <div key={idx} style={{ padding: "6px 0", borderBottom: idx < deckEvents.length - 1 ? "1px solid rgba(255,255,255,0.05)" : "none" }}>
+                              <span style={{ color: "#d4b86a", fontWeight: "bold", marginRight: "8px" }}>
+                                {ev.name}
+                              </span>
+                              <span>{ev.mood}</span>
+                              <span style={{ margin: "0 6px", color: "#5a6578" }}>|</span>
+                              <span>{ev.action}</span>
+                            </div>
+                          ))
+                        ) : (
+                          <div style={{ color: "#5a6578", fontStyle: "italic", padding: "4px 0" }}>
+                            현재 이 구역에는 아무도 없는 것 같습니다.
                           </div>
-                        ))}
+                        )}
                       </div>
-                    )}
+                    </div>
                   </div>
                 );
               })}
@@ -524,51 +545,140 @@ function CustomComponent({
     const item = ITEM_DB[id];
     if (!item) return null;
     
+    // 페이지 상태 관리 (단서 텍스트가 여러 장으로 나뉘는 효과)
+    const [currentPage, setCurrentPage] = React.useState(0);
+    // 긴 텍스트를 적당한 길이로 자르기 (예제용 임의 분할 로직)
+    const pages = item.content.length > 80 
+      ? [item.content.substring(0, Math.floor(item.content.length/2)), item.content.substring(Math.floor(item.content.length/2))]
+      : [item.content];
+
     return (
-      <div style={{ maxWidth: '480px', margin: '32px auto', position: 'relative' }}>
-        <div style={{ position: 'absolute', top: '-10px', left: '20px', background: '#d4b86a', color: '#040914', fontSize: '11px', fontWeight: 'bold', padding: '4px 12px', borderRadius: '2px', letterSpacing: '0.1em', zIndex: 10 }}>NEW DISCOVERY</div>
+      <div style={{ maxWidth: '520px', margin: '32px auto', position: 'relative', perspective: '1000px' }}>
+        <div style={{ position: 'absolute', top: '-14px', left: '20px', background: '#d4b86a', color: '#040914', fontSize: '11px', fontWeight: 'bold', padding: '6px 14px', borderRadius: '4px', letterSpacing: '0.15em', zIndex: 10, boxShadow: '0 4px 8px rgba(0,0,0,0.5)' }}>NEW DISCOVERY</div>
         
         <div style={{ 
-          background: "rgba(0,0,0,0.5)", border: "1px solid #d4b86a", borderRadius: "8px", padding: "24px", position: "relative",
-          boxShadow: '0 16px 32px rgba(0,0,0,0.8)'
+          background: "linear-gradient(135deg, #0a1f3d 0%, #040d1a 100%)", 
+          border: "2px solid #d4b86a", 
+          borderRadius: "12px", 
+          padding: "40px 24px 24px", 
+          position: "relative",
+          boxShadow: '0 24px 48px rgba(0,0,0,0.9), inset 0 0 40px rgba(0,0,0,0.8)'
         }}>
-          <div style={{ fontSize: "32px", marginBottom: "12px", textAlign: 'center' }}>{item.icon}</div>
-          <div style={{ fontSize: "18px", fontWeight: "bold", color: "#f0e4c4", marginBottom: "8px", textAlign: 'center' }}>{item.title}</div>
-          <div style={{ fontSize: "12px", color: "#8a7f6e", marginBottom: "24px", textAlign: 'center' }}>{item.desc}</div>
+          
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px', marginBottom: '24px' }}>
+            <div style={{ fontSize: "48px", filter: 'drop-shadow(0 0 8px rgba(212,184,106,0.4))' }}>{item.icon}</div>
+            <div>
+              <div style={{ fontSize: "20px", fontWeight: "bold", color: "#f0e4c4", marginBottom: "4px", letterSpacing: '0.05em' }}>{item.title}</div>
+              <div style={{ fontSize: "13px", color: "#8a7f6e", fontStyle: 'italic' }}>{item.desc}</div>
+            </div>
+          </div>
           
           {item.type.includes("paper") ? (
-            <div style={{
-              background: item.type === "bloody_paper" ? "rgba(92, 36, 56, 0.15)" : "rgba(245, 240, 230, 0.08)",
-              borderLeft: item.type === "bloody_paper" ? "4px solid #8b1a1a" : "4px solid #8a7f6e",
-              padding: "20px",
-              fontFamily: '"Nanum Myeongjo", serif',
-              fontSize: "15px",
-              lineHeight: "1.9",
-              color: item.type === "wet_paper" ? "rgba(245, 240, 230, 0.6)" : "#d1d8e5",
-              textShadow: item.type === "wet_paper" ? "0 0 4px rgba(245, 240, 230, 0.5)" : "none",
-              whiteSpace: "pre-wrap"
-            }}>
-              {item.content}
+            <div style={{ position: 'relative', minHeight: '260px' }}>
+              
+              {/* 다이어리/수첩 본체 연출 */}
+              <div style={{
+                background: item.type === "bloody_paper" 
+                  ? "linear-gradient(to bottom, #d9d1c0 0%, #c4bcae 100%)" 
+                  : item.type === "wet_paper"
+                    ? "linear-gradient(to bottom, #c2c9d1 0%, #a8b0ba 100%)"
+                    : "linear-gradient(to bottom, #e8e3d5 0%, #d4cdbb 100%)",
+                padding: "32px 32px 48px 40px",
+                borderRadius: "4px 12px 12px 4px",
+                fontFamily: '"Nanum Myeongjo", "Batang", serif',
+                fontSize: "16px",
+                lineHeight: "2.2",
+                color: item.type === "wet_paper" ? "rgba(40, 50, 60, 0.7)" : "#1a1c20",
+                textShadow: item.type === "wet_paper" ? "0 0 6px rgba(40,50,60,0.3)" : "none",
+                whiteSpace: "pre-wrap",
+                boxShadow: '8px 8px 24px rgba(0,0,0,0.6), inset 16px 0 24px rgba(0,0,0,0.1)',
+                position: 'relative',
+                transformStyle: 'preserve-3d',
+                transition: 'transform 0.5s ease-in-out',
+                borderLeft: '4px solid rgba(0,0,0,0.2)'
+              }}>
+                
+                {/* 좌측 스프링/타공 구멍 연출 */}
+                <div style={{ position: 'absolute', top: '10px', left: '6px', bottom: '10px', width: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 3 }}>
+                  {[...Array(8)].map((_, i) => (
+                    <div key={i} style={{ width: '12px', height: '12px', background: '#0a1f3d', borderRadius: '50%', boxShadow: 'inset 2px 2px 4px rgba(0,0,0,0.8)' }} />
+                  ))}
+                </div>
+
+                {/* 노트 가로줄 무늬 */}
+                <div style={{ position: 'absolute', top: '32px', left: '0', width: '100%', height: 'calc(100% - 32px)', backgroundImage: 'linear-gradient(transparent 95%, rgba(0,0,0,0.08) 100%)', backgroundSize: '100% 35.2px', pointerEvents: 'none' }} />
+
+                {/* 특수 효과 (피/물) */}
+                {item.type === "bloody_paper" && (
+                  <div style={{ position: 'absolute', bottom: '20px', right: '30px', width: '120px', height: '100px', background: 'radial-gradient(circle, rgba(139,26,26,0.4) 0%, transparent 60%)', filter: 'blur(4px)', pointerEvents: 'none', mixBlendMode: 'multiply' }} />
+                )}
+                {item.type === "wet_paper" && (
+                  <div style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', background: 'linear-gradient(120deg, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.1) 50%, rgba(255,255,255,0.1) 100%)', mixBlendMode: 'overlay', pointerEvents: 'none' }} />
+                )}
+
+                {/* 내용 텍스트 (페이지에 맞게 렌더링) */}
+                <div style={{ position: 'relative', zIndex: 2, minHeight: '160px' }}>
+                  {pages[currentPage]}
+                </div>
+                
+                {/* 페이지 넘기기 컨트롤 */}
+                {pages.length > 1 && (
+                  <div style={{ position: 'absolute', bottom: '16px', right: '24px', display: 'flex', gap: '16px', zIndex: 10 }}>
+                    {currentPage > 0 && (
+                      <button onClick={() => setCurrentPage(p => p - 1)} style={{ background: 'none', border: 'none', color: 'rgba(0,0,0,0.4)', cursor: 'pointer', fontFamily: 'serif', fontWeight: 'bold' }}>← 이전장</button>
+                    )}
+                    {currentPage < pages.length - 1 && (
+                      <button onClick={() => setCurrentPage(p => p + 1)} style={{ background: 'none', border: 'none', color: 'rgba(0,0,0,0.6)', cursor: 'pointer', fontFamily: 'serif', fontWeight: 'bold' }}>다음장 →</button>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           ) : item.type === "photo" ? (
-            <div style={{
-              background: "#0a0a0a",
-              padding: "16px",
-              border: "12px solid #f5f0e6",
-              borderBottom: "48px solid #f5f0e6",
-              fontFamily: '"Nanum Myeongjo", serif',
-              fontSize: "14px",
-              color: "#333",
-              textAlign: "center",
-              boxShadow: '0 8px 16px rgba(0,0,0,0.5)'
-            }}>
-              <div style={{ height: "160px", background: "linear-gradient(45deg, #111, #222)", marginBottom: "16px", display: "flex", alignItems: "center", justifyContent: "center", color: "#555" }}>
-                [ 빛바랜 형상 ]
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              {/* 폴라로이드 사진 연출 */}
+              <div style={{
+                background: "#f5f5f5",
+                padding: "16px 16px 48px 16px",
+                borderRadius: "2px",
+                fontFamily: '"Nanum Myeongjo", serif',
+                fontSize: "14px",
+                color: "#222",
+                textAlign: "center",
+                boxShadow: '0 16px 32px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.05)',
+                width: '80%',
+                transform: 'rotate(-2deg)',
+                transition: 'transform 0.3s'
+              }}
+              onMouseOver={e => e.currentTarget.style.transform = 'rotate(0deg) scale(1.05)'}
+              onMouseOut={e => e.currentTarget.style.transform = 'rotate(-2deg)'}
+              >
+                <div style={{ 
+                  height: "220px", 
+                  background: "linear-gradient(45deg, #050505 0%, #1a1a1a 100%)", 
+                  marginBottom: "20px", 
+                  display: "flex", 
+                  alignItems: "center", 
+                  justifyContent: "center", 
+                  color: "#444",
+                  boxShadow: 'inset 0 0 30px rgba(0,0,0,1)'
+                }}>
+                  <span style={{ filter: 'blur(1px)' }}>[ 빛바랜 형상 ]</span>
+                </div>
+                <div style={{ opacity: 0.8 }}>{item.content}</div>
               </div>
-              {item.content}
             </div>
           ) : (
-            <div style={{ padding: "16px", background: "rgba(255,255,255,0.03)", fontSize: "14px", color: "#a6b0c2", lineHeight: "1.7" }}>
+            <div style={{ 
+              padding: "24px", 
+              background: "rgba(255,255,255,0.03)", 
+              border: "1px solid rgba(255,255,255,0.1)",
+              borderRadius: "4px",
+              fontSize: "15px", 
+              color: "#a6b0c2", 
+              lineHeight: "1.8",
+              boxShadow: 'inset 0 0 20px rgba(0,0,0,0.5)'
+            }}>
               {item.content}
             </div>
           )}
@@ -690,9 +800,7 @@ const deckNumStyle = {
   fontFamily: "serif",
 };
 const indicatorStyle = {
-  fontSize: "11px",
-  color: "#7fd4df",
-  background: "rgba(127, 212, 223, 0.1)",
+  fontSize: "12px",
+  color: "#d4b86a",
   padding: "4px 8px",
-  borderRadius: "4px",
 };
