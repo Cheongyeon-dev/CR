@@ -586,7 +586,7 @@ function CustomComponent({
   if (type === "item_discover") {
     // id가 없거나 ITEM_DB에 없으면 폴백 렌더링을 하거나 아예 안 보이게 처리할 수 있습니다.
     // 여기서는 미리보기 테스트를 위해 id가 없으면 첫 번째 아이템(log_203)을 강제로 보여줍니다.
-    const targetId = id || "log_203";
+    const targetId = id || "log_01";
     const item = ITEM_DB[targetId];
     if (!item) return null;
 
