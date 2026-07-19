@@ -1,7 +1,46 @@
 // 크루즈 코즈믹 호러 TRPG 통합 UI 컴포넌트
-// type prop에 따라 단말기, 다이스, 아이템, 엔딩 등을 렌더링합니다.
+// type: "main" | "dice" | "item_discover" | "ending"
 
-// 크루즈 코즈믹 호러 TRPG 통합 UI 컴포넌트
+const ITEM_DB = {
+  // --- 객실 구역 ---
+  "log_203": {
+    icon: "📝", title: "구겨진 메모", desc: "객실 203호에서 발견",
+    type: "paper",
+    content: "옆방에서 밤새 벽을 긁는 소리가 난다. 분명히 비어있는 객실이라고 했는데. 프론트에 연락해도 통화 중이라는 기계음만 반복된다."
+  },
+  "photo_205": {
+    icon: "📷", title: "초점이 나간 사진", desc: "객실 205호 바닥에 떨어져 있던 사진",
+    type: "photo",
+    content: "(어두운 객실 화장실 거울을 찍은 사진. 거울 속에 사람의 형태가 아닌 기이하게 길쭉한 무언가의 실루엣이 흐릿하게 맺혀 있다.)"
+  },
+  // --- 갑판 구역 ---
+  "log_pool": {
+    icon: "📜", title: "젖은 일지 페이지", desc: "10F 야외 수영장에서 건져냄",
+    type: "wet_paper",
+    content: "물 밖으로 나가야 해 물 밖으로 나가야 해 물 밖으로 나가야 해 저 아래에 입이 있어"
+  },
+  "item_bench": {
+    icon: "📻", title: "망가진 무전기", desc: "9F 갑판 벤치 밑",
+    type: "device",
+    content: "(전원이 꺼진 무전기다. 하지만 귀를 가까이 대면 끊임없이 웅얼거리는 듯한 주파수 노이즈가 새어나온다.)"
+  },
+  // --- 식당/라운지 구역 ---
+  "log_salad": {
+    icon: "🍴", title: "식당 검역 보고서", desc: "4F 레스토랑 샐러드바",
+    type: "paper",
+    content: "식자재 오염. 폐기 요망. 고기에서 자꾸만 맥박이 뛰는 것처럼 움직인다. 주방장은 정상이라고 주장함."
+  },
+  "log_locker": {
+    icon: "🩸", title: "피 묻은 직원 수첩", desc: "직원 탈의실 캐비닛",
+    type: "bloody_paper",
+    content: "오늘 밤 12시, 안개가 짙어지면 모두 '그것'을 맞이하러 간다. 나만 빼고. 나만 빼고. 눈이 마주치면 안 돼."
+  },
+  "item_sofa": {
+    icon: "🗝️", title: "차갑게 식은 객실 키", desc: "7F 라운지 소파 틈새",
+    type: "item",
+    content: "금속 재질의 열쇠. '기관실'이라는 긁힌 자국이 있다. 손에 쥐고 있으면 뼛속까지 시린 한기가 올라온다."
+  }
+};
 
 function CustomComponent({
   type = "main", // "main"(상시메뉴), "dice"(판정), "item_discover"(최초발견연출), "ending"(엔딩)
@@ -31,6 +70,9 @@ function CustomComponent({
   const [activeTab, setActiveTab] = React.useState("map");
   const [viewItem, setViewItem] = React.useState(null);
   const [expandedDeck, setExpandedDeck] = React.useState(null);
+  const [isRolling, setIsRolling] = React.useState(false);
+  const [showResult, setShowResult] = React.useState(false);
+  const [currentPage, setCurrentPage] = React.useState(0);
 
   // 탭 변경 시 상세 보기 초기화
   const handleTabChange = (tab) => {
@@ -39,8 +81,6 @@ function CustomComponent({
       setViewItem(null);
     }
   };
-  const [isRolling, setIsRolling] = React.useState(false);
-  const [showResult, setShowResult] = React.useState(false);
 
   // 다이스 굴리기 액션
   const handleRoll = () => {
@@ -49,7 +89,7 @@ function CustomComponent({
     setTimeout(() => {
       setIsRolling(false);
       setShowResult(true);
-    }, 1500); // 1.5초 애니메이션
+    }, 1500);
   };
 
   // 1. 상시 메뉴 UI (지도/상태창/수집품)
@@ -288,9 +328,12 @@ function CustomComponent({
                 >
                   심리 상태
                 </div>
+
+                {/* 기존 이모지 잔으로 롤백 */}
                 <div style={{ fontSize: "24px", marginBottom: "4px" }}>
                   {sanity > 70 ? "🍸" : sanity > 30 ? "🍹" : "🍷"}
                 </div>
+
                 <div
                   style={{
                     fontSize: "13px",
@@ -300,8 +343,8 @@ function CustomComponent({
                   {sanity > 70
                     ? "평온함. 기분 좋은 파도 소리가 들립니다."
                     : sanity > 30
-                      ? "조금 어지럽습니다. 안개가 짙어집니다."
-                      : "위험합니다. 귓가에 누군가의 웃음소리가 들립니다."}
+                      ? "이런, 조금 어지럽습니다. 안개가 짙어집니다."
+                      : "귓가에 누군가의 웃음소리가 들리기 시작합니다."}
                 </div>
               </div>
             </div>
@@ -542,7 +585,10 @@ function CustomComponent({
   }
 
   if (type === "item_discover") {
-    const item = ITEM_DB[id];
+    // id가 없거나 ITEM_DB에 없으면 폴백 렌더링을 하거나 아예 안 보이게 처리할 수 있습니다.
+    // 여기서는 미리보기 테스트를 위해 id가 없으면 첫 번째 아이템(log_203)을 강제로 보여줍니다.
+    const targetId = id || "log_203";
+    const item = ITEM_DB[targetId];
     if (!item) return null;
     
     // 페이지 상태 관리 (단서 텍스트가 여러 장으로 나뉘는 효과)
