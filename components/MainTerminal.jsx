@@ -690,8 +690,22 @@ function CustomComponent({
                 flexDirection: "column",
                 border: "1px solid rgba(0,0,0,0.1)",
               }}>
-                {/* 좌측 뜯어진 종이 질감 연출 */}
-                <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '6px', background: 'rgba(0,0,0,0.05)', borderRight: '1px dashed rgba(0,0,0,0.2)', opacity: 0.5 }} />
+                {/* 구겨진 느낌의 그림자 텍스처 오버레이 */}
+                <div style={{
+                  position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+                  background: 'linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent)',
+                  backgroundSize: '30px 30px',
+                  pointerEvents: 'none', zIndex: 1
+                }} />
+                <div style={{
+                  position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+                  backgroundImage: 'radial-gradient(ellipse at 20% 30%, rgba(0,0,0,0.04) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(0,0,0,0.03) 0%, transparent 50%)',
+                  pointerEvents: 'none', zIndex: 1
+                }} />
+
+                {/* 좌측 뜯어진 종이 질감 연출 (찢어진 자국 추가) */}
+                <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: '12px', background: 'rgba(0,0,0,0.03)', borderRight: '1px dashed rgba(0,0,0,0.2)' }} />
+                <div style={{ position: 'absolute', top: 0, left: '4px', bottom: 0, width: '4px', background: 'rgba(0,0,0,0.05)' }} />
 
                 {/* 좌측 스프링 타공 구멍 (최상단 zIndex 배치) */}
                 <div style={{ position: 'absolute', top: '24px', left: '10px', bottom: '24px', width: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', zIndex: 10 }}>
@@ -711,7 +725,7 @@ function CustomComponent({
                     right: '-20%',
                     width: '300px',
                     height: '300px',
-                    backgroundImage: 'url("https://raw.githubusercontent.com/Cheongyeon-dev/CR/main/assets/c__Users_levan_AppData_Roaming_Cursor_User_workspaceStorage_e6c908c4b9e60473cdd93ddb3dc4bacf_images_reggobi-stain-7331853-f46f534a-ea6f-4c21-afa8-980f0ce6f9d5.png")', // raw URL로 변경
+                    backgroundImage: 'url("https://raw.githubusercontent.com/Cheongyeon-dev/CR/cruise-page/assets/bloodstain.png")',
                     backgroundSize: 'contain',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
