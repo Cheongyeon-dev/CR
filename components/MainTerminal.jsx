@@ -72,6 +72,7 @@ function CustomComponent({
   const [isRolling, setIsRolling] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
   const [currentPage, setCurrentPage] = React.useState(0);
+  const [isOpen, setIsOpen] = React.useState(false);
 
   // 탭 변경 시 상세 보기 초기화
   const handleTabChange = (tab) => {
@@ -589,9 +590,6 @@ function CustomComponent({
     const targetId = id || "log_01";
     const item = ITEM_DB[targetId];
     if (!item) return null;
-
-    const [isOpen, setIsOpen] = React.useState(false);
-    const [currentPage, setCurrentPage] = React.useState(0);
 
     // 긴 텍스트를 적당한 길이로 자르기
     const pages = item.content.length > 60 
