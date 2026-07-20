@@ -3,27 +3,34 @@
 
 const ITEM_DB = {
   // --- 일기장 조각 (연속된 기록) ---
+  // dayLabel / recordTitle / content = 기본값. AI props로 덮어쓰기 가능
   log_01: {
     icon: "📝",
     title: "누군가의 일기 - 1일 차",
     desc: "객실 구석에서 발견된 일기장 조각",
     type: "paper",
+    dayLabel: "1일 차",
+    recordTitle: "누군가의 기록",
     content:
-      "완벽한 휴가다. 태양은 눈부시고 라운지의 샴페인은 끝없이 제공된다. 하지만 어젯밤부터 창밖으로 이상한 소리가 들린다. 파도 소리라기엔 너무 무겁고, 짐승의 울음소리라기엔 너무 거대한 무언가가 바다 밑을 긁고 있는 것 같다.",
+      "완벽한 휴가. 눈부신 태양 아래 샴페인은 끝없이 제공되고, 사람들의 웃음소리로 떠들썩한 아침이다.",
   },
   log_02: {
     icon: "📝",
     title: "누군가의 일기 - 2일 차",
     desc: "수영장 근처 벤치에 떨어져 있던 조각",
     type: "wet_paper",
+    dayLabel: "2일 차",
+    recordTitle: "누군가의 기록",
     content:
-      "수영장 물이 지금은 탁한 심해처럼 바닥이 보이지 않는다. 누군가 물속에 들어갔다 나온 걸 봤지만, 그는 수면 위로 다시 올라오지 않았다. 아무도 그를 신경 쓰지 않는다. 내가 점점 이상해지는 거 같아.",
+      "수영장 물이 마치 탁한 심해처럼 바닥이 보이지 않는다. 수영장에 들어갔던 사람은 수면 위로 다시는 올라오지 않았다. 아무도 그를 신경 쓰지 않는다. 내가 점점 이상해지는 거 같아.",
   },
   log_03: {
     icon: "📝",
     title: "누군가의 일기 - 3일 차",
     desc: "직원 탈의실 캐비닛",
     type: "bloody_paper",
+    dayLabel: "3일 차",
+    recordTitle: "누군가의 기록",
     content:
       "오늘 밤 12시, 안개가 짙어지면 모두 '그것'을 맞이하러 간다. 나만 빼고. 나만 빼고. 눈이 마주치면 안 돼.",
   },
@@ -33,33 +40,100 @@ const ITEM_DB = {
     title: "구겨진 메모",
     desc: "객실 203호에서 발견",
     type: "paper",
+    dayLabel: "",
+    recordTitle: "구겨진 메모",
     content:
-      "옆방에서 밤새 벽을 긁는 소리가 난다. 분명히 비어있는 객실이라고 했는데. 프론트에 연락해도 통화 중이라는 기계음만 반복된다.",
+      "옆방에서 밤새 벽을 긁는 소리가 난다. 시끄러워서 화를 내도 벽이 울리는 소리만 되돌아온다. 프론트에 연락해도 통화 중이라는 기계음만 반복된다.",
   },
   photo_205: {
     icon: "📷",
     title: "초점이 나간 사진",
     desc: "객실 205호 바닥에 떨어져 있던 사진",
     type: "photo",
+    dayLabel: "",
+    recordTitle: "초점이 나간 사진",
     content:
-      "(어두운 객실 화장실 거울을 찍은 사진. 거울 속에 사람의 형태가 아닌 기이하게 길쭉한 무언가의 실루엣이 흐릿하게 맺혀 있다.)",
+      "(어두운 객실 화장실 거울을 찍은 사진. 거울 속에 무언가의 실루엣이 흐릿하게 맺혀 있다.)",
   },
   log_salad: {
     icon: "🍴",
     title: "식당 검역 보고서",
     desc: "4F 레스토랑 샐러드바",
     type: "paper",
+    dayLabel: "",
+    recordTitle: "식당 검역 보고서",
     content:
       "식자재 오염. 폐기 요망. 고기에서 자꾸만 맥박이 뛰는 것처럼 움직인다. 주방장은 정상이라고 주장함.",
   },
   item_sofa: {
     icon: "🗝️",
-    title: "차갑게 식은 객실 키",
+    title: "낡은 열쇠",
     desc: "7F 라운지 소파 틈새",
     type: "item",
+    dayLabel: "",
+    recordTitle: "낡은 열쇠",
     content:
       "금속 재질의 열쇠. '기관실'이라는 긁힌 자국이 있다. 손에 쥐고 있으면 뼛속까지 시린 한기가 올라온다.",
   },
+  // --- 임의 조사 연출 폴백 (AI가 recordTitle·entryBody 필수. 비우면 아래 최소값) ---
+  clue_note: {
+    icon: "📝",
+    title: "메모",
+    desc: "조사 중 발견",
+    type: "paper",
+    dayLabel: "",
+    recordTitle: "메모",
+    content: "",
+  },
+  clue_item: {
+    icon: "🗝️",
+    title: "소지품",
+    desc: "조사 중 발견",
+    type: "item",
+    dayLabel: "",
+    recordTitle: "소지품",
+    content: "",
+  },
+  clue_photo: {
+    icon: "📷",
+    title: "사진",
+    desc: "조사 중 발견",
+    type: "photo",
+    dayLabel: "",
+    recordTitle: "사진",
+    content: "",
+  },
+};
+
+const DECK_PLAN = [
+  { id: "12F", name: "브릿지 · 선장실" },
+  { id: "10F", name: "야외 수영장 & 자쿠지" },
+  { id: "9F", name: "갑판 산책로" },
+  { id: "7F", name: "라운지 바" },
+  { id: "4F", name: "레스토랑" },
+  { id: "5-8F", name: "여객 객실 구역" },
+].map((deck) => ({
+  ...deck,
+  locationLabel: `${deck.id} ${deck.name}`,
+}));
+
+/** events.location = 층 ID만 / 층+장소 병기 둘 다 매칭 */
+function eventMatchesDeck(evLocation, deck) {
+  const s = String(evLocation || "").trim();
+  if (!s) return false;
+  if (s === deck.id || s === deck.locationLabel) return true;
+  if (s.startsWith(deck.id + " ") || s.startsWith(deck.id + "\u00a0")) return true;
+  return false;
+}
+
+/** AI events 미전달 시 지도 아코디언 폴백 (층별 분위기) */
+const DECK_AMBIENT_FALLBACK = {
+  "12F": "조타실 문 너머로 바다가 보인다.",
+  "10F": "수영장에서 풀 파티가 열리고 있는 것 같다.",
+  "9F": "갑판에 나가볼까? 바닷바람이 기분 좋게 불고 있다.",
+  "7F": "라운지에서 음악이 흘러나오고 있다.",
+  "4F": "레스토랑에서 식사하는 소리가 들린다.",
+  "5-8F": "복도에 승객들과 승무원이 바쁘게 오간다.",
 };
 
 function CustomComponent({
@@ -81,6 +155,9 @@ function CustomComponent({
 
   // Item Props
   id = "", // 최초 발견 시 연출할 단서 ID
+  dayLabel = "", // 라벨: "3일 차" 등 (비우면 ITEM_DB 기본)
+  recordTitle = "", // 라벨: "누군가의 기록" 등
+  entryBody = "", // 라벨: 일기/단서 본문 (비우면 ITEM_DB content)
 
   // Ending Props
   title = "",
@@ -92,7 +169,6 @@ function CustomComponent({
   const [expandedDeck, setExpandedDeck] = React.useState(null);
   const [isRolling, setIsRolling] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
-  const [currentPage, setCurrentPage] = React.useState(0);
   const [isOpen, setIsOpen] = React.useState(false);
 
   // 탭 변경 시 상세 보기 초기화
@@ -207,14 +283,10 @@ function CustomComponent({
               >
                 ◆ DECK PLAN & EVENTS
               </div>
-              {[
-                { id: "10F", name: "야외 수영장 & 자쿠지" },
-                { id: "9F", name: "갑판 산책로" },
-                { id: "7F", name: "라운지 바" },
-                { id: "4F", name: "레스토랑" },
-                { id: "5-8F", name: "여객 객실 구역" },
-              ].map((deck) => {
-                const deckEvents = events.filter((e) => e.location === deck.id);
+              {DECK_PLAN.map((deck) => {
+                const deckEvents = events.filter((e) =>
+                  eventMatchesDeck(e.location, deck),
+                );
                 return (
                   <div
                     key={deck.id}
@@ -271,44 +343,67 @@ function CustomComponent({
                         }}
                       >
                         {deckEvents.length > 0 ? (
-                          deckEvents.map((ev, idx) => (
-                            <div
-                              key={idx}
-                              style={{
-                                padding: "6px 0",
-                                borderBottom:
-                                  idx < deckEvents.length - 1
-                                    ? "1px solid rgba(255,255,255,0.05)"
-                                    : "none",
-                              }}
-                            >
-                              <span
+                          deckEvents.map((ev, idx) => {
+                            const sceneText =
+                              ev.scene || ev.ambient || (!ev.name && ev.action);
+                            if (!ev.name && sceneText) {
+                              return (
+                                <div
+                                  key={idx}
+                                  style={{
+                                    padding: "6px 0",
+                                    borderBottom:
+                                      idx < deckEvents.length - 1
+                                        ? "1px solid rgba(255,255,255,0.05)"
+                                        : "none",
+                                  }}
+                                >
+                                  {sceneText}
+                                </div>
+                              );
+                            }
+                            return (
+                              <div
+                                key={idx}
                                 style={{
-                                  color: "#d4b86a",
-                                  fontWeight: "bold",
-                                  marginRight: "8px",
+                                  padding: "6px 0",
+                                  borderBottom:
+                                    idx < deckEvents.length - 1
+                                      ? "1px solid rgba(255,255,255,0.05)"
+                                      : "none",
                                 }}
                               >
-                                {ev.name}
-                              </span>
-                              <span>{ev.mood}</span>
-                              <span
-                                style={{ margin: "0 6px", color: "#5a6578" }}
-                              >
-                                |
-                              </span>
-                              <span>{ev.action}</span>
-                            </div>
-                          ))
+                                <span
+                                  style={{
+                                    color: "#d4b86a",
+                                    fontWeight: "bold",
+                                    marginRight: "8px",
+                                  }}
+                                >
+                                  {ev.name}
+                                </span>
+                                {ev.mood ? <span>{ev.mood}</span> : null}
+                                {ev.action ? (
+                                  <>
+                                    {ev.mood ? (
+                                      <span
+                                        style={{
+                                          margin: "0 6px",
+                                          color: "#5a6578",
+                                        }}
+                                      >
+                                        |
+                                      </span>
+                                    ) : null}
+                                    <span>{ev.action}</span>
+                                  </>
+                                ) : null}
+                              </div>
+                            );
+                          })
                         ) : (
-                          <div
-                            style={{
-                              color: "#5a6578",
-                              fontStyle: "italic",
-                              padding: "4px 0",
-                            }}
-                          >
-                            현재 이 구역에는 아무도 없는 것 같습니다.
+                          <div style={{ padding: "4px 0" }}>
+                            {DECK_AMBIENT_FALLBACK[deck.id]}
                           </div>
                         )}
                       </div>
@@ -733,20 +828,18 @@ function CustomComponent({
   }
 
   if (type === "item_discover") {
-    // id가 없거나 ITEM_DB에 없으면 폴백 렌더링을 하거나 아예 안 보이게 처리할 수 있습니다.
-    // 여기서는 미리보기 테스트를 위해 id가 없으면 첫 번째 아이템(log_01)을 강제로 보여줍니다.
     const targetId = id || "log_01";
     const item = ITEM_DB[targetId];
     if (!item) return null;
 
-    // 긴 텍스트를 적당한 길이로 자르기
-    const pages =
-      item.content.length > 60
-        ? [
-            item.content.substring(0, Math.floor(item.content.length / 2)),
-            item.content.substring(Math.floor(item.content.length / 2)),
-          ]
-        : [item.content];
+    // AI 라벨 우선, 없으면 DB 기본값
+    const resolvedDay = dayLabel || item.dayLabel || "";
+    const resolvedTitle =
+      recordTitle || item.recordTitle || item.title || "누군가의 기록";
+    const resolvedBody = entryBody || item.content || "";
+    const headerLine = resolvedDay
+      ? `${resolvedDay} · ${resolvedTitle}`
+      : resolvedTitle;
 
     return (
       <div
@@ -878,78 +971,22 @@ function CustomComponent({
             }}
           >
             {item.type.includes("paper") ? (
-              /* --- 다이어리 내지 렌더링 --- */
+              /* --- 다이어리 내지 (원본: 흰 줄노트 + 타공, 날짜/좌측그림자 없음) --- */
               <div
                 style={{
                   width: "100%",
                   height: "100%",
                   background:
-                    item.type === "wet_paper"
-                      ? "linear-gradient(to right, #d8dfe5 0%, #e8ecef 10%, #ffffff 100%)"
-                      : "linear-gradient(to right, #cfc7b8 0%, #eae8e1 8%, #fdfcf9 15%, #ffffff 100%)", // 타공 부분은 어둡게, 나머진 밝게
+                    item.type === "wet_paper" ? "#e8ecef" : "#ffffff",
                   borderRadius: "4px 12px 12px 4px",
                   position: "relative",
                   overflow: "hidden",
-                  boxShadow:
-                    "inset 40px 0 60px -20px rgba(0,0,0,0.3), inset -2px 0 10px rgba(0,0,0,0.05)",
                   display: "flex",
                   flexDirection: "column",
-                  border: "1px solid rgba(0,0,0,0.1)",
+                  border: "1px solid rgba(0,0,0,0.08)",
                 }}
               >
-                {/* 구겨진 느낌의 그림자 텍스처 오버레이 */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    background:
-                      "linear-gradient(45deg, rgba(0,0,0,0.01) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.01) 75%, transparent 75%, transparent)",
-                    backgroundSize: "30px 30px",
-                    pointerEvents: "none",
-                    zIndex: 1,
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    backgroundImage:
-                      "radial-gradient(ellipse at 20% 30%, rgba(0,0,0,0.04) 0%, transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(0,0,0,0.03) 0%, transparent 50%)",
-                    pointerEvents: "none",
-                    zIndex: 1,
-                  }}
-                />
-
-                {/* 좌측 뜯어진 종이 질감 연출 (찢어진 자국 추가) */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    width: "12px",
-                    background: "rgba(0,0,0,0.03)",
-                    borderRight: "1px dashed rgba(0,0,0,0.2)",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: "4px",
-                    bottom: 0,
-                    width: "4px",
-                    background: "rgba(0,0,0,0.05)",
-                  }}
-                />
-
-                {/* 좌측 스프링 타공 구멍 (최상단 zIndex 배치) */}
+                {/* 좌측 스프링 타공 */}
                 <div
                   style={{
                     position: "absolute",
@@ -960,7 +997,8 @@ function CustomComponent({
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    zIndex: 10,
+                    zIndex: 2,
+                    pointerEvents: "none",
                   }}
                 >
                   {[...Array(12)].map((_, i) => (
@@ -978,140 +1016,71 @@ function CustomComponent({
                   ))}
                 </div>
 
-                {/* 노트 가로줄 무늬 */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "80px",
-                    left: "32px",
-                    width: "calc(100% - 32px)",
-                    height: "calc(100% - 80px)",
-                    backgroundImage:
-                      "linear-gradient(transparent 95%, rgba(0,0,0,0.08) 100%)",
-                    backgroundSize: "100% 32px",
-                    pointerEvents: "none",
-                    zIndex: 1,
-                  }}
-                />
-
-                {/* 실제 핏자국 PNG 연출 */}
-                {item.type === "bloody_paper" && (
+                {item.type === "wet_paper" && (
                   <div
                     style={{
                       position: "absolute",
-                      top: "40%",
-                      right: "-20%",
-                      width: "300px",
-                      height: "300px",
-                      backgroundImage:
-                        'url("https://bi.pharang.workers.dev/assets/bloodstain.png")',
-                      backgroundSize: "contain",
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "center",
-                      mixBlendMode: "multiply",
-                      opacity: 0.85,
+                      inset: 0,
                       pointerEvents: "none",
-                      zIndex: 2,
-                      transform: "rotate(15deg)",
+                      zIndex: 1,
+                      background:
+                        "linear-gradient(180deg, rgba(90,110,130,0.06) 0%, transparent 40%)",
                     }}
                   />
                 )}
 
-                {/* 젖은 효과 (종이 우글거림 SVG 필터) */}
-                {item.type === "wet_paper" && (
-                  <svg
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                      pointerEvents: "none",
-                      zIndex: 2,
-                      mixBlendMode: "multiply",
-                      opacity: 0.4,
-                    }}
-                  >
-                    <defs>
-                      <filter id="water-wrinkle">
-                        <feTurbulence
-                          type="fractalNoise"
-                          baseFrequency="0.02"
-                          numOctaves="3"
-                          result="noise"
-                        />
-                        <feColorMatrix
-                          type="matrix"
-                          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 3 -1"
-                          in="noise"
-                        />
-                      </filter>
-                    </defs>
-                    <rect
-                      width="100%"
-                      height="100%"
-                      filter="url(#water-wrinkle)"
-                    />
-                    <rect
-                      width="100%"
-                      height="100%"
-                      fill="rgba(40,50,60,0.15)"
-                    />
-                  </svg>
-                )}
-
-                {/* 본문 텍스트 렌더링 영역 (글씨 자르지 않음) */}
+                {/* 날짜: 우측 정렬 + 본문과 띄움. 우측 패딩으로 잘림 방지 */}
                 <div
                   style={{
-                    flex: 1,
-                    padding: "50px 40px 20px 50px",
+                    boxSizing: "border-box",
+                    flexShrink: 0,
+                    width: "100%",
+                    padding: "48px 48px 0 48px",
+                    marginBottom: "36px",
                     position: "relative",
                     zIndex: 5,
                     fontFamily: '"Nanum Myeongjo", "Batang", serif',
-                    fontSize: "16px",
-                    lineHeight: "2.0",
-                    color:
-                      item.type === "wet_paper"
-                        ? "rgba(30,40,50,0.8)"
-                        : "#1a1c20",
-                    textShadow:
-                      item.type === "wet_paper"
-                        ? "0 0 3px rgba(30,40,50,0.4)"
-                        : "none",
-                    whiteSpace: "pre-wrap",
-                    overflowY: "auto", // 내용이 길면 자체 스크롤되도록 처리 (억지 분할 X)
+                    fontSize: "13px",
+                    lineHeight: "1.5",
+                    color: "rgba(0,0,0,0.5)",
+                    letterSpacing: "0.04em",
+                    textAlign: "right",
                   }}
                 >
-                  {/* 페이지 전환 효과를 위한 래퍼 */}
-                  <div
-                    style={{
-                      animation: "tdos-fade-in 0.4s ease-out",
-                    }}
-                  >
-                    {pages[currentPage]}
-                  </div>
+                  {headerLine}
                 </div>
 
-                {/* 하단 날짜 (본문 폰트 통일) */}
+                {/* 본문: 좌측. 가로줄은 본문 background만(absolute 오버레이=글자 덮임 원인) */}
                 <div
                   style={{
-                    padding: "0 40px 30px 50px",
+                    boxSizing: "border-box",
+                    flex: 1,
+                    minWidth: 0,
+                    minHeight: 0,
+                    width: "auto",
+                    margin: "0 48px 40px 48px",
+                    padding: 0,
                     position: "relative",
                     zIndex: 5,
-                    display: "flex",
-                    justifyContent: "flex-end",
+                    fontFamily: '"Nanum Myeongjo", "Batang", serif',
+                    fontSize: "15px",
+                    lineHeight: "32px",
+                    color:
+                      item.type === "wet_paper"
+                        ? "rgba(30,40,50,0.85)"
+                        : "#222",
+                    textAlign: "left",
+                    whiteSpace: "pre-wrap",
+                    wordBreak: "keep-all",
+                    overflowWrap: "break-word",
+                    overflowX: "hidden",
+                    overflowY: "auto",
+                    backgroundImage:
+                      "repeating-linear-gradient(to bottom, transparent 0, transparent 31px, rgba(0,0,0,0.07) 31px, rgba(0,0,0,0.07) 32px)",
+                    backgroundAttachment: "local",
                   }}
                 >
-                  <div
-                    style={{
-                      fontFamily: '"Nanum Myeongjo", "Batang", serif',
-                      fontSize: "14px",
-                      color: "rgba(0,0,0,0.6)",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    JUL 18, 2026
-                  </div>
+                  {resolvedBody}
                 </div>
               </div>
             ) : item.type === "photo" ? (
@@ -1177,7 +1146,7 @@ function CustomComponent({
                       lineHeight: "1.6",
                     }}
                   >
-                    {item.content}
+                    {resolvedBody}
                   </div>
                 </div>
               </div>
@@ -1223,9 +1192,9 @@ function CustomComponent({
                       marginBottom: "8px",
                     }}
                   >
-                    {item.title}
+                    {resolvedTitle}
                   </div>
-                  <div>{item.content}</div>
+                  <div>{resolvedBody}</div>
                 </div>
               </div>
             )}

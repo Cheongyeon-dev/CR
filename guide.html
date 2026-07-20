@@ -31,6 +31,7 @@
     <aside class="deck-diagram" aria-label="선박 층별 안내">
       <p class="deck-diagram__title">DECK PLAN — SIDE PROFILE</p>
       <div class="deck-stack">
+        <button type="button" class="deck-layer" data-tab="bridge"><span>12F</span>브릿지</button>
         <button type="button" class="deck-layer active" data-tab="pool"><span>10F</span>수영장</button>
         <button type="button" class="deck-layer" data-tab="deck"><span>9F</span>갑판</button>
         <button type="button" class="deck-layer" data-tab="lounge"><span>7F</span>라운지</button>
@@ -69,7 +70,15 @@
         <p class="program-pane__lead">인피니티 풀 · 자쿠지</p>
         <ul class="program-list">
           <li>06:00–22:00 개방</li>
-          <li>타월 · 선크림 데크 옆 수령</li>
+          <li>타월 · 선크림 덱 옆 수령</li>
+        </ul>
+      </div>
+      <div id="bridge" class="program-pane">
+        <h3>브릿지 · 선장실 · Deck 12</h3>
+        <p class="program-pane__lead">선수 최상부 · 승객 출입 제한</p>
+        <ul class="program-list">
+          <li><strong>구역</strong> 조타실 · 선장실</li>
+          <li><strong>출입</strong> 승무원 전용</li>
         </ul>
       </div>
     </div>
@@ -81,6 +90,10 @@
       <p>날씨 · 시간 · 안개 등 환경 정보가 표시됩니다.</p>
       <div class="status-plaque__readout">📍 갑판 · 🌞 낮 · ☀️ 맑음 · 🌊 잔잔 · 안개: 없음</div>
       <p class="status-plaque__note">※ 짙은 안개 시, 갑판으로 나가지 마십시오.</p>
+      <div class="status-plaque__jsx">
+        <h3 class="status-plaque__jsx-title">JSX 상태창 미리보기</h3>
+        <iframe src="jsx-preview.html" title="JSX 상태창 미리보기" class="status-plaque__iframe"></iframe>
+      </div>
     </div>
   </section>
 

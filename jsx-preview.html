@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSX Preview · THREE DAYS OF SUN</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 12px;
+      background: #fdfbf7;
+    }
+    #root {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+    .preview-error {
+      margin: 0;
+      color: #8b2942;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"><p class="preview-error">로딩 중…</p></div>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script>
+    (async function () {
+      var rootEl = document.getElementById("root");
+      try {
+        var res = await fetch("./components/MainTerminal.jsx");
+        if (!res.ok) throw new Error("MainTerminal.jsx (" + res.status + ")");
+        var source = await res.text();
+        var compiled = Babel.transform(source, {
+          presets: ["react"],
+          filename: "MainTerminal.jsx",
+        }).code;
+        var CustomComponent = new Function("React", compiled + "; return CustomComponent;")(React);
+        if (typeof CustomComponent !== "function") throw new Error("CustomComponent 없음");
+        var sample = React.createElement(CustomComponent, {
+          type: "main",
+          playerName: "VIP 승객",
+          time: "Day 1 - 18:00",
+          weather: "맑음",
+          fogLevel: "없음",
+          sanity: 100,
+          inventoryIds: [],
+          events: [
+            { location: "9F 갑판 산책로", scene: "바닷바람이 잔잔하다." },
+            { location: "12F 브릿지 · 선장실", scene: "승객 출입 제한." },
+          ],
+        });
+        ReactDOM.createRoot(rootEl).render(sample);
+      } catch (err) {
+        rootEl.innerHTML =
+          '<p class="preview-error">미리보기 로드 실패: ' +
+          String(err && err.message ? err.message : err) +
+          "</p>";
+      }
+    })();
+  </script>
+</body>
+</html>
