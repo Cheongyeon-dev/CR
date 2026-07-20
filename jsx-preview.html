@@ -30,10 +30,27 @@
   <script>
     (async function () {
       var rootEl = document.getElementById("root");
+      var JSX_URLS =
+        location.protocol === "file:"
+          ? ["https://cheongyeon-dev.github.io/CR/components/MainTerminal.jsx"]
+          : [
+              new URL("components/MainTerminal.jsx", location.href).href,
+              "https://cheongyeon-dev.github.io/CR/components/MainTerminal.jsx",
+            ];
       try {
-        var res = await fetch("./components/MainTerminal.jsx");
-        if (!res.ok) throw new Error("MainTerminal.jsx (" + res.status + ")");
-        var source = await res.text();
+        var source = "";
+        var lastErr = null;
+        for (var i = 0; i < JSX_URLS.length; i++) {
+          try {
+            var res = await fetch(JSX_URLS[i]);
+            if (!res.ok) throw new Error(JSX_URLS[i] + " (" + res.status + ")");
+            source = await res.text();
+            break;
+          } catch (e) {
+            lastErr = e;
+          }
+        }
+        if (!source) throw lastErr || new Error("MainTerminal.jsx");
         var compiled = Babel.transform(source, {
           presets: ["react"],
           filename: "MainTerminal.jsx",
