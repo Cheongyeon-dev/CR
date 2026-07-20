@@ -52,10 +52,14 @@
         }
         if (!source) throw lastErr || new Error("MainTerminal.jsx");
         var compiled = Babel.transform(source, {
-          presets: ["react"],
+          presets: [["react", { runtime: "classic" }]],
           filename: "MainTerminal.jsx",
         }).code;
-        var CustomComponent = new Function("React", compiled + "; return CustomComponent;")(React);
+        var CustomComponent = new Function(
+          "React",
+          "ReactDOM",
+          compiled + "; return CustomComponent;"
+        )(React, ReactDOM);
         if (typeof CustomComponent !== "function") throw new Error("CustomComponent 없음");
         var sample = React.createElement(CustomComponent, {
           type: "main",
