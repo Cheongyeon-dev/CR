@@ -136,15 +136,145 @@ const DECK_AMBIENT_FALLBACK = {
   "5-8F": "복도에 승객들과 승무원이 바쁘게 오간다.",
 };
 
+function sanityStatusText(sanity) {
+  if (sanity > 70) return "평온함. 기분 좋은 파도 소리가 들립니다.";
+  if (sanity > 30) return "이런, 조금 어지럽습니다. 안개가 짙어지고 있습니다.";
+  if (sanity > 0) return "귓가에 누군가의 웃음소리가 들리기 시작합니다.";
+  return "모든 이성을 상실하고 광기에 사로잡혔습니다.";
+}
+
+/** schedule prop: "19:00 디너쇼 · 22:00 안개 주의" — 시각·항목만 갱신 */
+function parseScheduleEntries(schedule) {
+  const raw = String(schedule || "").trim();
+  if (!raw) return [];
+  return raw
+    .split(/[·\n|]/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((entry) => {
+      const m = entry.match(/^(\d{1,2}:\d{2})\s*(.+)$/);
+      if (m) return { time: m[1], title: m[2].trim() };
+      return { time: "", title: entry };
+    });
+}
+
+/** 백틱 NPC 한 줄: 이름|🩵호감|🍸100|🙂기분💭위치&행동 */
+function formatNpcBacktickLine(npc, fallbackLocation) {
+  if (!npc || !npc.name) return "";
+  const aff = npc.affection != null ? npc.affection : 0;
+  const san = npc.npcSanity != null ? npc.npcSanity : 100;
+  const mood = npc.mood || "🙂—";
+  const loc = npc.location || fallbackLocation || "";
+  const act = npc.action || "";
+  return `${npc.name}|🩵${aff}|🍸${san}|${mood}💭${loc}&${act}`;
+}
+
+function collectStatusNpcNames(mainNpc, nearbyNpcs) {
+  const names = new Set();
+  if (mainNpc && mainNpc.name) names.add(mainNpc.name);
+  (nearbyNpcs || []).forEach((n) => {
+    if (n && n.name) names.add(n.name);
+  });
+  return names;
+}
+
+function formatMapEventText(ev, deck, ambientFallback) {
+  const sceneText = ev.scene || ev.ambient || (!ev.name && ev.action);
+  if (!ev.name && sceneText) return sceneText;
+  if (!ev.name) return ambientFallback;
+  return formatNpcBacktickLine(
+    {
+      name: ev.name,
+      affection: ev.affection,
+      npcSanity: ev.npcSanity ?? ev.sanity,
+      mood: ev.mood,
+      location: ev.location,
+      action: ev.action,
+    },
+    deck.locationLabel,
+  );
+}
+
+/** HUD 시각 — "7월 4일 월요일 09:00" 서식 전체. 숫자·요일·시각만 AI가 갱신. Day N 형식 사용 금지 */
+function resolveHudCalendarText(calendarText) {
+  const s = String(calendarText || "").trim();
+  return s || "7월 4일 월요일 09:00";
+}
+
+function resolveHudField(value, fallback) {
+  const s = String(value ?? "").trim();
+  return s || fallback;
+}
+
+function resolveHudFogLabel(fogLevel) {
+  const fog = String(fogLevel ?? "").trim() || "없음";
+  return fog === "없음" ? "안개 없음" : fog;
+}
+
+function formatScheduleInline(schedule) {
+  const rows = parseScheduleEntries(schedule);
+  if (rows.length === 0) return "—";
+  return rows
+    .map((e) => (e.time ? `${e.time} ${e.title}` : e.title))
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function buildStatusNpcLines(mainNpc, nearbyNpcs, events, location) {
+  const lines = [];
+  const push = (npc) => {
+    if (npc && npc.name) lines.push(npc);
+  };
+  push(mainNpc);
+  (nearbyNpcs || []).forEach(push);
+  if (lines.length > 0) return lines;
+
+  const named = (events || []).filter((e) => e && e.name);
+  if (!named.length) return lines;
+  const locKey = String(location || "").trim();
+  const atLoc = locKey
+    ? named.filter(
+        (e) =>
+          String(e.location || "").trim() === locKey ||
+          String(e.location || "").includes(locKey.split(" ")[0]),
+      )
+    : [];
+  const pool = atLoc.length > 0 ? atLoc : named;
+  return pool.slice(0, 3).map((e) => ({
+    name: e.name,
+    affection: e.affection ?? 0,
+    npcSanity: e.npcSanity ?? e.sanity ?? 100,
+    mood: e.mood || "🙂—",
+    location: e.location || location,
+    action: e.action || "—",
+  }));
+}
+
 function CustomComponent({
   type = "main", // "main"(상시메뉴), "dice"(판정), "item_discover"(최초발견연출), "ending"(엔딩)
 
   // Main Menu Props
   playerName = "VIP 승객",
+  voyageMeta = "",
+  voyageDay = "",
+  gender = "",
+  role = "",
   weather = "맑음",
   time = "Day 1 - 18:00",
+  dateTime = "7월 4일 월요일 09:00", // HUD 시각 — "N월 N일 N요일 HH:MM" 전체. Day N·time으로 대체 금지
+  location = "",
+  dayPhase = "",
+  seaState = "",
+  seaRegion = "",
   fogLevel = "없음",
   sanity = 100,
+  userOutfit = "",
+  userInventory = "",
+  mainNpc = null, // { name, mood?, action?, affection? }
+  nearbyNpcs = [],
+  schedule = "",
+  diary = "",
+  diaryNpcName = "",
   events = [],
   inventoryIds = [], // 수집품 메뉴에서 확인할 ID 배열
 
@@ -164,9 +294,8 @@ function CustomComponent({
   verdict = "",
   body = "",
 }) {
-  const [activeTab, setActiveTab] = React.useState("map");
+  const [activeTab, setActiveTab] = React.useState("status");
   const [viewItem, setViewItem] = React.useState(null);
-  const [expandedDeck, setExpandedDeck] = React.useState(null);
   const [isRolling, setIsRolling] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -191,10 +320,32 @@ function CustomComponent({
 
   // 1. 상시 메뉴 UI (지도/상태창/수집품)
   if (type === "main") {
+    const hudCalendar = resolveHudCalendarText(dateTime);
+    const hudLocation = resolveHudField(location, "—");
+    const hudPhase = resolveHudField(dayPhase, "낮");
+    const hudWeather = resolveHudField(weather, "맑음");
+    const hudFog = resolveHudField(fogLevel, "없음");
+    const hudFogLabel = resolveHudFogLabel(hudFog);
+    const hudSeaText = String(seaState ?? "").trim() || "—";
+    const hudSeaLine = String(seaRegion ?? "").trim()
+      ? `${hudSeaText} | ${String(seaRegion).trim()}`
+      : hudSeaText;
+    const scheduleInline = formatScheduleInline(schedule);
+    const diaryLine = `${diaryNpcName || "—"}의 일기 | ${diary || "—"}`;
+    const statusNpcLines = buildStatusNpcLines(
+      mainNpc,
+      nearbyNpcs,
+      events,
+      location,
+    );
+    const statusNpcNames = collectStatusNpcNames(mainNpc, nearbyNpcs);
+    statusNpcLines.forEach((n) => {
+      if (n && n.name) statusNpcNames.add(n.name);
+    });
     return (
       <div
         style={{
-          maxWidth: "400px",
+          maxWidth: "760px",
           margin: "0 auto",
           background: "linear-gradient(180deg, #0a1f3d 0%, #061528 100%)",
           border: "1px solid #d4b86a",
@@ -209,7 +360,7 @@ function CustomComponent({
         {/* 헤더 영역 */}
         <div
           style={{
-            padding: "16px 20px",
+            padding: "14px 20px 12px",
             borderBottom: "1px solid rgba(212, 184, 106, 0.3)",
             background: "rgba(255,255,255,0.02)",
           }}
@@ -225,11 +376,54 @@ function CustomComponent({
           >
             THREE DAYS OF SUN
           </h3>
-          <p
-            style={{ margin: "4px 0 0", fontSize: "18px", fontWeight: "bold" }}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "baseline",
+              flexWrap: "wrap",
+              gap: "8px 10px",
+              marginTop: "6px",
+            }}
           >
-            {playerName}
-          </p>
+            <span
+              style={{
+                fontSize: "14px",
+                fontWeight: 600,
+                color: "#f5f0e6",
+                lineHeight: 1.3,
+              }}
+            >
+              {playerName}
+            </span>
+            {voyageDay || gender || role ? (
+              <span
+                style={{
+                  fontSize: "11px",
+                  color: "#7fd4df",
+                  letterSpacing: "0.02em",
+                  lineHeight: 1.3,
+                }}
+              >
+                {[
+                  `승선 ${voyageDay || "1"}일차`,
+                  gender || "—",
+                  role || "VIP 승객",
+                ].join(" · ")}
+              </span>
+            ) : (
+              <span
+                style={{
+                  fontSize: "11px",
+                  color: "#7fd4df",
+                  letterSpacing: "0.02em",
+                  lineHeight: 1.3,
+                }}
+              >
+                {voyageMeta ||
+                  `승선 ${voyageDay || "1"}일차 · ${gender || "—"} · ${role || "VIP 승객"}`}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* 탭 버튼 */}
@@ -239,7 +433,7 @@ function CustomComponent({
             borderBottom: "1px solid rgba(212, 184, 106, 0.2)",
           }}
         >
-          {["map", "status", "inventory"].map((tab) => (
+          {["status", "map", "inventory"].map((tab) => (
             <button
               key={tab}
               onClick={() => handleTabChange(tab)}
@@ -262,17 +456,242 @@ function CustomComponent({
                 transition: "all 0.2s",
               }}
             >
-              {tab === "map" ? "지도" : tab === "status" ? "상태창" : "수집품"}
+              {tab === "status" ? "상태" : tab === "map" ? "지도" : "수집품"}
             </button>
           ))}
         </div>
 
         {/* 콘텐츠 */}
-        <div style={{ padding: "24px 20px", minHeight: "280px" }}>
+        <div style={{ padding: "20px", minHeight: "320px" }}>
+          {/* 상태 탭 */}
+          {activeTab === "status" && (
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+            >
+              {/* 환경 HUD — 2줄 흐름 · 좌우 그리드 없음 */}
+              <div
+                style={{
+                  background: "#040d1a",
+                  padding: "12px 14px",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(127, 212, 223, 0.3)",
+                  boxShadow: "inset 0 0 16px rgba(0,0,0,0.8)",
+                  fontFamily: "monospace",
+                  fontSize: "12px",
+                  color: "#7fd4df",
+                  lineHeight: 1.55,
+                }}
+              >
+                <div>
+                  {hudCalendar}&nbsp;&nbsp;🌞 {hudPhase}&nbsp;&nbsp;🌤{" "}
+                  {hudWeather}
+                </div>
+                <div style={{ marginTop: "6px" }}>
+                  📍 {hudLocation}&nbsp;&nbsp;🌊 {hudSeaLine}&nbsp;&nbsp;☁️{" "}
+                  {hudFogLabel}
+                </div>
+              </div>
+
+              {/* 유저 | 심리 — 심리 영역 ~70% */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr minmax(108px, 28%)",
+                  gap: "16px",
+                  alignItems: "start",
+                }}
+              >
+                <div style={{ fontSize: "13px", lineHeight: 1.6 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      alignItems: "flex-start",
+                    }}
+                  >
+                    <span
+                      style={{
+                        flexShrink: 0,
+                        width: "42px",
+                        fontSize: "11px",
+                        color: "#f5f0e6",
+                        fontWeight: "bold",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      복장
+                    </span>
+                    <span
+                      style={{
+                        flex: 1,
+                        color: userOutfit ? "#f5f0e6" : "#5a6578",
+                        wordBreak: "break-word",
+                      }}
+                    >
+                      {userOutfit || "—"}
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      marginTop: "10px",
+                      alignItems: "flex-start",
+                    }}
+                  >
+                    <span
+                      style={{
+                        flexShrink: 0,
+                        width: "42px",
+                        fontSize: "11px",
+                        color: "#f5f0e6",
+                        fontWeight: "bold",
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      소지품
+                    </span>
+                    <span
+                      style={{
+                        flex: 1,
+                        color: userInventory ? "#f5f0e6" : "#5a6578",
+                        wordBreak: "break-word",
+                      }}
+                    >
+                      {userInventory || "—"}
+                    </span>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    textAlign: "center",
+                    fontSize: "9px",
+                    lineHeight: 1.45,
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: "1em",
+                      color: "#f5f0e6",
+                      marginBottom: "4px",
+                    }}
+                  >
+                    심리 상태
+                  </div>
+                  <div style={{ fontSize: "1.55em", marginBottom: "3px" }}>
+                    {sanity > 70 ? "🍸" : sanity > 30 ? "🍹" : "🍷"}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "1.05em",
+                      color: sanity > 30 ? "#f5f0e6" : "#e8925a",
+                    }}
+                  >
+                    {sanityStatusText(sanity)}
+                  </div>
+                </div>
+              </div>
+
+              {/* NPC — 라벨 + 상태줄 */}
+              <div
+                style={{
+                  borderTop: "1px solid rgba(212, 184, 106, 0.15)",
+                  paddingTop: "10px",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "11px",
+                    color: "#f5f0e6",
+                    fontWeight: "bold",
+                    marginBottom: "6px",
+                    letterSpacing: "0.06em",
+                  }}
+                >
+                  NPC
+                </div>
+                <div
+                  style={{
+                    fontSize: "14px",
+                    lineHeight: 1.65,
+                    color: "#c8d0dc",
+                  }}
+                >
+                  {statusNpcLines.length > 0 ? (
+                    statusNpcLines.map((npc, idx) => (
+                      <div
+                        key={`${npc.name}-${idx}`}
+                        style={{ marginBottom: "8px" }}
+                      >
+                        <div>{formatNpcBacktickLine(npc, location)}</div>
+                        <div
+                          style={{
+                            paddingLeft: "16px",
+                            marginTop: "4px",
+                            fontSize: "12px",
+                            color: "#8a7f6e",
+                          }}
+                        >
+                          {[npc.outfit, npc.items].filter(Boolean).join(" · ") ||
+                            "—"}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div style={{ color: "#5a6578" }}>
+                      —|🩵—|🍸—|🙂—💭—&—
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* 하단: 일기(좌) | 예정 일정(우) — 한 줄 · 박스 없음 */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "16px",
+                  alignItems: "start",
+                  borderTop: "1px solid rgba(212, 184, 106, 0.12)",
+                  paddingTop: "10px",
+                }}
+              >
+                <div style={{ minWidth: 0 }}>
+                  <div
+                    style={{
+                      fontSize: "12px",
+                      lineHeight: 1.65,
+                      color: "#f5f0e6",
+                      whiteSpace: "pre-wrap",
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    {diaryLine}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    fontSize: "12px",
+                    lineHeight: 1.65,
+                    color: "#f5f0e6",
+                    minWidth: 0,
+                    wordBreak: "break-word",
+                  }}
+                >
+                  예정 일정 |{" "}
+                  <span style={{ color: scheduleInline === "—" ? "#5a6578" : "#f5f0e6" }}>
+                    {scheduleInline}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* 지도 탭 */}
           {activeTab === "map" && (
             <div
-              style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+              style={{ display: "flex", flexDirection: "column", gap: "8px" }}
             >
               <div
                 style={{
@@ -284,223 +703,58 @@ function CustomComponent({
                 ◆ DECK PLAN & EVENTS
               </div>
               {DECK_PLAN.map((deck) => {
-                const deckEvents = events.filter((e) =>
-                  eventMatchesDeck(e.location, deck),
-                );
+                const deckEvents = events
+                  .filter((e) => eventMatchesDeck(e.location, deck))
+                  .filter((e) => !e.name || !statusNpcNames.has(e.name));
+                const inlineText =
+                  deckEvents.length > 0
+                    ? deckEvents
+                        .map((ev) =>
+                          formatMapEventText(
+                            ev,
+                            deck,
+                            DECK_AMBIENT_FALLBACK[deck.id],
+                          ),
+                        )
+                        .join("  ·  ")
+                    : DECK_AMBIENT_FALLBACK[deck.id];
                 return (
                   <div
                     key={deck.id}
                     style={{
                       display: "flex",
-                      flexDirection: "column",
-                      gap: "4px",
+                      alignItems: "baseline",
+                      gap: "10px",
+                      padding: "6px 0",
+                      borderBottom: "1px solid rgba(255,255,255,0.05)",
+                      fontSize: "12px",
+                      lineHeight: 1.55,
                     }}
                   >
-                    <div
-                      style={{ ...mapBtnStyle, cursor: "pointer" }}
-                      onClick={() =>
-                        setExpandedDeck(
-                          expandedDeck === deck.id ? null : deck.id,
-                        )
-                      }
-                    >
-                      <span style={deckNumStyle}>{deck.id}</span>
-                      <span style={{ flex: 1, textAlign: "left" }}>
-                        {deck.name}
-                      </span>
-                      <span
-                        style={{
-                          ...indicatorStyle,
-                          transition: "transform 0.2s",
-                          transform:
-                            expandedDeck === deck.id
-                              ? "rotate(180deg)"
-                              : "rotate(0deg)",
-                        }}
-                      >
-                        ▼
-                      </span>
-                    </div>
-                    {/* 아코디언 펼침 내용 */}
-                    <div
+                    <span
                       style={{
-                        maxHeight: expandedDeck === deck.id ? "500px" : "0",
-                        overflow: "hidden",
-                        transition: "max-height 0.3s ease-in-out",
-                        opacity: expandedDeck === deck.id ? 1 : 0,
+                        ...deckNumStyle,
+                        width: "44px",
+                        flexShrink: 0,
                       }}
                     >
-                      <div
-                        style={{
-                          padding: "12px 16px",
-                          background: "rgba(0,0,0,0.2)",
-                          borderLeft: "2px solid #7fd4df",
-                          borderRadius: "0 4px 4px 0",
-                          marginTop: "2px",
-                          fontSize: "13px",
-                          color: "#a6b0c2",
-                          lineHeight: "1.6",
-                        }}
-                      >
-                        {deckEvents.length > 0 ? (
-                          deckEvents.map((ev, idx) => {
-                            const sceneText =
-                              ev.scene || ev.ambient || (!ev.name && ev.action);
-                            if (!ev.name && sceneText) {
-                              return (
-                                <div
-                                  key={idx}
-                                  style={{
-                                    padding: "6px 0",
-                                    borderBottom:
-                                      idx < deckEvents.length - 1
-                                        ? "1px solid rgba(255,255,255,0.05)"
-                                        : "none",
-                                  }}
-                                >
-                                  {sceneText}
-                                </div>
-                              );
-                            }
-                            return (
-                              <div
-                                key={idx}
-                                style={{
-                                  padding: "6px 0",
-                                  borderBottom:
-                                    idx < deckEvents.length - 1
-                                      ? "1px solid rgba(255,255,255,0.05)"
-                                      : "none",
-                                }}
-                              >
-                                <span
-                                  style={{
-                                    color: "#d4b86a",
-                                    fontWeight: "bold",
-                                    marginRight: "8px",
-                                  }}
-                                >
-                                  {ev.name}
-                                </span>
-                                {ev.mood ? <span>{ev.mood}</span> : null}
-                                {ev.action ? (
-                                  <>
-                                    {ev.mood ? (
-                                      <span
-                                        style={{
-                                          margin: "0 6px",
-                                          color: "#5a6578",
-                                        }}
-                                      >
-                                        |
-                                      </span>
-                                    ) : null}
-                                    <span>{ev.action}</span>
-                                  </>
-                                ) : null}
-                              </div>
-                            );
-                          })
-                        ) : (
-                          <div style={{ padding: "4px 0" }}>
-                            {DECK_AMBIENT_FALLBACK[deck.id]}
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                      {deck.id}
+                    </span>
+                    <span
+                      style={{
+                        width: "128px",
+                        flexShrink: 0,
+                        color: "#a6b0c2",
+                      }}
+                    >
+                      {deck.name}
+                    </span>
+                    <span style={{ flex: 1, color: "#c8d0dc" }}>
+                      {inlineText}
+                    </span>
                   </div>
                 );
               })}
-            </div>
-          )}
-
-          {/* 상태창 탭 */}
-          {activeTab === "status" && (
-            <div
-              style={{ display: "flex", flexDirection: "column", gap: "16px" }}
-            >
-              <div
-                style={{
-                  background: "#040d1a",
-                  padding: "16px",
-                  borderRadius: "8px",
-                  border: "1px solid rgba(127, 212, 223, 0.3)",
-                  boxShadow: "inset 0 0 16px rgba(0,0,0,0.8)",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#7fd4df",
-                    fontFamily: "monospace",
-                    fontSize: "13px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: "12px",
-                  }}
-                >
-                  <span>TIME</span> <span>{time}</span>
-                </div>
-                <div
-                  style={{
-                    color: "#7fd4df",
-                    fontFamily: "monospace",
-                    fontSize: "13px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: "12px",
-                  }}
-                >
-                  <span>WEATHER</span> <span>{weather}</span>
-                </div>
-                <div
-                  style={{
-                    color: fogLevel !== "없음" ? "#e8925a" : "#7fd4df",
-                    fontFamily: "monospace",
-                    fontSize: "13px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <span>FOG WARN</span> <span>{fogLevel}</span>
-                </div>
-              </div>
-              <div
-                style={{
-                  textAlign: "center",
-                  marginTop: "12px",
-                  padding: "16px",
-                  background: "rgba(255,255,255,0.02)",
-                  borderRadius: "8px",
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: "11px",
-                    color: "#d4b86a",
-                    marginBottom: "8px",
-                  }}
-                >
-                  심리 상태
-                </div>
-
-                {/* 기존 이모지 잔으로 롤백 */}
-                <div style={{ fontSize: "24px", marginBottom: "4px" }}>
-                  {sanity > 70 ? "🍸" : sanity > 30 ? "🍹" : "🍷"}
-                </div>
-
-                <div
-                  style={{
-                    fontSize: "13px",
-                    color: sanity > 30 ? "#f5f0e6" : "#e8925a",
-                  }}
-                >
-                  {sanity > 70
-                    ? "평온함. 기분 좋은 파도 소리가 들립니다."
-                    : sanity > 30
-                      ? "이런, 조금 어지럽습니다. 안개가 짙어집니다."
-                      : "귓가에 누군가의 웃음소리가 들리기 시작합니다."}
-                </div>
-              </div>
             </div>
           )}
 

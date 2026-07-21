@@ -11,7 +11,7 @@
       background: #fdfbf7;
     }
     #root {
-      max-width: 420px;
+      max-width: 800px;
       margin: 0 auto;
     }
     .preview-error {
@@ -30,27 +30,12 @@
   <script>
     (async function () {
       var rootEl = document.getElementById("root");
-      var JSX_URLS =
-        location.protocol === "file:"
-          ? ["https://cheongyeon-dev.github.io/CR/components/MainTerminal.jsx"]
-          : [
-              new URL("components/MainTerminal.jsx", location.href).href,
-              "https://cheongyeon-dev.github.io/CR/components/MainTerminal.jsx",
-            ];
+      var JSX_URL =
+        new URL("components/MainTerminal.jsx", location.href).href + "?v=20260721g";
       try {
-        var source = "";
-        var lastErr = null;
-        for (var i = 0; i < JSX_URLS.length; i++) {
-          try {
-            var res = await fetch(JSX_URLS[i]);
-            if (!res.ok) throw new Error(JSX_URLS[i] + " (" + res.status + ")");
-            source = await res.text();
-            break;
-          } catch (e) {
-            lastErr = e;
-          }
-        }
-        if (!source) throw lastErr || new Error("MainTerminal.jsx");
+        var res = await fetch(JSX_URL);
+        if (!res.ok) throw new Error(JSX_URL + " (" + res.status + ")");
+        var source = await res.text();
         var compiled = Babel.transform(source, {
           presets: [["react", { runtime: "classic" }]],
           filename: "MainTerminal.jsx",
@@ -63,14 +48,55 @@
         if (typeof CustomComponent !== "function") throw new Error("CustomComponent 없음");
         var sample = React.createElement(CustomComponent, {
           type: "main",
-          playerName: "VIP 승객",
-          time: "Day 1 - 18:00",
+          playerName: "파랑",
+          voyageDay: "2",
+          gender: "여",
+          role: "VIP 승객",
+          dateTime: "7월 4일 월요일 09:00",
+          location: "7F 라운지 바",
+          dayPhase: "낮",
           weather: "맑음",
           fogLevel: "없음",
-          sanity: 100,
-          inventoryIds: [],
+          seaState: "잔잔한 파도",
+          seaRegion: "동아시아 해역",
+          sanity: 85,
+          userOutfit: "검은 원피스, 진주 목걸이",
+          userInventory: "객실키, 스마트폰",
+          mainNpc: {
+            name: "설하영",
+            affection: 41,
+            mood: "🙂평온",
+            action: "칵테일을 흔드는 중",
+            outfit: "검은 정장",
+            items: "실버 워치",
+          },
+          nearbyNpcs: [
+            {
+              name: "레이나",
+              affection: 28,
+              mood: "🤔고민",
+              action: "난간을 바라보는 중",
+            },
+          ],
+          schedule: "19:00 디너쇼 · 22:00 안개 주의",
+          diaryNpcName: "설하영",
+          diary: "웃었지만, 눈빛은 바다 쪽을 향하고 있었다.",
+          inventoryIds: ["log_203"],
           events: [
-            { location: "9F 갑판 산책로", scene: "바닷바람이 잔잔하다." },
+            {
+              location: "7F 라운지 바",
+              name: "설하영",
+              affection: 41,
+              mood: "🙂평온",
+              action: "칵테일을 흔드는 중",
+            },
+            {
+              location: "9F 갑판 산책로",
+              name: "크리스티안",
+              affection: 15,
+              mood: "🙂",
+              action: "갑판을 순찰하는 중",
+            },
             { location: "12F 브릿지 · 선장실", scene: "승객 출입 제한." },
           ],
         });
