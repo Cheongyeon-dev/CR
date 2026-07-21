@@ -75,6 +75,16 @@ const ITEM_DB = {
     content:
       "금속 재질의 열쇠. '기관실'이라는 긁힌 자국이 있다. 손에 쥐고 있으면 뼛속까지 시린 한기가 올라온다.",
   },
+  log_theogony: {
+    icon: "📜",
+    title: "찢어진 신통기 조각",
+    desc: "7F 라운지 VIP 구역 테이블 아래",
+    type: "paper",
+    dayLabel: "",
+    recordTitle: "찢어진 신통기 조각",
+    content:
+      '"…이들이 바로 오케아노스와 테티스가 낳은 가장 먼저 태어난 신성한 딸들이라. 하지만 이들 외에도 다른 자매들이 아주 많으니, 영토를 널리 다스리는 제우스께서 이 자매들에게 아폴론 왕 및 강(江)의 신들과 함께 대지 위 청년들의 성장과 양육을 도우라는 임무를 주셨음이라."            — 헤시오도스, 《신통기》 중',
+  },
   // --- 임의 조사 연출 폴백 (AI가 recordTitle·entryBody 필수. 비우면 아래 최소값) ---
   clue_note: {
     icon: "📝",
@@ -158,15 +168,29 @@ function parseScheduleEntries(schedule) {
     });
 }
 
-/** 백틱 NPC 한 줄: 이름|🩵호감|🍸100|🙂기분💭위치&행동 */
+/** 관계 칸: relationTag 우선 (예: 💕45 · 💝100 · 💔0 · 🩵41). 없으면 relationType+affection, 기본 🩵 */
+function resolveRelationTag(npc) {
+  if (!npc) return "🩵—";
+  const tag = String(npc.relationTag ?? "").trim();
+  if (tag) return tag;
+  const aff = npc.affection != null ? npc.affection : "—";
+  const type = String(npc.relationType ?? "").trim();
+  const icon =
+    type === "💕" || type === "💝" || type === "💔" || type === "🩵"
+      ? type
+      : "🩵";
+  return `${icon}${aff}`;
+}
+
+/** 백틱 NPC 한 줄: 이름|{관계이모지}수치|🍸100|🙂기분💭위치&행동 */
 function formatNpcBacktickLine(npc, fallbackLocation) {
   if (!npc || !npc.name) return "";
-  const aff = npc.affection != null ? npc.affection : 0;
+  const relation = resolveRelationTag(npc);
   const san = npc.npcSanity != null ? npc.npcSanity : 100;
   const mood = npc.mood || "🙂—";
   const loc = npc.location || fallbackLocation || "";
   const act = npc.action || "";
-  return `${npc.name}|🩵${aff}|🍸${san}|${mood}💭${loc}&${act}`;
+  return `${npc.name}|${relation}|🍸${san}|${mood}💭${loc}&${act}`;
 }
 
 function collectStatusNpcNames(mainNpc, nearbyNpcs) {
@@ -186,6 +210,8 @@ function formatMapEventText(ev, deck, ambientFallback) {
     {
       name: ev.name,
       affection: ev.affection,
+      relationTag: ev.relationTag,
+      relationType: ev.relationType,
       npcSanity: ev.npcSanity ?? ev.sanity,
       mood: ev.mood,
       location: ev.location,
@@ -243,6 +269,8 @@ function buildStatusNpcLines(mainNpc, nearbyNpcs, events, location) {
   return pool.slice(0, 3).map((e) => ({
     name: e.name,
     affection: e.affection ?? 0,
+    relationTag: e.relationTag,
+    relationType: e.relationType,
     npcSanity: e.npcSanity ?? e.sanity ?? 100,
     mood: e.mood || "🙂—",
     location: e.location || location,
@@ -270,7 +298,7 @@ function CustomComponent({
   sanity = 100,
   userOutfit = "",
   userInventory = "",
-  mainNpc = null, // { name, mood?, action?, affection? }
+  mainNpc = null, // { name, mood?, action?, affection?, relationTag?, relationType? }
   nearbyNpcs = [],
   schedule = "",
   diary = "",
