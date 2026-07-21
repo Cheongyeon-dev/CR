@@ -957,11 +957,14 @@ button { font-family: inherit; cursor: pointer; }
    THEME C — cast.html (VIP 초대장 · 시안·네이비·금)
    ════════════════════════════════════════════ */
 .theme-c {
-  /* 기존 저톤: #0c2f52 / #0e3d62 / #0a2a48 → 톤 업 */
-  background:
-    radial-gradient(ellipse 70% 55% at 12% 8%, rgba(80, 210, 230, 0.5), transparent 56%),
-    radial-gradient(ellipse 55% 45% at 88% 90%, rgba(50, 170, 190, 0.42), transparent 52%),
-    linear-gradient(168deg, #1a5a8c 0%, #1f6a9e 42%, #154a78 100%);
+  /* 네이비 → 딥네이비 그라데이션만 (단색·밝은 중간톤 금지). 금색 토큰 변경 금지 */
+  background: linear-gradient(
+    180deg,
+    #0a3a6e 0%,
+    #072a52 40%,
+    #041a36 75%,
+    #020d1c 100%
+  );
   color: var(--champagne-light);
   min-height: 100vh;
 }
@@ -1017,13 +1020,13 @@ button { font-family: inherit; cursor: pointer; }
   width: 100%;
   padding: clamp(36px, 5vw, 52px) clamp(32px, 4.5vw, 52px);
   background:
-    radial-gradient(ellipse 90% 70% at 10% 0%, rgba(26, 138, 154, 0.14), transparent 55%),
-    linear-gradient(155deg, #1a4570 0%, #143556 50%, #102a48 100%);
+    radial-gradient(ellipse 90% 70% at 10% 0%, rgba(20, 90, 140, 0.2), transparent 55%),
+    linear-gradient(155deg, #0a355f 0%, #062440 50%, #03101f 100%);
   border: 2px solid rgba(212, 184, 106, 0.65);
   box-shadow:
-    0 28px 56px rgba(0, 0, 0, 0.28),
+    0 28px 56px rgba(0, 0, 0, 0.45),
     inset 0 0 0 1px rgba(240, 228, 196, 0.1),
-    inset 0 0 0 7px rgba(10, 31, 61, 0.35),
+    inset 0 0 0 7px rgba(3, 12, 28, 0.45),
     inset 0 0 0 8px rgba(212, 184, 106, 0.35);
 }
 
@@ -1100,7 +1103,7 @@ button { font-family: inherit; cursor: pointer; }
   font-size: clamp(1.85rem, 4.2vw, 3rem);
   letter-spacing: 0.04em;
   line-height: 1;
-  background: linear-gradient(105deg, #a87f33, #c79f49 22%, #f0e4c4 48%, #d4b86a 72%, #a87f33);
+  background: linear-gradient(105deg, #c98a08, #f0c63a 22%, #fff3b8 48%, #e8b410 72%, #c98a08);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -1850,8 +1853,36 @@ body.is-boarded .cast-page {
 }
 
 /* ════════════════════════════════════════════
-   gallery.html — theme-b 안내판 톤
+   gallery.html — 대문 theme-a 톤 (theme-b 세로줄 금지)
    ════════════════════════════════════════════ */
+.gallery-hero {
+  padding: clamp(40px, 6vw, 64px) 0 clamp(28px, 4vw, 40px);
+}
+
+.gallery-hero__tag {
+  margin: 0 0 12px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.gallery-hero h1 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  color: var(--navy);
+  line-height: 1.05;
+}
+
+.gallery-hero__sub {
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: rgba(10, 31, 61, 0.62);
+}
+
 .gallery-main {
   padding-bottom: 64px;
 }
@@ -1867,7 +1898,7 @@ body.is-boarded .cast-page {
   gap: 16px;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid var(--champagne);
+  border-bottom: 1px solid rgba(212, 184, 106, 0.45);
 }
 
 .gallery-section__head h2 {
@@ -1881,7 +1912,7 @@ body.is-boarded .cast-page {
 .gallery-section__head p {
   margin: 0;
   font-size: 12px;
-  color: var(--paper-muted);
+  color: rgba(10, 31, 61, 0.5);
   letter-spacing: 0.06em;
 }
 
@@ -1896,9 +1927,9 @@ body.is-boarded .cast-page {
 
 .gallery-panel {
   padding: 24px 28px;
-  background: #faf4e8;
-  border: 1px solid rgba(12, 39, 69, 0.2);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(212, 184, 106, 0.35);
+  box-shadow: 0 12px 28px rgba(10, 31, 61, 0.06);
 }
 
 .gallery-panel p {

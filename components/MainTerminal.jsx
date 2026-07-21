@@ -18,7 +18,7 @@ const ITEM_DB = {
     icon: "📝",
     title: "누군가의 일기 - 2일 차",
     desc: "수영장 근처 벤치에 떨어져 있던 조각",
-    type: "wet_paper",
+    type: "paper",
     dayLabel: "2일 차",
     recordTitle: "누군가의 기록",
     content:
@@ -28,7 +28,7 @@ const ITEM_DB = {
     icon: "📝",
     title: "누군가의 일기 - 3일 차",
     desc: "직원 탈의실 캐비닛",
-    type: "bloody_paper",
+    type: "paper",
     dayLabel: "3일 차",
     recordTitle: "누군가의 기록",
     content:
@@ -543,7 +543,7 @@ function CustomComponent({
                         flexShrink: 0,
                         width: "42px",
                         fontSize: "11px",
-                        color: "#f5f0e6",
+                        color: "#7fd4df",
                         fontWeight: "bold",
                         lineHeight: 1.6,
                       }}
@@ -573,7 +573,7 @@ function CustomComponent({
                         flexShrink: 0,
                         width: "42px",
                         fontSize: "11px",
-                        color: "#f5f0e6",
+                        color: "#7fd4df",
                         fontWeight: "bold",
                         lineHeight: 1.6,
                       }}
@@ -602,7 +602,8 @@ function CustomComponent({
                   <div
                     style={{
                       fontSize: "1em",
-                      color: "#f5f0e6",
+                      color: "#7fd4df",
+                      fontWeight: "bold",
                       marginBottom: "4px",
                     }}
                   >
@@ -632,7 +633,7 @@ function CustomComponent({
                 <div
                   style={{
                     fontSize: "11px",
-                    color: "#f5f0e6",
+                    color: "#7fd4df",
                     fontWeight: "bold",
                     marginBottom: "6px",
                     letterSpacing: "0.06em",
@@ -863,26 +864,13 @@ function CustomComponent({
                   {viewItem.type.includes("paper") ? (
                     <div
                       style={{
-                        background:
-                          viewItem.type === "bloody_paper"
-                            ? "rgba(92, 36, 56, 0.1)"
-                            : "rgba(245, 240, 230, 0.05)",
-                        borderLeft:
-                          viewItem.type === "bloody_paper"
-                            ? "3px solid #8b1a1a"
-                            : "3px solid #8a7f6e",
+                        background: "rgba(245, 240, 230, 0.05)",
+                        borderLeft: "3px solid #8a7f6e",
                         padding: "16px",
                         fontFamily: '"Nanum Myeongjo", serif',
                         fontSize: "14px",
                         lineHeight: "1.8",
-                        color:
-                          viewItem.type === "wet_paper"
-                            ? "rgba(245, 240, 230, 0.6)"
-                            : "#d1d8e5",
-                        textShadow:
-                          viewItem.type === "wet_paper"
-                            ? "0 0 2px rgba(245, 240, 230, 0.4)"
-                            : "none",
+                        color: "#d1d8e5",
                         whiteSpace: "pre-wrap",
                       }}
                     >
@@ -1264,8 +1252,7 @@ function CustomComponent({
                 style={{
                   width: "100%",
                   height: "100%",
-                  background:
-                    item.type === "wet_paper" ? "#e8ecef" : "#ffffff",
+                  background: "#ffffff",
                   borderRadius: "4px 12px 12px 4px",
                   position: "relative",
                   overflow: "hidden",
@@ -1304,19 +1291,6 @@ function CustomComponent({
                   ))}
                 </div>
 
-                {item.type === "wet_paper" && (
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      pointerEvents: "none",
-                      zIndex: 1,
-                      background:
-                        "linear-gradient(180deg, rgba(90,110,130,0.06) 0%, transparent 40%)",
-                    }}
-                  />
-                )}
-
                 {/* 날짜: 우측 정렬 + 본문과 띄움. 우측 패딩으로 잘림 방지 */}
                 <div
                   style={{
@@ -1338,7 +1312,7 @@ function CustomComponent({
                   {headerLine}
                 </div>
 
-                {/* 본문: 좌측. 가로줄은 본문 background만(absolute 오버레이=글자 덮임 원인) */}
+                {/* 본문: 좌측. 가로줄은 본문 background만 */}
                 <div
                   style={{
                     boxSizing: "border-box",
@@ -1353,10 +1327,7 @@ function CustomComponent({
                     fontFamily: '"Nanum Myeongjo", "Batang", serif',
                     fontSize: "15px",
                     lineHeight: "32px",
-                    color:
-                      item.type === "wet_paper"
-                        ? "rgba(30,40,50,0.85)"
-                        : "#222",
+                    color: "#222",
                     textAlign: "left",
                     whiteSpace: "pre-wrap",
                     wordBreak: "keep-all",
