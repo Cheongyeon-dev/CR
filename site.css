@@ -957,10 +957,11 @@ button { font-family: inherit; cursor: pointer; }
    THEME C — cast.html (VIP 초대장 · 시안·네이비·금)
    ════════════════════════════════════════════ */
 .theme-c {
+  /* 기존 저톤: #0c2f52 / #0e3d62 / #0a2a48 → 톤 업 */
   background:
-    radial-gradient(ellipse 70% 55% at 12% 8%, rgba(45, 190, 210, 0.42), transparent 56%),
-    radial-gradient(ellipse 55% 45% at 88% 90%, rgba(26, 138, 154, 0.35), transparent 52%),
-    linear-gradient(168deg, #0c2f52 0%, #0e3d62 42%, #0a2a48 100%);
+    radial-gradient(ellipse 70% 55% at 12% 8%, rgba(80, 210, 230, 0.5), transparent 56%),
+    radial-gradient(ellipse 55% 45% at 88% 90%, rgba(50, 170, 190, 0.42), transparent 52%),
+    linear-gradient(168deg, #1a5a8c 0%, #1f6a9e 42%, #154a78 100%);
   color: var(--champagne-light);
   min-height: 100vh;
 }
@@ -1014,16 +1015,35 @@ button { font-family: inherit; cursor: pointer; }
 .invite-frame {
   position: relative;
   width: 100%;
-  padding: clamp(32px, 4.5vw, 48px) clamp(28px, 4vw, 48px);
+  padding: clamp(36px, 5vw, 52px) clamp(32px, 4.5vw, 52px);
   background:
-    radial-gradient(ellipse 90% 70% at 10% 0%, rgba(26, 138, 154, 0.1), transparent 55%),
-    linear-gradient(155deg, #132d4e 0%, #0d1f38 50%, #0a182e 100%);
-  border: 1px solid rgba(212, 184, 106, 0.5);
+    radial-gradient(ellipse 90% 70% at 10% 0%, rgba(26, 138, 154, 0.14), transparent 55%),
+    linear-gradient(155deg, #1a4570 0%, #143556 50%, #102a48 100%);
+  border: 2px solid rgba(212, 184, 106, 0.65);
   box-shadow:
-    0 28px 56px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(240, 228, 196, 0.08),
-    inset 0 0 0 1px rgba(212, 184, 106, 0.12);
-  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.28));
+    0 28px 56px rgba(0, 0, 0, 0.28),
+    inset 0 0 0 1px rgba(240, 228, 196, 0.1),
+    inset 0 0 0 7px rgba(10, 31, 61, 0.35),
+    inset 0 0 0 8px rgba(212, 184, 106, 0.35);
+}
+
+/* 전체 테두리 장식 (모서리 L만 쓰지 않음) */
+.invite-frame::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(212, 184, 106, 0.38);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.invite-frame::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px dashed rgba(127, 212, 223, 0.28);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .invite-frame__foil {
@@ -1032,6 +1052,7 @@ button { font-family: inherit; cursor: pointer; }
   left: 0;
   right: 0;
   height: 4px;
+  z-index: 2;
   background: linear-gradient(90deg, #6b5220, #c9a84c 18%, #f5e6b8 42%, #d4b86a 58%, #f5e6b8 78%, #6b5220);
   background-size: 220% 100%;
   animation: foilShimmer 5s linear infinite;
@@ -1054,6 +1075,12 @@ button { font-family: inherit; cursor: pointer; }
 .invite-frame__punch--bottom {
   bottom: -5px;
   transform: rotate(180deg);
+}
+
+.invite-frame__headline,
+.invite-frame__copy {
+  position: relative;
+  z-index: 2;
 }
 
 .invite-frame__headline {
@@ -1610,7 +1637,7 @@ body.is-boarded .cast-page {
   box-shadow:
     0 24px 48px rgba(0, 20, 40, 0.28),
     inset 0 0 0 1px rgba(127, 212, 223, 0.12);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .cast-profile__portrait::before {
@@ -1633,10 +1660,13 @@ body.is-boarded .cast-page {
   z-index: 2;
 }
 
-/* 카드 PNG = 원본 비율 유지 (cover 강제 크롭 금지) */
+/* 카드 PNG = 원본 비율 전체 표시 (크롭·강제 4:5 금지) */
 .cast-profile__portrait:has(img) {
-  aspect-ratio: auto;
-  background: #0e2f4a;
+  aspect-ratio: unset;
+  min-height: 0;
+  height: auto;
+  background: transparent;
+  overflow: visible;
 }
 
 .cast-profile__portrait:has(img)::before,
@@ -1649,8 +1679,10 @@ body.is-boarded .cast-page {
   z-index: 1;
   width: 100%;
   height: auto;
+  max-width: 100%;
   display: block;
   object-fit: contain;
+  object-position: center top;
 }
 
 .cast-profile__portrait:has(img) .cast-profile__numeral {
@@ -1766,6 +1798,8 @@ body.is-boarded .cast-page {
   .cast-profile__portrait {
     width: 100%;
     max-width: none;
+  }
+  .cast-profile__portrait:not(:has(img)) {
     min-height: clamp(240px, 62vw, 360px);
   }
   .cast-profile__bio { max-width: none; }
