@@ -71,8 +71,8 @@
 
 ### 레이아웃 (확정)
 
-- **세로 4섹션**, 각 섹션 = **좌 큰 portrait + 우 설명**
-- 캡처의 **가로 4열 카드**는 참고용이었으나, 최종은 **좌우 섹션** 유지
+- **세로 6섹션**, 각 섹션 = **좌 큰 portrait + 우 설명**
+- 최종은 **좌우 섹션** 유지 (가로 카드 그리드 금지)
 
 ### portrait 프레임
 
@@ -84,12 +84,17 @@
 
 ### 직함·텍스트
 
-| # | 직함 (`cast-profile__post`) | 출처 |
-|---|---------------------------|------|
-| I | 갑판 승무원 | `index.html` roster |
-| II | 바텐더 | 동일 |
-| III | 객실 승무원 | 동일 |
-| IV | 컨시어지 | 동일 |
+| # | 이름 (`cast-profile__post`) | role | 출처 |
+|---|---------------------------|------|------|
+| I | 올리비아 | Captain | `index.html` roster · `assets/cruise/` |
+| II | 설하영 | Crew | 동일 |
+| III | 크리세이스 | Suite Guest | 동일 |
+| IV | 리지 | Lifeguard | 동일 |
+| V | 레이나 | Ocean View | 동일 |
+| VI | 크리스티안 | Balcony Guest | 동일 |
+
+- portrait img: `https://bi.pharang.workers.dev/assets/cruise/{이름}.png`  
+  (로컬: `lorebox-worker/public/assets/cruise/` — **경계의문 `characters/` 아님**)
 
 - `인물명 미정` 등 **placeholder 금지**
 - Deck 9, Lobby 등 **임의 부가 라벨 금지**

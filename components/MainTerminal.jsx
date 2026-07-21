@@ -1122,6 +1122,8 @@ function CustomComponent({
     const headerLine = resolvedDay
       ? `${resolvedDay} · ${resolvedTitle}`
       : resolvedTitle;
+    const showDiaryCover = String(item.type || "").includes("paper");
+    const contentReady = showDiaryCover ? isOpen : true;
 
     return (
       <div
@@ -1151,7 +1153,8 @@ function CustomComponent({
             borderRadius: "8px 12px 12px 8px",
           }}
         >
-          {/* 1. 다이어리 표지 (Cover) */}
+          {/* 1. 다이어리 표지 — paper 계열만 */}
+          {showDiaryCover && (
           <div
             onClick={() => setIsOpen(true)}
             style={{
@@ -1161,23 +1164,18 @@ function CustomComponent({
               width: "100%",
               height: "100%",
               background:
-                item.type === "photo"
-                  ? "transparent"
-                  : "linear-gradient(to right, #111 0%, #222 5%, #151515 100%)", // 고급스러운 검은 가죽 느낌
+                "linear-gradient(to right, #111 0%, #222 5%, #151515 100%)",
               borderRadius: "8px 12px 12px 8px",
-              border:
-                item.type === "photo"
-                  ? "none"
-                  : "1px solid rgba(255,255,255,0.05)",
-              borderLeft: item.type === "photo" ? "none" : "6px solid #050505", // 굵은 책등
+              border: "1px solid rgba(255,255,255,0.05)",
+              borderLeft: "6px solid #050505",
               transformOrigin: "left center",
-              transform: isOpen ? "rotateY(-180deg)" : "rotateY(0deg)", // 180도로 완전히 넘김
-              opacity: isOpen ? 0 : 1, // 넘어가면 투명해져서 안 보임
+              transform: isOpen ? "rotateY(-180deg)" : "rotateY(0deg)",
+              opacity: isOpen ? 0 : 1,
               transition:
                 "transform 0.8s cubic-bezier(0.3, 0.0, 0.1, 1), opacity 0.8s cubic-bezier(0.3, 0.0, 0.1, 1)",
               zIndex: 10,
               cursor: isOpen ? "default" : "pointer",
-              display: item.type === "photo" ? "none" : "flex",
+              display: "flex",
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
@@ -1185,7 +1183,6 @@ function CustomComponent({
               boxShadow: "inset -8px 0 20px rgba(0,0,0,0.5)",
             }}
           >
-            {/* 표지 장식/텍스트 */}
             {!isOpen && (
               <div
                 style={{
@@ -1238,6 +1235,7 @@ function CustomComponent({
               </div>
             )}
           </div>
+          )}
 
           {/* 2. 본문 내용 (단일 오른쪽 페이지 한 장) */}
           <div
@@ -1249,7 +1247,7 @@ function CustomComponent({
               height: "100%",
               borderRadius: "4px 12px 12px 4px",
               zIndex: 1,
-              pointerEvents: isOpen ? "auto" : "none",
+              pointerEvents: contentReady ? "auto" : "none",
             }}
           >
             {item.type.includes("paper") ? (

@@ -1630,6 +1630,21 @@ body.is-boarded .cast-page {
   pointer-events: none;
 }
 
+.cast-profile__portrait img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.cast-profile__portrait:has(img) .cast-profile__numeral {
+  display: none;
+}
+
 .cast-profile__numeral {
   position: absolute;
   inset: 0;

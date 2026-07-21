@@ -44,9 +44,10 @@
 | C1 | 객실 배경 | `public/assets/bg/C1.webp` |
 | C2 | 수영장 | `public/assets/bg/C2.webp` |
 | C3 | 바다(폭풍) | `public/assets/bg/C3.webp` |
-| (캐스트) | 홈 인물 | `public/assets/characters/{코드}-full.webp` 등 |
+| (캐스트) | 홈·승선명단 | `public/assets/cruise/{이름}.png` (올리비아·설하영·…) |
+| — | 경계의문 홈 인물 | `public/assets/characters/` — **크루즈 캐스트 넣지 말 것** |
 
-**URL:** `bi.pharang.workers.dev/assets/bg/C1.webp` — 홈페이지는 이 링크만 걸면 됨.
+**URL:** `bi.pharang.workers.dev/assets/bg/C1.webp` · 캐스트 `…/assets/cruise/올리비아.png` — 홈페이지는 이 링크만 걸면 됨.
 
 convert·scrub 후 **wrangler deploy (bi)**. CR push 아님.
 
