@@ -33,7 +33,7 @@
 | B2 | 해변(비치베드) |
 | B3 | 수족관 |
 | N | 크리세이스 전용(바다의 님프) |
-**URL:** `bi.pharang.workers.dev/c/{캐릭}/{상황}` → CR Pages webp
+**URL:** `bi.pharang.workers.dev/c/{캐릭}/{상황}` → `github.io/CR/temp_cr_repo/{캐릭}/{상황}-n.webp`
 
 ---
 
@@ -60,10 +60,17 @@ convert·scrub 후 **wrangler deploy (bi)**. CR push 아님.
 ```
 raw/{SL}/{1}/ PNG
 → convert --cruise → scrub --cruise
-→ temp 스테이징 → CR push (webp만) → deploy bi (/c/)
+→ temp_cr_repo/{캐릭}/ 스테이징(웹피만) → CR push → deploy bi (/c/)
 ```
 
-`raw/`·`out/` = 로컬 전용. **GitHub(CR) 레포에 raw/out 직접 push 금지.**
+| 폴더 | 역할 | push |
+|------|------|------|
+| `raw/` · `out/` | 로컬 창고 | **금지** |
+| `temp_cr_repo/{SL,OV,…}/` | **유일한** CR 웹피 스테이징 | webp만 CR |
+| 루트 `SL/`·`OV/`… (html 옆) | **금지** — temp로만 |
+
+`raw/`·`out/` = 로컬 전용. **GitHub(CR)에 raw/out·루트 캐릭터 폴더 혼재 금지.**
+잘못 섞인 웹피 이동/삭제는 **스테이징(`temp_cr_repo` 또는 정리 전 루트 캐릭 폴더)만**. convert 재실행·raw 건드리지 말 것.
 
 **배경·UI·홈**
 ```

@@ -1610,6 +1610,7 @@ body.is-boarded .cast-page {
   box-shadow:
     0 24px 48px rgba(0, 20, 40, 0.28),
     inset 0 0 0 1px rgba(127, 212, 223, 0.12);
+  overflow: hidden;
 }
 
 .cast-profile__portrait::before {
@@ -1618,6 +1619,7 @@ body.is-boarded .cast-page {
   inset: 10px;
   border: 1px solid rgba(212, 184, 106, 0.22);
   pointer-events: none;
+  z-index: 2;
 }
 
 .cast-profile__portrait::after {
@@ -1628,17 +1630,27 @@ body.is-boarded .cast-page {
   background-size: 200% 200%;
   animation: portraitShine 8s ease-in-out infinite;
   pointer-events: none;
+  z-index: 2;
+}
+
+/* 카드 PNG = 원본 비율 유지 (cover 강제 크롭 금지) */
+.cast-profile__portrait:has(img) {
+  aspect-ratio: auto;
+  background: #0e2f4a;
+}
+
+.cast-profile__portrait:has(img)::before,
+.cast-profile__portrait:has(img)::after {
+  display: none;
 }
 
 .cast-profile__portrait img {
-  position: absolute;
-  inset: 0;
+  position: static;
   z-index: 1;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  height: auto;
   display: block;
+  object-fit: contain;
 }
 
 .cast-profile__portrait:has(img) .cast-profile__numeral {

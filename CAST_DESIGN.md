@@ -76,9 +76,9 @@
 
 ### portrait 프레임
 
-- `aspect-ratio: 4/5`, `min-height` 크게
+- **img 있을 때:** 원본 비율 유지 (`width:100%` · `height:auto` · cover 크롭 금지)
+- **img 없을 때:** `aspect-ratio: 4/5` 플레이스홀더 + 로마자 워터마크
 - **전체** 얇은 금 테두리 (`border: 1px solid champagne`)
-- 중앙 로마자 워터마크 I · II · III · IV (흐린 금색)
 - `corner-gold` span만으로 프레임 대체 **금지**
 - 좌측 선 한 줄(`border-left`만) **금지**
 

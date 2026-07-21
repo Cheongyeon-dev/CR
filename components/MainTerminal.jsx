@@ -359,7 +359,8 @@ function CustomComponent({
       ? `${hudSeaText} | ${String(seaRegion).trim()}`
       : hudSeaText;
     const scheduleInline = formatScheduleInline(schedule);
-    const diaryLine = `${diaryNpcName || "—"}의 일기 | ${diary || "—"}`;
+    const diaryTitle = `${diaryNpcName || "—"}의 일기`;
+    const diaryBody = diary || "—";
     const statusNpcLines = buildStatusNpcLines(
       mainNpc,
       nearbyNpcs,
@@ -674,7 +675,7 @@ function CustomComponent({
                 </div>
               </div>
 
-              {/* 하단: 일기(좌) | 예정 일정(우) — 한 줄 · 박스 없음 */}
+              {/* 하단: 일기(좌) | 예정 일정(우) — 제목 연하늘+볼드 / 본문 아이보리 */}
               <div
                 style={{
                   display: "grid",
@@ -685,31 +686,38 @@ function CustomComponent({
                   paddingTop: "10px",
                 }}
               >
-                <div style={{ minWidth: 0 }}>
-                  <div
-                    style={{
-                      fontSize: "12px",
-                      lineHeight: 1.65,
-                      color: "#f5f0e6",
-                      whiteSpace: "pre-wrap",
-                      wordBreak: "break-word",
-                    }}
-                  >
-                    {diaryLine}
-                  </div>
+                <div
+                  style={{
+                    minWidth: 0,
+                    fontSize: "12px",
+                    lineHeight: 1.65,
+                    whiteSpace: "pre-wrap",
+                    wordBreak: "break-word",
+                  }}
+                >
+                  <span style={{ color: "#7fd4df", fontWeight: 700 }}>
+                    {diaryTitle}
+                  </span>
+                  <span style={{ color: "#f5f0e6" }}> | {diaryBody}</span>
                 </div>
                 <div
                   style={{
                     fontSize: "12px",
                     lineHeight: 1.65,
-                    color: "#f5f0e6",
                     minWidth: 0,
                     wordBreak: "break-word",
                   }}
                 >
-                  예정 일정 |{" "}
-                  <span style={{ color: scheduleInline === "—" ? "#5a6578" : "#f5f0e6" }}>
-                    {scheduleInline}
+                  <span style={{ color: "#7fd4df", fontWeight: 700 }}>
+                    예정 일정
+                  </span>
+                  <span
+                    style={{
+                      color: scheduleInline === "—" ? "#5a6578" : "#f5f0e6",
+                    }}
+                  >
+                    {" "}
+                    | {scheduleInline}
                   </span>
                 </div>
               </div>
