@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>에셋 갤러리 | THREE DAYS OF SUN</title>
-  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="site.css?v=20260722c">
 </head>
-<body class="theme-b gallery-page">
+<body class="theme-a gallery-page">
 
   <nav class="top-nav" aria-label="사이트 메뉴">
     <a class="brand" href="index.html">
-      <span class="brand-mark brand-mark--dark" aria-hidden="true">⚓</span>
+      <span class="brand-mark" aria-hidden="true">☀</span>
       THREE DAYS OF SUN
-      <small>Onboard Directory</small>
+      <small>Luxury Cruise Line</small>
     </a>
     <div class="nav-links">
       <a href="index.html">대문</a>
@@ -22,10 +22,10 @@
     </div>
   </nav>
 
-  <header class="masthead-b wrap">
-    <p class="masthead-b__tag">RP IMAGE CODE TABLE · PASSENGER USE</p>
+  <header class="gallery-hero wrap">
+    <p class="gallery-hero__tag">SUMMER VOYAGE 2026 · RP CODES</p>
     <h1>에셋 갤러리</h1>
-    <p class="masthead-b__sub">캐릭터 RP 이미지 코드 · 미리보기 · 복사</p>
+    <p class="gallery-hero__sub">캐릭터 RP 이미지 코드 · 미리보기 · 복사</p>
   </header>
 
   <main class="wrap gallery-main">
@@ -37,7 +37,6 @@
       <article class="gallery-panel gallery-panel--compact">
         <p><strong>입력 형식</strong><br>![](https://bi.pharang.workers.dev/c/{캐릭터코드}/{상황코드})</p>
         <p><strong>예시</strong><br>![](https://bi.pharang.workers.dev/c/SL/1)</p>
-        <p class="gallery-panel__note">※ 워커 counts(CR) 기준 슬롯만 표시 · CR Pages에 webp 있으면 썸네일 로드</p>
       </article>
     </section>
 
@@ -224,8 +223,7 @@
 
     const emptyMessage = () => `
       <div class="gallery-empty">
-        <p><strong>등록된 에셋이 없습니다.</strong></p>
-        <p>raw → convert → scrub → CR push 후 <code>assets/gallery/manifest.json</code>에 항목이 추가되면 여기에 표시됩니다.</p>
+        <p><strong>표시할 이미지가 없습니다.</strong></p>
       </div>
     `;
 

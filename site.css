@@ -957,14 +957,12 @@ button { font-family: inherit; cursor: pointer; }
    THEME C — cast.html (VIP 초대장 · 시안·네이비·금)
    ════════════════════════════════════════════ */
 .theme-c {
-  /* 네이비 → 딥네이비 그라데이션만 (단색·밝은 중간톤 금지). 금색 토큰 변경 금지 */
-  background: linear-gradient(
-    180deg,
-    #0a3a6e 0%,
-    #072a52 40%,
-    #041a36 75%,
-    #020d1c 100%
-  );
+  /* 왼쪽 밝음 → 오른쪽/아래 딥네이비 (radial depth). 밝은 중간톤·플랫 linear 금지 */
+  background:
+    radial-gradient(ellipse 70% 55% at 8% 28%, rgba(26, 90, 130, 0.38), transparent 58%),
+    radial-gradient(ellipse 55% 50% at 88% 18%, rgba(4, 18, 40, 0.55), transparent 50%),
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(2, 10, 22, 0.9), transparent 55%),
+    linear-gradient(155deg, #0a2a4a 0%, #061a30 42%, #030e1c 100%);
   color: var(--champagne-light);
   min-height: 100vh;
 }
@@ -1020,14 +1018,15 @@ button { font-family: inherit; cursor: pointer; }
   width: 100%;
   padding: clamp(36px, 5vw, 52px) clamp(32px, 4.5vw, 52px);
   background:
-    radial-gradient(ellipse 90% 70% at 10% 0%, rgba(20, 90, 140, 0.2), transparent 55%),
-    linear-gradient(155deg, #0a355f 0%, #062440 50%, #03101f 100%);
-  border: 2px solid rgba(212, 184, 106, 0.65);
+    radial-gradient(ellipse 90% 70% at 10% 0%, rgba(26, 138, 154, 0.1), transparent 55%),
+    linear-gradient(155deg, #132d4e 0%, #0d1f38 50%, #0a182e 100%);
+  border: 1px solid rgba(212, 184, 106, 0.5);
   box-shadow:
-    0 28px 56px rgba(0, 0, 0, 0.45),
-    inset 0 0 0 1px rgba(240, 228, 196, 0.1),
-    inset 0 0 0 7px rgba(3, 12, 28, 0.45),
-    inset 0 0 0 8px rgba(212, 184, 106, 0.35);
+    0 28px 56px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(240, 228, 196, 0.08),
+    inset 0 0 0 1px rgba(212, 184, 106, 0.12),
+    inset 0 0 0 7px rgba(3, 12, 28, 0.35),
+    inset 0 0 0 8px rgba(212, 184, 106, 0.22);
 }
 
 /* 전체 테두리 장식 (모서리 L만 쓰지 않음) */
@@ -1103,7 +1102,8 @@ button { font-family: inherit; cursor: pointer; }
   font-size: clamp(1.85rem, 4.2vw, 3rem);
   letter-spacing: 0.04em;
   line-height: 1;
-  background: linear-gradient(105deg, #c98a08, #f0c63a 22%, #fff3b8 48%, #e8b410 72%, #c98a08);
+  /* 은은한 샴페인 금박 (노란 네온 #f0c63a/#e8b410 금지) — 대문 title-gold 계열 */
+  background: linear-gradient(105deg, #a87f33, #ecd69e 45%, #c79f49 75%, #8a6a2a);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
