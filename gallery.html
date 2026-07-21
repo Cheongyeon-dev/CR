@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>에셋 갤러리 | THREE DAYS OF SUN</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body class="theme-b gallery-page">
+
+  <nav class="top-nav" aria-label="사이트 메뉴">
+    <a class="brand" href="index.html">
+      <span class="brand-mark brand-mark--dark" aria-hidden="true">⚓</span>
+      THREE DAYS OF SUN
+      <small>Onboard Directory</small>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">대문</a>
+      <a href="guide.html">선내 안내</a>
+      <a href="cast.html">승선 명단</a>
+      <a href="gallery.html" class="active">에셋 갤러리</a>
+    </div>
+  </nav>
+
+  <header class="masthead-b wrap">
+    <p class="masthead-b__tag">RP IMAGE CODE TABLE · PASSENGER USE</p>
+    <h1>에셋 갤러리</h1>
+    <p class="masthead-b__sub">캐릭터 RP 이미지 코드 · 미리보기 · 복사</p>
+  </header>
+
+  <main class="wrap gallery-main">
+
+    <section class="gallery-section">
+      <div class="gallery-section__head">
+        <h2>출력 양식</h2>
+      </div>
+      <article class="gallery-panel gallery-panel--compact">
+        <p><strong>입력 형식</strong><br>![](https://bi.pharang.workers.dev/c/{캐릭터코드}/{상황코드})</p>
+        <p><strong>예시</strong><br>![](https://bi.pharang.workers.dev/c/SL/1)</p>
+        <p class="gallery-panel__note">※ 변환·스크러빙 후 CR Pages에 webp가 올라가면 아래 그리드에 표시됩니다.</p>
+      </article>
+    </section>
+
+    <section class="gallery-section">
+      <div class="gallery-section__head">
+        <h2>캐릭터 코드표</h2>
+      </div>
+      <div class="code-table">
+        <div class="code-row"><b>SL</b><span>설하영</span></div>
+        <div class="code-row"><b>KR</b><span>크리스티안</span></div>
+        <div class="code-row"><b>CH</b><span>크리세이스</span></div>
+        <div class="code-row"><b>RN</b><span>레이나</span></div>
+        <div class="code-row"><b>LZ</b><span>리지</span></div>
+        <div class="code-row"><b>OV</b><span>올리비아</span></div>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <div class="gallery-section__head">
+        <h2>상황 코드표</h2>
+      </div>
+
+      <h3 class="gallery-subhead">감정</h3>
+      <div class="code-table code-table--3">
+        <div class="code-row"><b>1</b><span>기본</span></div>
+        <div class="code-row"><b>2</b><span>웃음</span></div>
+        <div class="code-row"><b>3</b><span>슬픔</span></div>
+        <div class="code-row"><b>4</b><span>놀람</span></div>
+        <div class="code-row"><b>5</b><span>충격</span></div>
+        <div class="code-row"><b>6</b><span>설렘</span></div>
+        <div class="code-row"><b>7</b><span>광기</span></div>
+        <div class="code-row"><b>8</b><span>광기(바다 입수)</span></div>
+      </div>
+
+      <h3 class="gallery-subhead">선내 · 갑판</h3>
+      <div class="code-table code-table--3">
+        <div class="code-row"><b>A1</b><span>갑판</span></div>
+        <div class="code-row"><b>A2</b><span>갑판(저녁)</span></div>
+        <div class="code-row"><b>A3</b><span>식당</span></div>
+        <div class="code-row"><b>A4</b><span>아이스크림</span></div>
+        <div class="code-row"><b>A5</b><span>소파</span></div>
+        <div class="code-row"><b>A6</b><span>라운지 파티</span></div>
+      </div>
+
+      <h3 class="gallery-subhead">기항지 · 시설</h3>
+      <div class="code-table code-table--3">
+        <div class="code-row"><b>B1</b><span>해안산책</span></div>
+        <div class="code-row"><b>B2</b><span>해변(비치베드)</span></div>
+        <div class="code-row"><b>B3</b><span>수족관</span></div>
+      </div>
+
+      <h3 class="gallery-subhead">캐릭터 전용</h3>
+      <div class="code-table code-table--3">
+        <div class="code-row"><b>N</b><span>CH 전용(바다의 님프)</span></div>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <div class="gallery-section__head">
+        <h2>등록 에셋</h2>
+        <p>클릭 시 확대 · 마크다운 복사</p>
+      </div>
+
+      <div class="gallery-filters">
+        <select id="character-filter" aria-label="캐릭터 필터">
+          <option value="ALL">전체 캐릭터</option>
+          <option value="SL">SL (설하영)</option>
+          <option value="KR">KR (크리스티안)</option>
+          <option value="CH">CH (크리세이스)</option>
+          <option value="RN">RN (레이나)</option>
+          <option value="LZ">LZ (리지)</option>
+          <option value="OV">OV (올리비아)</option>
+        </select>
+        <select id="situation-filter" aria-label="상황 필터">
+          <option value="ALL">상황 전체</option>
+          <optgroup label="감정">
+            <option value="1">1 (기본)</option>
+            <option value="2">2 (웃음)</option>
+            <option value="3">3 (슬픔)</option>
+            <option value="4">4 (놀람)</option>
+            <option value="5">5 (충격)</option>
+            <option value="6">6 (설렘)</option>
+            <option value="7">7 (광기)</option>
+            <option value="8">8 (바다 입수)</option>
+          </optgroup>
+          <optgroup label="선내 · 갑판">
+            <option value="A1">A1 (갑판)</option>
+            <option value="A2">A2 (갑판·저녁)</option>
+            <option value="A3">A3 (식당)</option>
+            <option value="A4">A4 (아이스크림)</option>
+            <option value="A5">A5 (소파)</option>
+            <option value="A6">A6 (라운지 파티)</option>
+          </optgroup>
+          <optgroup label="기항지 · 시설">
+            <option value="B1">B1 (해안산책)</option>
+            <option value="B2">B2 (해변)</option>
+            <option value="B3">B3 (수족관)</option>
+          </optgroup>
+          <optgroup label="캐릭터 전용">
+            <option value="N">N (CH · 바다의 님프)</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="gallery-grid" id="asset-grid" aria-live="polite"></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer--b wrap">
+    <p>THREE DAYS OF SUN · RP Asset Gallery · For Passenger Use Only</p>
+  </footer>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <div id="image-modal" class="gallery-modal" hidden onclick="closeModal()">
+    <button type="button" class="gallery-modal__close" aria-label="닫기" onclick="closeModal()">&times;</button>
+    <img id="modal-img" alt="">
+  </div>
+
+  <script>
+    const filterSelect = document.getElementById('character-filter');
+    const situationSelect = document.getElementById('situation-filter');
+    const assetGrid = document.getElementById('asset-grid');
+    const toast = document.getElementById('toast');
+    let allAssets = [];
+
+    const CR_REPO_BASE = 'https://cheongyeon-dev.github.io/CR';
+    const BI_BASE = 'https://bi.pharang.workers.dev/c';
+
+    const allowedSituationPrefixes = [
+      '1', '2', '3', '4', '5', '6', '7', '8',
+      'A1', 'A2', 'A3', 'A4', 'A5', 'A6',
+      'B1', 'B2', 'B3',
+      'N'
+    ];
+
+    const characterOrder = ['SL', 'KR', 'CH', 'RN', 'LZ', 'OV'];
+
+    const situationOf = (asset) => asset.situation || asset.code.replace(/-\d+$/, '');
+
+    const showToast = (message) => {
+      toast.textContent = message;
+      toast.className = 'show';
+      setTimeout(() => { toast.className = ''; }, 2200);
+    };
+
+    window.copyToClipboard = (text) => {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('복사되었습니다: ' + text);
+      }).catch((err) => {
+        console.error('Failed to copy:', err);
+      });
+    };
+
+    window.openModal = (imgSrc) => {
+      const modal = document.getElementById('image-modal');
+      const modalImg = document.getElementById('modal-img');
+      modal.hidden = false;
+      modalImg.src = imgSrc;
+    };
+
+    window.closeModal = () => {
+      document.getElementById('image-modal').hidden = true;
+    };
+
+    window.handleClick = (mdText, imgSrc) => {
+      copyToClipboard(mdText);
+      openModal(imgSrc);
+    };
+
+    const emptyMessage = () => `
+      <div class="gallery-empty">
+        <p><strong>등록된 에셋이 없습니다.</strong></p>
+        <p>raw → convert → scrub → CR push 후 <code>assets/gallery/manifest.json</code>에 항목이 추가되면 여기에 표시됩니다.</p>
+      </div>
+    `;
+
+    const renderAssets = () => {
+      const charFilter = filterSelect.value;
+      const sitFilter = situationSelect.value;
+
+      let filtered = charFilter === 'ALL'
+        ? allAssets
+        : allAssets.filter((a) => a.group === charFilter);
+
+      if (sitFilter !== 'ALL') {
+        filtered = filtered.filter((a) => {
+          const prefix = a.code.split('-')[0];
+          return prefix === sitFilter;
+        });
+      }
+
+      filtered = filtered.filter((a) => {
+        const prefix = a.code.split('-')[0];
+        return allowedSituationPrefixes.includes(prefix);
+      });
+
+      filtered.sort((a, b) => {
+        const indexA = characterOrder.indexOf(a.group);
+        const indexB = characterOrder.indexOf(b.group);
+        if (indexA !== indexB) {
+          if (indexA === -1) return 1;
+          if (indexB === -1) return -1;
+          return indexA - indexB;
+        }
+        return a.code.localeCompare(b.code, undefined, { numeric: true });
+      });
+
+      if (filtered.length === 0) {
+        assetGrid.innerHTML = emptyMessage();
+        return;
+      }
+
+      assetGrid.innerHTML = filtered.map((asset) => {
+        const sit = situationOf(asset);
+        const mdText = `![](${BI_BASE}/${asset.group}/${sit})`;
+        const imgSrc = `${CR_REPO_BASE}/${asset.group}/${asset.code}.webp`;
+        const mdEsc = mdText.replace(/'/g, "\\'");
+        return `
+          <article class="gallery-card" onclick="handleClick('${mdEsc}', '${imgSrc}')">
+            <img src="${imgSrc}" alt="${asset.group}/${asset.code}" loading="lazy"
+              onerror="this.classList.add('gallery-card__img--missing'); this.alt='미등록';"/>
+            <div class="gallery-card__foot">
+              <strong>${asset.group}/${asset.code}</strong>
+              <span class="gallery-card__badge">클릭 복사</span>
+            </div>
+          </article>
+        `;
+      }).join('');
+    };
+
+    filterSelect.addEventListener('change', renderAssets);
+    situationSelect.addEventListener('change', renderAssets);
+
+    fetch('assets/gallery/manifest.json')
+      .then((response) => {
+        if (!response.ok) throw new Error('manifest not found');
+        return response.json();
+      })
+      .then((manifest) => {
+        allAssets = manifest.assets || [];
+        renderAssets();
+      })
+      .catch((err) => {
+        console.error('Failed to load manifest:', err);
+        allAssets = [];
+        renderAssets();
+      });
+  </script>
+
+</body>
+</html>

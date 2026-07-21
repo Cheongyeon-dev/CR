@@ -1,0 +1,2225 @@
+{
+  "baseUrl": "https://cheongyeon-dev.github.io/CR",
+  "assets": [
+    {
+      "group": "CH",
+      "code": "1-1",
+      "situation": "1"
+    },
+    {
+      "group": "CH",
+      "code": "1-2",
+      "situation": "1"
+    },
+    {
+      "group": "CH",
+      "code": "2-1",
+      "situation": "2"
+    },
+    {
+      "group": "CH",
+      "code": "2-2",
+      "situation": "2"
+    },
+    {
+      "group": "CH",
+      "code": "2-3",
+      "situation": "2"
+    },
+    {
+      "group": "CH",
+      "code": "2-4",
+      "situation": "2"
+    },
+    {
+      "group": "CH",
+      "code": "2-5",
+      "situation": "2"
+    },
+    {
+      "group": "CH",
+      "code": "3-1",
+      "situation": "3"
+    },
+    {
+      "group": "CH",
+      "code": "3-2",
+      "situation": "3"
+    },
+    {
+      "group": "CH",
+      "code": "3-3",
+      "situation": "3"
+    },
+    {
+      "group": "CH",
+      "code": "3-4",
+      "situation": "3"
+    },
+    {
+      "group": "CH",
+      "code": "3-5",
+      "situation": "3"
+    },
+    {
+      "group": "CH",
+      "code": "4-1",
+      "situation": "4"
+    },
+    {
+      "group": "CH",
+      "code": "4-2",
+      "situation": "4"
+    },
+    {
+      "group": "CH",
+      "code": "4-3",
+      "situation": "4"
+    },
+    {
+      "group": "CH",
+      "code": "4-4",
+      "situation": "4"
+    },
+    {
+      "group": "CH",
+      "code": "4-5",
+      "situation": "4"
+    },
+    {
+      "group": "CH",
+      "code": "4-6",
+      "situation": "4"
+    },
+    {
+      "group": "CH",
+      "code": "5-1",
+      "situation": "5"
+    },
+    {
+      "group": "CH",
+      "code": "5-10",
+      "situation": "5"
+    },
+    {
+      "group": "CH",
+      "code": "5-2",
+      "situation": "5"
+    },
+    {
+      "group": "CH",
+      "code": "5-3",
+      "situation": "5"
+    },
+    {
+      "group": "CH",
+      "code": "5-4",
+      "situation": "5"
+    },
+    {
+      "group": "CH",
+      "code": "5-5",
+      "situation": "5"
+    },
+    {
+      "group": "CH",
+      "code": "5-6",
+      "situation": "5"
+    },
+    {
+      "group": "CH",
+      "code": "5-7",
+      "situation": "5"
+    },
+    {
+      "group": "CH",
+      "code": "5-8",
+      "situation": "5"
+    },
+    {
+      "group": "CH",
+      "code": "5-9",
+      "situation": "5"
+    },
+    {
+      "group": "CH",
+      "code": "6-1",
+      "situation": "6"
+    },
+    {
+      "group": "CH",
+      "code": "6-2",
+      "situation": "6"
+    },
+    {
+      "group": "CH",
+      "code": "6-3",
+      "situation": "6"
+    },
+    {
+      "group": "CH",
+      "code": "6-4",
+      "situation": "6"
+    },
+    {
+      "group": "CH",
+      "code": "6-5",
+      "situation": "6"
+    },
+    {
+      "group": "CH",
+      "code": "6-6",
+      "situation": "6"
+    },
+    {
+      "group": "CH",
+      "code": "6-7",
+      "situation": "6"
+    },
+    {
+      "group": "CH",
+      "code": "7-1",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "7-10",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "7-11",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "7-12",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "7-2",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "7-3",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "7-4",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "7-5",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "7-6",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "7-7",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "7-8",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "7-9",
+      "situation": "7"
+    },
+    {
+      "group": "CH",
+      "code": "8-1",
+      "situation": "8"
+    },
+    {
+      "group": "CH",
+      "code": "8-2",
+      "situation": "8"
+    },
+    {
+      "group": "CH",
+      "code": "8-3",
+      "situation": "8"
+    },
+    {
+      "group": "CH",
+      "code": "8-4",
+      "situation": "8"
+    },
+    {
+      "group": "CH",
+      "code": "A1-1",
+      "situation": "A1"
+    },
+    {
+      "group": "CH",
+      "code": "A1-2",
+      "situation": "A1"
+    },
+    {
+      "group": "CH",
+      "code": "A1-3",
+      "situation": "A1"
+    },
+    {
+      "group": "CH",
+      "code": "A1-4",
+      "situation": "A1"
+    },
+    {
+      "group": "CH",
+      "code": "A2-1",
+      "situation": "A2"
+    },
+    {
+      "group": "CH",
+      "code": "A2-2",
+      "situation": "A2"
+    },
+    {
+      "group": "CH",
+      "code": "A2-3",
+      "situation": "A2"
+    },
+    {
+      "group": "CH",
+      "code": "A2-4",
+      "situation": "A2"
+    },
+    {
+      "group": "CH",
+      "code": "A2-5",
+      "situation": "A2"
+    },
+    {
+      "group": "CH",
+      "code": "A2-6",
+      "situation": "A2"
+    },
+    {
+      "group": "CH",
+      "code": "A2-7",
+      "situation": "A2"
+    },
+    {
+      "group": "CH",
+      "code": "A2-8",
+      "situation": "A2"
+    },
+    {
+      "group": "CH",
+      "code": "A2-9",
+      "situation": "A2"
+    },
+    {
+      "group": "CH",
+      "code": "A3-1",
+      "situation": "A3"
+    },
+    {
+      "group": "CH",
+      "code": "A3-2",
+      "situation": "A3"
+    },
+    {
+      "group": "CH",
+      "code": "A4-1",
+      "situation": "A4"
+    },
+    {
+      "group": "CH",
+      "code": "A4-2",
+      "situation": "A4"
+    },
+    {
+      "group": "CH",
+      "code": "A4-3",
+      "situation": "A4"
+    },
+    {
+      "group": "CH",
+      "code": "A4-4",
+      "situation": "A4"
+    },
+    {
+      "group": "CH",
+      "code": "A4-5",
+      "situation": "A4"
+    },
+    {
+      "group": "CH",
+      "code": "A5-1",
+      "situation": "A5"
+    },
+    {
+      "group": "CH",
+      "code": "A5-2",
+      "situation": "A5"
+    },
+    {
+      "group": "CH",
+      "code": "A5-3",
+      "situation": "A5"
+    },
+    {
+      "group": "CH",
+      "code": "A5-4",
+      "situation": "A5"
+    },
+    {
+      "group": "CH",
+      "code": "A5-5",
+      "situation": "A5"
+    },
+    {
+      "group": "CH",
+      "code": "A6-1",
+      "situation": "A6"
+    },
+    {
+      "group": "CH",
+      "code": "A6-2",
+      "situation": "A6"
+    },
+    {
+      "group": "CH",
+      "code": "A6-3",
+      "situation": "A6"
+    },
+    {
+      "group": "CH",
+      "code": "A6-4",
+      "situation": "A6"
+    },
+    {
+      "group": "CH",
+      "code": "A6-5",
+      "situation": "A6"
+    },
+    {
+      "group": "CH",
+      "code": "A6-6",
+      "situation": "A6"
+    },
+    {
+      "group": "CH",
+      "code": "B1-1",
+      "situation": "B1"
+    },
+    {
+      "group": "CH",
+      "code": "B1-2",
+      "situation": "B1"
+    },
+    {
+      "group": "CH",
+      "code": "B1-3",
+      "situation": "B1"
+    },
+    {
+      "group": "CH",
+      "code": "B1-4",
+      "situation": "B1"
+    },
+    {
+      "group": "CH",
+      "code": "B1-5",
+      "situation": "B1"
+    },
+    {
+      "group": "CH",
+      "code": "B2-1",
+      "situation": "B2"
+    },
+    {
+      "group": "CH",
+      "code": "B2-2",
+      "situation": "B2"
+    },
+    {
+      "group": "CH",
+      "code": "B2-3",
+      "situation": "B2"
+    },
+    {
+      "group": "CH",
+      "code": "B2-4",
+      "situation": "B2"
+    },
+    {
+      "group": "CH",
+      "code": "B2-5",
+      "situation": "B2"
+    },
+    {
+      "group": "CH",
+      "code": "B2-6",
+      "situation": "B2"
+    },
+    {
+      "group": "CH",
+      "code": "B3-1",
+      "situation": "B3"
+    },
+    {
+      "group": "CH",
+      "code": "B3-2",
+      "situation": "B3"
+    },
+    {
+      "group": "CH",
+      "code": "B3-3",
+      "situation": "B3"
+    },
+    {
+      "group": "CH",
+      "code": "N-1",
+      "situation": "N"
+    },
+    {
+      "group": "KR",
+      "code": "1-1",
+      "situation": "1"
+    },
+    {
+      "group": "KR",
+      "code": "1-2",
+      "situation": "1"
+    },
+    {
+      "group": "KR",
+      "code": "1-3",
+      "situation": "1"
+    },
+    {
+      "group": "KR",
+      "code": "2-1",
+      "situation": "2"
+    },
+    {
+      "group": "KR",
+      "code": "2-2",
+      "situation": "2"
+    },
+    {
+      "group": "KR",
+      "code": "2-3",
+      "situation": "2"
+    },
+    {
+      "group": "KR",
+      "code": "2-4",
+      "situation": "2"
+    },
+    {
+      "group": "KR",
+      "code": "2-5",
+      "situation": "2"
+    },
+    {
+      "group": "KR",
+      "code": "2-6",
+      "situation": "2"
+    },
+    {
+      "group": "KR",
+      "code": "3-1",
+      "situation": "3"
+    },
+    {
+      "group": "KR",
+      "code": "3-2",
+      "situation": "3"
+    },
+    {
+      "group": "KR",
+      "code": "4-1",
+      "situation": "4"
+    },
+    {
+      "group": "KR",
+      "code": "5-1",
+      "situation": "5"
+    },
+    {
+      "group": "KR",
+      "code": "5-2",
+      "situation": "5"
+    },
+    {
+      "group": "KR",
+      "code": "5-3",
+      "situation": "5"
+    },
+    {
+      "group": "KR",
+      "code": "5-4",
+      "situation": "5"
+    },
+    {
+      "group": "KR",
+      "code": "5-5",
+      "situation": "5"
+    },
+    {
+      "group": "KR",
+      "code": "5-6",
+      "situation": "5"
+    },
+    {
+      "group": "KR",
+      "code": "5-7",
+      "situation": "5"
+    },
+    {
+      "group": "KR",
+      "code": "6-1",
+      "situation": "6"
+    },
+    {
+      "group": "KR",
+      "code": "6-2",
+      "situation": "6"
+    },
+    {
+      "group": "KR",
+      "code": "6-3",
+      "situation": "6"
+    },
+    {
+      "group": "KR",
+      "code": "6-4",
+      "situation": "6"
+    },
+    {
+      "group": "KR",
+      "code": "6-5",
+      "situation": "6"
+    },
+    {
+      "group": "KR",
+      "code": "6-6",
+      "situation": "6"
+    },
+    {
+      "group": "KR",
+      "code": "6-7",
+      "situation": "6"
+    },
+    {
+      "group": "KR",
+      "code": "6-8",
+      "situation": "6"
+    },
+    {
+      "group": "KR",
+      "code": "7-1",
+      "situation": "7"
+    },
+    {
+      "group": "KR",
+      "code": "7-2",
+      "situation": "7"
+    },
+    {
+      "group": "KR",
+      "code": "7-3",
+      "situation": "7"
+    },
+    {
+      "group": "KR",
+      "code": "7-4",
+      "situation": "7"
+    },
+    {
+      "group": "KR",
+      "code": "7-5",
+      "situation": "7"
+    },
+    {
+      "group": "KR",
+      "code": "8-1",
+      "situation": "8"
+    },
+    {
+      "group": "KR",
+      "code": "8-2",
+      "situation": "8"
+    },
+    {
+      "group": "KR",
+      "code": "8-3",
+      "situation": "8"
+    },
+    {
+      "group": "KR",
+      "code": "8-4",
+      "situation": "8"
+    },
+    {
+      "group": "KR",
+      "code": "A1-1",
+      "situation": "A1"
+    },
+    {
+      "group": "KR",
+      "code": "A1-2",
+      "situation": "A1"
+    },
+    {
+      "group": "KR",
+      "code": "A1-3",
+      "situation": "A1"
+    },
+    {
+      "group": "KR",
+      "code": "A1-4",
+      "situation": "A1"
+    },
+    {
+      "group": "KR",
+      "code": "A2-1",
+      "situation": "A2"
+    },
+    {
+      "group": "KR",
+      "code": "A2-2",
+      "situation": "A2"
+    },
+    {
+      "group": "KR",
+      "code": "A2-3",
+      "situation": "A2"
+    },
+    {
+      "group": "KR",
+      "code": "A2-4",
+      "situation": "A2"
+    },
+    {
+      "group": "KR",
+      "code": "A2-5",
+      "situation": "A2"
+    },
+    {
+      "group": "KR",
+      "code": "A2-6",
+      "situation": "A2"
+    },
+    {
+      "group": "KR",
+      "code": "A3-1",
+      "situation": "A3"
+    },
+    {
+      "group": "KR",
+      "code": "A3-2",
+      "situation": "A3"
+    },
+    {
+      "group": "KR",
+      "code": "A3-3",
+      "situation": "A3"
+    },
+    {
+      "group": "KR",
+      "code": "A4-1",
+      "situation": "A4"
+    },
+    {
+      "group": "KR",
+      "code": "A4-2",
+      "situation": "A4"
+    },
+    {
+      "group": "KR",
+      "code": "A4-3",
+      "situation": "A4"
+    },
+    {
+      "group": "KR",
+      "code": "A5-1",
+      "situation": "A5"
+    },
+    {
+      "group": "KR",
+      "code": "A5-2",
+      "situation": "A5"
+    },
+    {
+      "group": "KR",
+      "code": "A5-3",
+      "situation": "A5"
+    },
+    {
+      "group": "KR",
+      "code": "A5-4",
+      "situation": "A5"
+    },
+    {
+      "group": "KR",
+      "code": "A6-1",
+      "situation": "A6"
+    },
+    {
+      "group": "KR",
+      "code": "A6-2",
+      "situation": "A6"
+    },
+    {
+      "group": "KR",
+      "code": "B1-1",
+      "situation": "B1"
+    },
+    {
+      "group": "KR",
+      "code": "B1-2",
+      "situation": "B1"
+    },
+    {
+      "group": "KR",
+      "code": "B1-3",
+      "situation": "B1"
+    },
+    {
+      "group": "KR",
+      "code": "B1-4",
+      "situation": "B1"
+    },
+    {
+      "group": "KR",
+      "code": "B1-5",
+      "situation": "B1"
+    },
+    {
+      "group": "KR",
+      "code": "B2-1",
+      "situation": "B2"
+    },
+    {
+      "group": "KR",
+      "code": "B2-2",
+      "situation": "B2"
+    },
+    {
+      "group": "KR",
+      "code": "B2-3",
+      "situation": "B2"
+    },
+    {
+      "group": "KR",
+      "code": "B3-1",
+      "situation": "B3"
+    },
+    {
+      "group": "KR",
+      "code": "B3-2",
+      "situation": "B3"
+    },
+    {
+      "group": "KR",
+      "code": "B3-3",
+      "situation": "B3"
+    },
+    {
+      "group": "LZ",
+      "code": "1-1",
+      "situation": "1"
+    },
+    {
+      "group": "LZ",
+      "code": "1-2",
+      "situation": "1"
+    },
+    {
+      "group": "LZ",
+      "code": "1-3",
+      "situation": "1"
+    },
+    {
+      "group": "LZ",
+      "code": "1-4",
+      "situation": "1"
+    },
+    {
+      "group": "LZ",
+      "code": "1-5",
+      "situation": "1"
+    },
+    {
+      "group": "LZ",
+      "code": "2-1",
+      "situation": "2"
+    },
+    {
+      "group": "LZ",
+      "code": "2-2",
+      "situation": "2"
+    },
+    {
+      "group": "LZ",
+      "code": "2-3",
+      "situation": "2"
+    },
+    {
+      "group": "LZ",
+      "code": "2-4",
+      "situation": "2"
+    },
+    {
+      "group": "LZ",
+      "code": "2-5",
+      "situation": "2"
+    },
+    {
+      "group": "LZ",
+      "code": "2-6",
+      "situation": "2"
+    },
+    {
+      "group": "LZ",
+      "code": "2-7",
+      "situation": "2"
+    },
+    {
+      "group": "LZ",
+      "code": "3-1",
+      "situation": "3"
+    },
+    {
+      "group": "LZ",
+      "code": "3-2",
+      "situation": "3"
+    },
+    {
+      "group": "LZ",
+      "code": "3-3",
+      "situation": "3"
+    },
+    {
+      "group": "LZ",
+      "code": "3-4",
+      "situation": "3"
+    },
+    {
+      "group": "LZ",
+      "code": "4-1",
+      "situation": "4"
+    },
+    {
+      "group": "LZ",
+      "code": "4-2",
+      "situation": "4"
+    },
+    {
+      "group": "LZ",
+      "code": "4-3",
+      "situation": "4"
+    },
+    {
+      "group": "LZ",
+      "code": "4-4",
+      "situation": "4"
+    },
+    {
+      "group": "LZ",
+      "code": "4-5",
+      "situation": "4"
+    },
+    {
+      "group": "LZ",
+      "code": "4-6",
+      "situation": "4"
+    },
+    {
+      "group": "LZ",
+      "code": "5-1",
+      "situation": "5"
+    },
+    {
+      "group": "LZ",
+      "code": "5-2",
+      "situation": "5"
+    },
+    {
+      "group": "LZ",
+      "code": "6-1",
+      "situation": "6"
+    },
+    {
+      "group": "LZ",
+      "code": "6-2",
+      "situation": "6"
+    },
+    {
+      "group": "LZ",
+      "code": "6-3",
+      "situation": "6"
+    },
+    {
+      "group": "LZ",
+      "code": "6-4",
+      "situation": "6"
+    },
+    {
+      "group": "LZ",
+      "code": "6-5",
+      "situation": "6"
+    },
+    {
+      "group": "LZ",
+      "code": "7-1",
+      "situation": "7"
+    },
+    {
+      "group": "LZ",
+      "code": "7-2",
+      "situation": "7"
+    },
+    {
+      "group": "LZ",
+      "code": "8-1",
+      "situation": "8"
+    },
+    {
+      "group": "LZ",
+      "code": "8-2",
+      "situation": "8"
+    },
+    {
+      "group": "LZ",
+      "code": "8-3",
+      "situation": "8"
+    },
+    {
+      "group": "LZ",
+      "code": "A1-1",
+      "situation": "A1"
+    },
+    {
+      "group": "LZ",
+      "code": "A1-2",
+      "situation": "A1"
+    },
+    {
+      "group": "LZ",
+      "code": "A1-3",
+      "situation": "A1"
+    },
+    {
+      "group": "LZ",
+      "code": "A1-4",
+      "situation": "A1"
+    },
+    {
+      "group": "LZ",
+      "code": "A1-5",
+      "situation": "A1"
+    },
+    {
+      "group": "LZ",
+      "code": "A1-6",
+      "situation": "A1"
+    },
+    {
+      "group": "LZ",
+      "code": "A2-1",
+      "situation": "A2"
+    },
+    {
+      "group": "LZ",
+      "code": "A2-2",
+      "situation": "A2"
+    },
+    {
+      "group": "LZ",
+      "code": "A2-3",
+      "situation": "A2"
+    },
+    {
+      "group": "LZ",
+      "code": "A2-4",
+      "situation": "A2"
+    },
+    {
+      "group": "LZ",
+      "code": "A2-5",
+      "situation": "A2"
+    },
+    {
+      "group": "LZ",
+      "code": "A2-6",
+      "situation": "A2"
+    },
+    {
+      "group": "LZ",
+      "code": "A2-7",
+      "situation": "A2"
+    },
+    {
+      "group": "LZ",
+      "code": "A3-1",
+      "situation": "A3"
+    },
+    {
+      "group": "LZ",
+      "code": "A3-2",
+      "situation": "A3"
+    },
+    {
+      "group": "LZ",
+      "code": "A3-3",
+      "situation": "A3"
+    },
+    {
+      "group": "LZ",
+      "code": "A4-1",
+      "situation": "A4"
+    },
+    {
+      "group": "LZ",
+      "code": "A4-2",
+      "situation": "A4"
+    },
+    {
+      "group": "LZ",
+      "code": "A4-3",
+      "situation": "A4"
+    },
+    {
+      "group": "LZ",
+      "code": "A4-4",
+      "situation": "A4"
+    },
+    {
+      "group": "LZ",
+      "code": "A5-1",
+      "situation": "A5"
+    },
+    {
+      "group": "LZ",
+      "code": "A5-2",
+      "situation": "A5"
+    },
+    {
+      "group": "LZ",
+      "code": "A6-1",
+      "situation": "A6"
+    },
+    {
+      "group": "LZ",
+      "code": "A6-2",
+      "situation": "A6"
+    },
+    {
+      "group": "LZ",
+      "code": "A6-3",
+      "situation": "A6"
+    },
+    {
+      "group": "LZ",
+      "code": "A6-4",
+      "situation": "A6"
+    },
+    {
+      "group": "LZ",
+      "code": "B1-1",
+      "situation": "B1"
+    },
+    {
+      "group": "LZ",
+      "code": "B1-2",
+      "situation": "B1"
+    },
+    {
+      "group": "LZ",
+      "code": "B1-3",
+      "situation": "B1"
+    },
+    {
+      "group": "LZ",
+      "code": "B2-1",
+      "situation": "B2"
+    },
+    {
+      "group": "LZ",
+      "code": "B2-2",
+      "situation": "B2"
+    },
+    {
+      "group": "LZ",
+      "code": "B2-3",
+      "situation": "B2"
+    },
+    {
+      "group": "LZ",
+      "code": "B2-4",
+      "situation": "B2"
+    },
+    {
+      "group": "LZ",
+      "code": "B3-1",
+      "situation": "B3"
+    },
+    {
+      "group": "LZ",
+      "code": "B3-2",
+      "situation": "B3"
+    },
+    {
+      "group": "LZ",
+      "code": "B3-3",
+      "situation": "B3"
+    },
+    {
+      "group": "LZ",
+      "code": "B3-4",
+      "situation": "B3"
+    },
+    {
+      "group": "OV",
+      "code": "1-1",
+      "situation": "1"
+    },
+    {
+      "group": "OV",
+      "code": "1-2",
+      "situation": "1"
+    },
+    {
+      "group": "OV",
+      "code": "2-1",
+      "situation": "2"
+    },
+    {
+      "group": "OV",
+      "code": "2-2",
+      "situation": "2"
+    },
+    {
+      "group": "OV",
+      "code": "2-3",
+      "situation": "2"
+    },
+    {
+      "group": "OV",
+      "code": "2-4",
+      "situation": "2"
+    },
+    {
+      "group": "OV",
+      "code": "2-5",
+      "situation": "2"
+    },
+    {
+      "group": "OV",
+      "code": "3-1",
+      "situation": "3"
+    },
+    {
+      "group": "OV",
+      "code": "3-2",
+      "situation": "3"
+    },
+    {
+      "group": "OV",
+      "code": "3-3",
+      "situation": "3"
+    },
+    {
+      "group": "OV",
+      "code": "3-4",
+      "situation": "3"
+    },
+    {
+      "group": "OV",
+      "code": "4-1",
+      "situation": "4"
+    },
+    {
+      "group": "OV",
+      "code": "4-2",
+      "situation": "4"
+    },
+    {
+      "group": "OV",
+      "code": "5-1",
+      "situation": "5"
+    },
+    {
+      "group": "OV",
+      "code": "5-2",
+      "situation": "5"
+    },
+    {
+      "group": "OV",
+      "code": "5-3",
+      "situation": "5"
+    },
+    {
+      "group": "OV",
+      "code": "6-1",
+      "situation": "6"
+    },
+    {
+      "group": "OV",
+      "code": "6-2",
+      "situation": "6"
+    },
+    {
+      "group": "OV",
+      "code": "6-3",
+      "situation": "6"
+    },
+    {
+      "group": "OV",
+      "code": "6-4",
+      "situation": "6"
+    },
+    {
+      "group": "OV",
+      "code": "6-5",
+      "situation": "6"
+    },
+    {
+      "group": "OV",
+      "code": "6-6",
+      "situation": "6"
+    },
+    {
+      "group": "OV",
+      "code": "6-7",
+      "situation": "6"
+    },
+    {
+      "group": "OV",
+      "code": "6-8",
+      "situation": "6"
+    },
+    {
+      "group": "OV",
+      "code": "7-1",
+      "situation": "7"
+    },
+    {
+      "group": "OV",
+      "code": "7-2",
+      "situation": "7"
+    },
+    {
+      "group": "OV",
+      "code": "7-3",
+      "situation": "7"
+    },
+    {
+      "group": "OV",
+      "code": "7-4",
+      "situation": "7"
+    },
+    {
+      "group": "OV",
+      "code": "8-1",
+      "situation": "8"
+    },
+    {
+      "group": "OV",
+      "code": "8-2",
+      "situation": "8"
+    },
+    {
+      "group": "OV",
+      "code": "8-3",
+      "situation": "8"
+    },
+    {
+      "group": "OV",
+      "code": "8-4",
+      "situation": "8"
+    },
+    {
+      "group": "OV",
+      "code": "A1-1",
+      "situation": "A1"
+    },
+    {
+      "group": "OV",
+      "code": "A1-2",
+      "situation": "A1"
+    },
+    {
+      "group": "OV",
+      "code": "A1-3",
+      "situation": "A1"
+    },
+    {
+      "group": "OV",
+      "code": "A1-4",
+      "situation": "A1"
+    },
+    {
+      "group": "OV",
+      "code": "A1-5",
+      "situation": "A1"
+    },
+    {
+      "group": "OV",
+      "code": "A1-6",
+      "situation": "A1"
+    },
+    {
+      "group": "OV",
+      "code": "A2-1",
+      "situation": "A2"
+    },
+    {
+      "group": "OV",
+      "code": "A2-2",
+      "situation": "A2"
+    },
+    {
+      "group": "OV",
+      "code": "A2-3",
+      "situation": "A2"
+    },
+    {
+      "group": "OV",
+      "code": "A2-4",
+      "situation": "A2"
+    },
+    {
+      "group": "OV",
+      "code": "A2-5",
+      "situation": "A2"
+    },
+    {
+      "group": "OV",
+      "code": "A2-6",
+      "situation": "A2"
+    },
+    {
+      "group": "OV",
+      "code": "A3-1",
+      "situation": "A3"
+    },
+    {
+      "group": "OV",
+      "code": "A3-2",
+      "situation": "A3"
+    },
+    {
+      "group": "OV",
+      "code": "A3-3",
+      "situation": "A3"
+    },
+    {
+      "group": "OV",
+      "code": "A3-4",
+      "situation": "A3"
+    },
+    {
+      "group": "OV",
+      "code": "A4-1",
+      "situation": "A4"
+    },
+    {
+      "group": "OV",
+      "code": "A4-2",
+      "situation": "A4"
+    },
+    {
+      "group": "OV",
+      "code": "A4-3",
+      "situation": "A4"
+    },
+    {
+      "group": "OV",
+      "code": "A4-4",
+      "situation": "A4"
+    },
+    {
+      "group": "OV",
+      "code": "A4-5",
+      "situation": "A4"
+    },
+    {
+      "group": "OV",
+      "code": "A4-6",
+      "situation": "A4"
+    },
+    {
+      "group": "OV",
+      "code": "A4-7",
+      "situation": "A4"
+    },
+    {
+      "group": "OV",
+      "code": "A5-1",
+      "situation": "A5"
+    },
+    {
+      "group": "OV",
+      "code": "A5-2",
+      "situation": "A5"
+    },
+    {
+      "group": "OV",
+      "code": "A5-3",
+      "situation": "A5"
+    },
+    {
+      "group": "OV",
+      "code": "A5-4",
+      "situation": "A5"
+    },
+    {
+      "group": "OV",
+      "code": "A5-5",
+      "situation": "A5"
+    },
+    {
+      "group": "OV",
+      "code": "A6-1",
+      "situation": "A6"
+    },
+    {
+      "group": "OV",
+      "code": "A6-2",
+      "situation": "A6"
+    },
+    {
+      "group": "OV",
+      "code": "A6-3",
+      "situation": "A6"
+    },
+    {
+      "group": "OV",
+      "code": "A6-4",
+      "situation": "A6"
+    },
+    {
+      "group": "OV",
+      "code": "A6-5",
+      "situation": "A6"
+    },
+    {
+      "group": "OV",
+      "code": "B1-1",
+      "situation": "B1"
+    },
+    {
+      "group": "OV",
+      "code": "B1-2",
+      "situation": "B1"
+    },
+    {
+      "group": "OV",
+      "code": "B2-1",
+      "situation": "B2"
+    },
+    {
+      "group": "OV",
+      "code": "B2-2",
+      "situation": "B2"
+    },
+    {
+      "group": "OV",
+      "code": "B2-3",
+      "situation": "B2"
+    },
+    {
+      "group": "OV",
+      "code": "B2-4",
+      "situation": "B2"
+    },
+    {
+      "group": "OV",
+      "code": "B3-1",
+      "situation": "B3"
+    },
+    {
+      "group": "OV",
+      "code": "B3-2",
+      "situation": "B3"
+    },
+    {
+      "group": "RN",
+      "code": "1-1",
+      "situation": "1"
+    },
+    {
+      "group": "RN",
+      "code": "1-2",
+      "situation": "1"
+    },
+    {
+      "group": "RN",
+      "code": "1-3",
+      "situation": "1"
+    },
+    {
+      "group": "RN",
+      "code": "1-4",
+      "situation": "1"
+    },
+    {
+      "group": "RN",
+      "code": "2-1",
+      "situation": "2"
+    },
+    {
+      "group": "RN",
+      "code": "2-2",
+      "situation": "2"
+    },
+    {
+      "group": "RN",
+      "code": "2-3",
+      "situation": "2"
+    },
+    {
+      "group": "RN",
+      "code": "3-1",
+      "situation": "3"
+    },
+    {
+      "group": "RN",
+      "code": "3-2",
+      "situation": "3"
+    },
+    {
+      "group": "RN",
+      "code": "3-3",
+      "situation": "3"
+    },
+    {
+      "group": "RN",
+      "code": "4-1",
+      "situation": "4"
+    },
+    {
+      "group": "RN",
+      "code": "4-10",
+      "situation": "4"
+    },
+    {
+      "group": "RN",
+      "code": "4-2",
+      "situation": "4"
+    },
+    {
+      "group": "RN",
+      "code": "4-3",
+      "situation": "4"
+    },
+    {
+      "group": "RN",
+      "code": "4-4",
+      "situation": "4"
+    },
+    {
+      "group": "RN",
+      "code": "4-5",
+      "situation": "4"
+    },
+    {
+      "group": "RN",
+      "code": "4-6",
+      "situation": "4"
+    },
+    {
+      "group": "RN",
+      "code": "4-7",
+      "situation": "4"
+    },
+    {
+      "group": "RN",
+      "code": "4-8",
+      "situation": "4"
+    },
+    {
+      "group": "RN",
+      "code": "4-9",
+      "situation": "4"
+    },
+    {
+      "group": "RN",
+      "code": "5-1",
+      "situation": "5"
+    },
+    {
+      "group": "RN",
+      "code": "5-2",
+      "situation": "5"
+    },
+    {
+      "group": "RN",
+      "code": "5-3",
+      "situation": "5"
+    },
+    {
+      "group": "RN",
+      "code": "5-4",
+      "situation": "5"
+    },
+    {
+      "group": "RN",
+      "code": "5-5",
+      "situation": "5"
+    },
+    {
+      "group": "RN",
+      "code": "6-1",
+      "situation": "6"
+    },
+    {
+      "group": "RN",
+      "code": "6-2",
+      "situation": "6"
+    },
+    {
+      "group": "RN",
+      "code": "6-3",
+      "situation": "6"
+    },
+    {
+      "group": "RN",
+      "code": "6-4",
+      "situation": "6"
+    },
+    {
+      "group": "RN",
+      "code": "6-5",
+      "situation": "6"
+    },
+    {
+      "group": "RN",
+      "code": "7-1",
+      "situation": "7"
+    },
+    {
+      "group": "RN",
+      "code": "7-2",
+      "situation": "7"
+    },
+    {
+      "group": "RN",
+      "code": "7-3",
+      "situation": "7"
+    },
+    {
+      "group": "RN",
+      "code": "8-1",
+      "situation": "8"
+    },
+    {
+      "group": "RN",
+      "code": "8-2",
+      "situation": "8"
+    },
+    {
+      "group": "RN",
+      "code": "8-3",
+      "situation": "8"
+    },
+    {
+      "group": "RN",
+      "code": "8-4",
+      "situation": "8"
+    },
+    {
+      "group": "RN",
+      "code": "8-5",
+      "situation": "8"
+    },
+    {
+      "group": "RN",
+      "code": "8-6",
+      "situation": "8"
+    },
+    {
+      "group": "RN",
+      "code": "8-7",
+      "situation": "8"
+    },
+    {
+      "group": "RN",
+      "code": "A1-1",
+      "situation": "A1"
+    },
+    {
+      "group": "RN",
+      "code": "A1-2",
+      "situation": "A1"
+    },
+    {
+      "group": "RN",
+      "code": "A1-3",
+      "situation": "A1"
+    },
+    {
+      "group": "RN",
+      "code": "A1-4",
+      "situation": "A1"
+    },
+    {
+      "group": "RN",
+      "code": "A2-1",
+      "situation": "A2"
+    },
+    {
+      "group": "RN",
+      "code": "A2-2",
+      "situation": "A2"
+    },
+    {
+      "group": "RN",
+      "code": "A2-3",
+      "situation": "A2"
+    },
+    {
+      "group": "RN",
+      "code": "A2-4",
+      "situation": "A2"
+    },
+    {
+      "group": "RN",
+      "code": "A2-5",
+      "situation": "A2"
+    },
+    {
+      "group": "RN",
+      "code": "A2-6",
+      "situation": "A2"
+    },
+    {
+      "group": "RN",
+      "code": "A3-1",
+      "situation": "A3"
+    },
+    {
+      "group": "RN",
+      "code": "A3-2",
+      "situation": "A3"
+    },
+    {
+      "group": "RN",
+      "code": "A3-3",
+      "situation": "A3"
+    },
+    {
+      "group": "RN",
+      "code": "A4-1",
+      "situation": "A4"
+    },
+    {
+      "group": "RN",
+      "code": "A4-2",
+      "situation": "A4"
+    },
+    {
+      "group": "RN",
+      "code": "A4-3",
+      "situation": "A4"
+    },
+    {
+      "group": "RN",
+      "code": "A4-4",
+      "situation": "A4"
+    },
+    {
+      "group": "RN",
+      "code": "A4-5",
+      "situation": "A4"
+    },
+    {
+      "group": "RN",
+      "code": "A5-1",
+      "situation": "A5"
+    },
+    {
+      "group": "RN",
+      "code": "A5-2",
+      "situation": "A5"
+    },
+    {
+      "group": "RN",
+      "code": "A5-3",
+      "situation": "A5"
+    },
+    {
+      "group": "RN",
+      "code": "A5-4",
+      "situation": "A5"
+    },
+    {
+      "group": "RN",
+      "code": "A5-5",
+      "situation": "A5"
+    },
+    {
+      "group": "RN",
+      "code": "A5-6",
+      "situation": "A5"
+    },
+    {
+      "group": "RN",
+      "code": "A6-1",
+      "situation": "A6"
+    },
+    {
+      "group": "RN",
+      "code": "A6-2",
+      "situation": "A6"
+    },
+    {
+      "group": "RN",
+      "code": "A6-3",
+      "situation": "A6"
+    },
+    {
+      "group": "RN",
+      "code": "B1-1",
+      "situation": "B1"
+    },
+    {
+      "group": "RN",
+      "code": "B1-2",
+      "situation": "B1"
+    },
+    {
+      "group": "RN",
+      "code": "B1-3",
+      "situation": "B1"
+    },
+    {
+      "group": "RN",
+      "code": "B2-1",
+      "situation": "B2"
+    },
+    {
+      "group": "RN",
+      "code": "B2-2",
+      "situation": "B2"
+    },
+    {
+      "group": "RN",
+      "code": "B2-3",
+      "situation": "B2"
+    },
+    {
+      "group": "RN",
+      "code": "B3-1",
+      "situation": "B3"
+    },
+    {
+      "group": "RN",
+      "code": "B3-2",
+      "situation": "B3"
+    },
+    {
+      "group": "SL",
+      "code": "1-1",
+      "situation": "1"
+    },
+    {
+      "group": "SL",
+      "code": "1-2",
+      "situation": "1"
+    },
+    {
+      "group": "SL",
+      "code": "1-3",
+      "situation": "1"
+    },
+    {
+      "group": "SL",
+      "code": "2-1",
+      "situation": "2"
+    },
+    {
+      "group": "SL",
+      "code": "2-2",
+      "situation": "2"
+    },
+    {
+      "group": "SL",
+      "code": "2-3",
+      "situation": "2"
+    },
+    {
+      "group": "SL",
+      "code": "2-4",
+      "situation": "2"
+    },
+    {
+      "group": "SL",
+      "code": "2-5",
+      "situation": "2"
+    },
+    {
+      "group": "SL",
+      "code": "3-1",
+      "situation": "3"
+    },
+    {
+      "group": "SL",
+      "code": "3-2",
+      "situation": "3"
+    },
+    {
+      "group": "SL",
+      "code": "3-3",
+      "situation": "3"
+    },
+    {
+      "group": "SL",
+      "code": "4-1",
+      "situation": "4"
+    },
+    {
+      "group": "SL",
+      "code": "4-2",
+      "situation": "4"
+    },
+    {
+      "group": "SL",
+      "code": "4-3",
+      "situation": "4"
+    },
+    {
+      "group": "SL",
+      "code": "4-4",
+      "situation": "4"
+    },
+    {
+      "group": "SL",
+      "code": "5-1",
+      "situation": "5"
+    },
+    {
+      "group": "SL",
+      "code": "5-2",
+      "situation": "5"
+    },
+    {
+      "group": "SL",
+      "code": "5-3",
+      "situation": "5"
+    },
+    {
+      "group": "SL",
+      "code": "6-1",
+      "situation": "6"
+    },
+    {
+      "group": "SL",
+      "code": "6-2",
+      "situation": "6"
+    },
+    {
+      "group": "SL",
+      "code": "6-3",
+      "situation": "6"
+    },
+    {
+      "group": "SL",
+      "code": "6-4",
+      "situation": "6"
+    },
+    {
+      "group": "SL",
+      "code": "7-1",
+      "situation": "7"
+    },
+    {
+      "group": "SL",
+      "code": "7-2",
+      "situation": "7"
+    },
+    {
+      "group": "SL",
+      "code": "A1-1",
+      "situation": "A1"
+    },
+    {
+      "group": "SL",
+      "code": "A1-2",
+      "situation": "A1"
+    },
+    {
+      "group": "SL",
+      "code": "A1-3",
+      "situation": "A1"
+    },
+    {
+      "group": "SL",
+      "code": "A2-1",
+      "situation": "A2"
+    },
+    {
+      "group": "SL",
+      "code": "A2-2",
+      "situation": "A2"
+    },
+    {
+      "group": "SL",
+      "code": "A2-3",
+      "situation": "A2"
+    },
+    {
+      "group": "SL",
+      "code": "A2-4",
+      "situation": "A2"
+    },
+    {
+      "group": "SL",
+      "code": "A2-5",
+      "situation": "A2"
+    },
+    {
+      "group": "SL",
+      "code": "A2-6",
+      "situation": "A2"
+    },
+    {
+      "group": "SL",
+      "code": "A3-1",
+      "situation": "A3"
+    },
+    {
+      "group": "SL",
+      "code": "A3-2",
+      "situation": "A3"
+    },
+    {
+      "group": "SL",
+      "code": "A3-3",
+      "situation": "A3"
+    },
+    {
+      "group": "SL",
+      "code": "A4-1",
+      "situation": "A4"
+    },
+    {
+      "group": "SL",
+      "code": "A4-2",
+      "situation": "A4"
+    },
+    {
+      "group": "SL",
+      "code": "A4-3",
+      "situation": "A4"
+    },
+    {
+      "group": "SL",
+      "code": "A4-4",
+      "situation": "A4"
+    },
+    {
+      "group": "SL",
+      "code": "A4-5",
+      "situation": "A4"
+    },
+    {
+      "group": "SL",
+      "code": "A4-6",
+      "situation": "A4"
+    },
+    {
+      "group": "SL",
+      "code": "A4-7",
+      "situation": "A4"
+    },
+    {
+      "group": "SL",
+      "code": "A5-1",
+      "situation": "A5"
+    },
+    {
+      "group": "SL",
+      "code": "A5-2",
+      "situation": "A5"
+    },
+    {
+      "group": "SL",
+      "code": "A6-1",
+      "situation": "A6"
+    },
+    {
+      "group": "SL",
+      "code": "A6-2",
+      "situation": "A6"
+    },
+    {
+      "group": "SL",
+      "code": "A6-3",
+      "situation": "A6"
+    },
+    {
+      "group": "SL",
+      "code": "A6-4",
+      "situation": "A6"
+    },
+    {
+      "group": "SL",
+      "code": "B1-1",
+      "situation": "B1"
+    },
+    {
+      "group": "SL",
+      "code": "B1-2",
+      "situation": "B1"
+    },
+    {
+      "group": "SL",
+      "code": "B1-3",
+      "situation": "B1"
+    },
+    {
+      "group": "SL",
+      "code": "B1-4",
+      "situation": "B1"
+    },
+    {
+      "group": "SL",
+      "code": "B1-5",
+      "situation": "B1"
+    },
+    {
+      "group": "SL",
+      "code": "B2-1",
+      "situation": "B2"
+    },
+    {
+      "group": "SL",
+      "code": "B2-2",
+      "situation": "B2"
+    },
+    {
+      "group": "SL",
+      "code": "B3-1",
+      "situation": "B3"
+    },
+    {
+      "group": "SL",
+      "code": "B3-2",
+      "situation": "B3"
+    },
+    {
+      "group": "SL",
+      "code": "B3-3",
+      "situation": "B3"
+    }
+  ]
+}

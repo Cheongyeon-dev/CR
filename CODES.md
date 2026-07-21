@@ -22,16 +22,17 @@
 | 5 | 충격 |
 | 6 | 설렘 |
 | 7 | 광기 |
+| 8 | 광기(바다 입수) |
 | A1 | 갑판 |
 | A2 | 갑판(저녁) |
 | A3 | 식당 |
 | A4 | 아이스크림 |
 | A5 | 소파 |
-| A6 | 파티 드레스 |
+| A6 | 라운지 파티 |
 | B1 | 해안산책 |
 | B2 | 해변(비치베드) |
 | B3 | 수족관 |
-
+| N | 크리세이스 전용(바다의 님프) |
 **URL:** `bi.pharang.workers.dev/c/{캐릭}/{상황}` → CR Pages webp
 
 ---
@@ -52,13 +53,16 @@ convert·scrub 후 **wrangler deploy (bi)**. CR push 아님.
 ---
 
 ## 파이프라인
+해당 문서만 보고 작업 절대 금지 AGENT_관련 리드미랑 파이프라인 필수 참고 
 
 **캐릭터 RP**
 ```
 raw/{SL}/{1}/ PNG
 → convert --cruise → scrub --cruise
-→ out/ push CR → deploy bi (/c/)
+→ temp 스테이징 → CR push (webp만) → deploy bi (/c/)
 ```
+
+`raw/`·`out/` = 로컬 전용. **GitHub(CR) 레포에 raw/out 직접 push 금지.**
 
 **배경·UI·홈**
 ```
