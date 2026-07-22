@@ -1,0 +1,188 @@
+<div id="charDescriptionHost"></div>
+<template id="charDescriptionTemplate">
+<!-- 크루즈 루나톡 · 홈 대문 비주얼 + 인라인 서식(경계의문/퀸즈와 동일 방식) · nav 없음 -->
+<div style="max-width:1080px;margin:0 auto;padding:28px 16px 56px;color:#0a1f3d;font-family:'Pretendard','Noto Sans KR','Apple SD Gothic Neo',sans-serif;line-height:1.75;word-break:keep-all;background:radial-gradient(ellipse 55% 45% at 18% 38%,rgba(255,248,232,0.95),transparent 62%),radial-gradient(ellipse 50% 40% at 82% 42%,rgba(186,228,218,0.75),transparent 58%),linear-gradient(105deg,#fdf9f2 0%,#f4faf8 48%,#e3f2ef 100%);position:relative;overflow:hidden;box-sizing:border-box;">
+<style>
+*{box-sizing:border-box}img{max-width:100%;display:block;height:auto}a{color:inherit;text-decoration:none}summary{list-style:none}summary::-webkit-details-marker{display:none}@media (max-width:720px){.cr-spread{grid-template-columns:1fr!important;gap:12px!important}.cr-crease{display:none!important}}
+</style>
+
+  <!-- 히어로: 좌 타이틀 · 우 팸플릿 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,56px);align-items:center;padding:12px 0 48px;">
+    <div style="max-width:520px;min-width:0;">
+      <p style="margin:0 0 14px;font-size:10px;font-weight:800;letter-spacing:.32em;text-transform:uppercase;color:#1a8a9a;">SUMMER VOYAGE 2026</p>
+      <h1 style="margin:0;font-family:'Nanum Myeongjo','Batang',serif;font-weight:400;line-height:.95;">
+        <span style="display:block;font-size:clamp(2.2rem,5.5vw,4rem);letter-spacing:.02em;color:#061528;">THREE DAYS</span>
+        <span style="display:block;font-size:clamp(2.4rem,6vw,4.6rem);background:linear-gradient(105deg,#a87f33,#ecd69e 45%,#c79f49 75%,#8a6a2a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 6px rgba(212,184,106,.25));">OF SUN</span>
+      </h1>
+      <p style="margin:16px 0 0;font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:rgba(10,31,61,.55);">WESTERN PACIFIC ROUTE</p>
+      <p style="margin:12px 0 0;font-size:17px;font-weight:600;color:#1a5068;">눈부신 여름 바다 위, 사흘간의 완벽한 휴양</p>
+    </div>
+    <div style="display:flex;justify-content:flex-end;align-items:center;min-width:0;">
+      <div style="width:100%;max-width:480px;background:#fafcff;padding:40px 36px;transform:rotate(2deg);box-shadow:-16px 24px 48px rgba(6,40,64,.12);border:1px solid rgba(212,184,106,.45);position:relative;">
+        <div style="position:absolute;inset:10px;border:1px solid rgba(212,184,106,.35);pointer-events:none;"></div>
+        <div style="position:absolute;top:0;right:0;width:48px;height:48px;background:linear-gradient(225deg,#d4b86a 50%,transparent 50%);opacity:.65;"></div>
+        <p style="margin:0 0 18px;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#d4b86a;font-weight:800;border-bottom:1px solid rgba(10,31,61,.08);padding-bottom:10px;position:relative;">Embarkation Brief</p>
+        <p style="margin:0 0 14px;font-family:'Nanum Myeongjo','Batang',serif;font-size:1.05rem;line-height:1.88;color:#0a1f3d;position:relative;">태양이 수평선을 하얗게 지우는 한여름, 당신은 각자의 사연을 안고 이 호화 여객선에 승선했습니다.</p>
+        <p style="margin:0;font-family:'Nanum Myeongjo','Batang',serif;font-size:1.05rem;line-height:1.88;color:#0a1f3d;position:relative;">끝없이 펼쳐진 맑은 바다, 찰랑이는 얼음 잔, 유쾌한 웃음소리. 육지와 단절되었다는 사실마저 낭만으로 치부될 만큼, 이 선상에서의 시간은 더할 나위 없이 눈부신 휴가 그 자체입니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3단 브로셔: article/h2/p/ul 대신 div만(플랫폼 산개 방지) · 회전·음수마진 제거 -->
+  <div class="cr-spread" style="display:grid;grid-template-columns:1fr 3px 1fr 3px 1fr;align-items:stretch;margin:0 0 40px;filter:drop-shadow(0 20px 44px rgba(10,50,80,.1));" aria-label="크루즈 안내 브로셔">
+    <div style="position:relative;padding:32px 24px 36px;background:linear-gradient(175deg,#fffefa 0%,#f8f3ea 55%,#f0ebe2 100%);border:1px solid rgba(212,184,106,.28);overflow:hidden;min-width:0;">
+      <div style="position:relative;z-index:1;">
+        <span style="position:absolute;top:0;right:0;font-family:'Nanum Myeongjo',serif;font-size:2.2rem;font-style:italic;color:rgba(212,184,106,.22);line-height:1;">01</span>
+        <div style="margin:0 0 8px;font-size:9px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:#1a8a9a;">세계관 소개</div>
+        <div style="margin:0 0 14px;font-family:'Nanum Myeongjo',serif;font-size:clamp(1.35rem,2.4vw,1.75rem);font-weight:400;line-height:1.15;color:#061528;">세계관<br>소개</div>
+        <div style="margin:0 0 10px;font-size:14px;line-height:1.7;color:#2a5570;">한여름의 호화 여객선. 태평양을 건너는 항해 동안, 승객들은 눈부신 갑판과 라운지, 별빛 아래의 파티를 누립니다.</div>
+        <div style="margin:0 0 10px;font-size:14px;line-height:1.7;font-family:'Nanum Myeongjo',serif;font-style:italic;color:#1a8a9a;">모든 것이 완벽하게 흘러가고 있습니다.</div>
+        <div style="margin:0;font-size:14px;line-height:1.7;color:#2a5570;">"손님 여러분께 안내 말씀 드립니다…"<br>치직-. 미세한 노이즈가 낀 안내방송이 갑판에 흐르기 시작합니다. 이런, 곧 비가 올 지도 모른다네요. 갑판에는 나가지 않는 게 좋겠어요.</div>
+      </div>
+    </div>
+    <div class="cr-crease" style="align-self:stretch;background:linear-gradient(90deg,rgba(0,0,0,.06),rgba(0,0,0,.14) 50%,rgba(255,255,255,.35));" aria-hidden="true"></div>
+    <div style="position:relative;z-index:2;padding:32px 24px 36px;background:linear-gradient(175deg,#fff 0%,#faf6ef 100%);border:1px solid rgba(212,184,106,.28);overflow:hidden;box-shadow:0 8px 32px rgba(10,50,80,.08);min-width:0;">
+      <div style="position:relative;z-index:1;">
+        <span style="position:absolute;top:0;right:0;font-family:'Nanum Myeongjo',serif;font-size:2.2rem;font-style:italic;color:rgba(212,184,106,.22);line-height:1;">02</span>
+        <div style="margin:0 0 8px;font-size:9px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:#1a8a9a;">등장인물</div>
+        <div style="margin:0 0 14px;font-family:'Nanum Myeongjo',serif;font-size:clamp(1.35rem,2.4vw,1.75rem);font-weight:400;line-height:1.15;color:#061528;">승선<br>명단</div>
+        <div style="margin:0;">
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted rgba(10,31,61,.15);font-size:13px;"><span style="font-family:'Nanum Myeongjo',serif;font-weight:700;">올리비아</span><span style="font-size:10px;letter-spacing:.12em;color:#d4b86a;">Captain</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted rgba(10,31,61,.15);font-size:13px;"><span style="font-family:'Nanum Myeongjo',serif;font-weight:700;">설하영</span><span style="font-size:10px;letter-spacing:.12em;color:#d4b86a;">Crew</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted rgba(10,31,61,.15);font-size:13px;"><span style="font-family:'Nanum Myeongjo',serif;font-weight:700;">크리세이스</span><span style="font-size:10px;letter-spacing:.12em;color:#d4b86a;">Suite</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted rgba(10,31,61,.15);font-size:13px;"><span style="font-family:'Nanum Myeongjo',serif;font-weight:700;">리지</span><span style="font-size:10px;letter-spacing:.12em;color:#d4b86a;">Lifeguard</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted rgba(10,31,61,.15);font-size:13px;"><span style="font-family:'Nanum Myeongjo',serif;font-weight:700;">레이나</span><span style="font-size:10px;letter-spacing:.12em;color:#d4b86a;">Ocean View</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dotted rgba(10,31,61,.15);font-size:13px;"><span style="font-family:'Nanum Myeongjo',serif;font-weight:700;">크리스티안</span><span style="font-size:10px;letter-spacing:.12em;color:#d4b86a;">Balcony</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="cr-crease" style="align-self:stretch;background:linear-gradient(90deg,rgba(0,0,0,.06),rgba(0,0,0,.14) 50%,rgba(255,255,255,.35));" aria-hidden="true"></div>
+    <div style="position:relative;padding:32px 24px 36px;background:linear-gradient(175deg,#fffefa 0%,#f8f3ea 55%,#f0ebe2 100%);border:1px solid rgba(212,184,106,.28);overflow:hidden;min-width:0;">
+      <div style="position:relative;z-index:1;">
+        <span style="position:absolute;top:0;right:0;font-family:'Nanum Myeongjo',serif;font-size:2.2rem;font-style:italic;color:rgba(212,184,106,.22);line-height:1;">03</span>
+        <div style="margin:0 0 8px;font-size:9px;font-weight:800;letter-spacing:.28em;text-transform:uppercase;color:#1a8a9a;">시작 상황</div>
+        <div style="margin:0 0 14px;font-family:'Nanum Myeongjo',serif;font-size:clamp(1.35rem,2.4vw,1.75rem);font-weight:400;line-height:1.15;color:#061528;">승선<br>선택</div>
+        <div style="padding:12px 0 12px 12px;border-left:2px solid #1a8a9a;">
+          <div style="font-size:9px;letter-spacing:.14em;color:#1a8a9a;font-weight:800;margin-bottom:4px;">일반 · 승객</div>
+          <div style="font-family:'Nanum Myeongjo',serif;margin-bottom:4px;color:#0a1f3d;font-weight:700;">승선한 여행객</div>
+          <div style="font-size:12px;color:#3d5568;">각자의 사연을 안고 승선한 평범한 휴양객.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 티켓: 기항지만 (홈 티켓 디자인) -->
+  <div style="display:grid;grid-template-columns:22px 1fr 22px;margin:0 0 40px;filter:drop-shadow(0 12px 32px rgba(10,50,80,.08));">
+    <div style="background:repeating-linear-gradient(180deg,#d4b86a 0 8px,transparent 8px 16px);opacity:.5;" aria-hidden="true"></div>
+    <div style="padding:24px 28px;background:linear-gradient(160deg,#fffefa,#f5f0e6);border-top:2px dashed rgba(10,31,61,.2);border-bottom:2px dashed rgba(10,31,61,.2);">
+      <p style="margin:0 0 12px;font-size:10px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:#d4b86a;">Boarding Information · 승선 안내</p>
+      <details open style="border-top:1px solid rgba(10,31,61,.1);">
+        <summary style="cursor:pointer;padding:12px 0;font-weight:700;font-size:14px;color:#0a1f3d;">기항지 · Trans-Pacific</summary>
+        <p style="margin:0 0 12px;padding-left:10px;font-size:13px;color:#3d5568;line-height:1.7;">태평양 횡단 노선 (Trans-Pacific)</p>
+        <p style="margin:0 0 12px;padding-left:10px;font-size:13px;color:#3d5568;line-height:1.7;">부산 → 도쿄 → 샌프란시스코 → 밴쿠버 → 알래스카</p>
+      </details>
+    </div>
+    <div style="background:radial-gradient(circle at 0 50%,transparent 6px,#f5f0e6 6px) 0 0/14px 14px repeat-y;" aria-hidden="true"></div>
+  </div>
+
+  <!-- UI 미리보기: 1열 단서 / 2열 다이스·엔딩 -->
+  <div style="margin:0 0 40px;">
+    <h2 style="margin:0 0 8px;font-family:'Nanum Myeongjo',serif;font-size:clamp(1.45rem,2.6vw,1.85rem);font-weight:700;color:#061528;">시스템 UI 미리보기</h2>
+    <p style="margin:0 0 18px;font-size:13px;color:#3d5568;font-weight:600;">상황에 따라 표시되는 정적 UI 이미지입니다. 버튼은 장식이며, 진행은 지문으로 이어집니다.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div style="grid-column:1/-1;min-width:0;padding:14px;background:#fffefa;border:1px solid #e8d9b0;box-shadow:0 8px 24px rgba(10,50,80,.08);">
+        <h3 style="margin:0 0 10px;font-size:15px;font-weight:900;letter-spacing:.06em;color:#061528;">단서</h3>
+        <img src="https://bi.pharang.workers.dev/?theme=cruise-clue&amp;id=log_01" alt="단서 카드 UI" style="width:100%;border:1px solid rgba(10,31,61,.1);background:#061528;" />
+        <p style="margin:10px 0 0;font-size:14px;color:#2a5570;line-height:1.65;font-weight:600;">선내 곳곳에서 단서를 획득할 수 있습니다.</p>
+      </div>
+      <div style="min-width:0;padding:14px;background:#fffefa;border:1px solid #e8d9b0;box-shadow:0 8px 24px rgba(10,50,80,.08);">
+        <h3 style="margin:0 0 10px;font-size:15px;font-weight:900;letter-spacing:.06em;color:#061528;">다이스</h3>
+        <img src="https://bi.pharang.workers.dev/?theme=cruise-dice&amp;reason=%EA%B0%91%ED%8C%90+%EC%88%98%EC%83%89&amp;result=14" alt="다이스 판정 UI" style="width:100%;border:1px solid rgba(10,31,61,.1);background:#061528;" />
+        <p style="margin:10px 0 0;font-size:14px;color:#2a5570;line-height:1.65;font-weight:600;">단서를 수집하거나 특정 액션 시 TRPG식 다이스 판정이 자동으로 일어납니다. 주사위 값에 따라 결과가 달라집니다.</p>
+      </div>
+      <div style="min-width:0;padding:14px;background:#fffefa;border:1px solid #e8d9b0;box-shadow:0 8px 24px rgba(10,50,80,.08);">
+        <h3 style="margin:0 0 10px;font-size:15px;font-weight:900;letter-spacing:.06em;color:#061528;">엔딩</h3>
+        <img src="https://bi.pharang.workers.dev/?theme=cruise-ending&amp;title=%EC%8B%AC%EC%97%B0+%EC%86%8D%EC%9C%BC%EB%A1%9C&amp;verdict=%EB%B0%94%EB%8B%A4%EC%9D%98+%EC%9D%BC%EB%B6%80%EA%B0%80+%EB%90%98%EB%8B%A4" alt="엔딩 카드 UI" style="width:100%;border:1px solid rgba(10,31,61,.1);background:#061528;" />
+        <p style="margin:10px 0 0;font-size:14px;color:#2a5570;line-height:1.65;font-weight:600;"><code style="font-size:13px;color:#0a1f3d;font-weight:800;">!엔딩</code> 입력 시 지금까지 상황을 참고하여 AI가 엔딩 카드를 생성합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단 접이식: 티켓 톤 + 밝은 샴페인 테두리만 -->
+  <details style="margin:10px 0;background:linear-gradient(160deg,#fffefa,#f5f0e6);color:#2a5570;border:1px solid #e8d9b0;">
+    <summary style="cursor:pointer;padding:15px 18px;font-weight:800;font-size:15px;color:#0a1f3d;background:transparent;">선내 안내 <span style="float:right;color:#e8d9b0;font-size:12px;">▾</span></summary>
+    <div style="padding:20px 22px 22px;border-top:1px solid rgba(212,184,106,.28);font-size:14px;line-height:1.9;color:#2a5570;">
+      <p style="margin:0 0 12px;"><b style="color:#061528;">12F · 브릿지</b><br>선장실 · 조타실. 승객 출입 제한.</p>
+      <p style="margin:0 0 12px;"><b style="color:#061528;">10F · 수영장</b><br>인피니티 풀 · 자쿠지. 06:00–22:00 개방.</p>
+      <p style="margin:0 0 12px;"><b style="color:#061528;">9F · 갑판</b><br>일광욕 · 산책 · 칵테일 바. 야간 별빛 파티.</p>
+      <p style="margin:0 0 12px;"><b style="color:#061528;">7F · 라운지</b><br>선셋 칵테일 리셉션 · 정장 디너 파티.</p>
+      <p style="margin:0 0 12px;"><b style="color:#061528;">5–8F · 객실</b><br>오션뷰 스위트 · 발코니 · 룸서비스 24h.</p>
+      <p style="margin:0;"><b style="color:#061528;">4F · 레스토랑</b><br>정식 다이닝 · 샐러드바 · 동층 수족관.</p>
+    </div>
+  </details>
+
+  <details style="margin:10px 0;background:linear-gradient(160deg,#fffefa,#f5f0e6);color:#2a5570;border:1px solid #e8d9b0;">
+    <summary style="cursor:pointer;padding:15px 18px;font-weight:800;font-size:15px;color:#0a1f3d;background:transparent;">승선 명단 <span style="float:right;color:#e8d9b0;font-size:12px;">▾</span></summary>
+    <div style="padding:20px 22px 22px;border-top:1px solid rgba(212,184,106,.28);">
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px;">
+        <div style="min-width:0;padding:8px;background:#fffefa;border:1px solid #e8d9b0;">
+          <img src="https://bi.pharang.workers.dev/assets/cruise/%EC%98%AC%EB%A6%AC%EB%B9%84%EC%95%84.png" alt="올리비아" />
+          <strong style="display:block;margin:10px 0 0;font-family:'Nanum Myeongjo',serif;font-size:16px;color:#061528;">올리비아</strong>
+          <em style="display:block;margin:2px 0 0;font-style:normal;font-size:12px;letter-spacing:.12em;color:#c9b27a;font-weight:700;">Captain</em>
+          <p style="margin:6px 0 0;font-size:13px;color:#3d5568;">선장 · 12F 선장실</p>
+        </div>
+        <div style="min-width:0;padding:8px;background:#fffefa;border:1px solid #e8d9b0;">
+          <img src="https://bi.pharang.workers.dev/assets/cruise/%EC%84%A4%ED%95%98%EC%98%81.png" alt="설하영" />
+          <strong style="display:block;margin:10px 0 0;font-family:'Nanum Myeongjo',serif;font-size:16px;color:#061528;">설하영</strong>
+          <em style="display:block;margin:2px 0 0;font-style:normal;font-size:12px;letter-spacing:.12em;color:#c9b27a;font-weight:700;">Crew</em>
+          <p style="margin:6px 0 0;font-size:13px;color:#3d5568;">객실 승무원 · 숙소 1104호</p>
+        </div>
+        <div style="min-width:0;padding:8px;background:#fffefa;border:1px solid #e8d9b0;">
+          <img src="https://bi.pharang.workers.dev/assets/cruise/%ED%81%AC%EB%A6%AC%EC%84%B8%EC%9D%B4%EC%8A%A4.png" alt="크리세이스" />
+          <strong style="display:block;margin:10px 0 0;font-family:'Nanum Myeongjo',serif;font-size:16px;color:#061528;">크리세이스</strong>
+          <em style="display:block;margin:2px 0 0;font-style:normal;font-size:12px;letter-spacing:.12em;color:#c9b27a;font-weight:700;">Suite</em>
+          <p style="margin:6px 0 0;font-size:13px;color:#3d5568;">패션 모델 · 801호 손님</p>
+        </div>
+        <div style="min-width:0;padding:8px;background:#fffefa;border:1px solid #e8d9b0;">
+          <img src="https://bi.pharang.workers.dev/assets/cruise/%EB%A6%AC%EC%A7%80.png" alt="리지" />
+          <strong style="display:block;margin:10px 0 0;font-family:'Nanum Myeongjo',serif;font-size:16px;color:#061528;">리지</strong>
+          <em style="display:block;margin:2px 0 0;font-style:normal;font-size:12px;letter-spacing:.12em;color:#c9b27a;font-weight:700;">Lifeguard</em>
+          <p style="margin:6px 0 0;font-size:13px;color:#3d5568;">인피니티 풀 안전요원 · 숙소 1102호</p>
+        </div>
+        <div style="min-width:0;padding:8px;background:#fffefa;border:1px solid #e8d9b0;">
+          <img src="https://bi.pharang.workers.dev/assets/cruise/%EB%A0%88%EC%9D%B4%EB%82%98.png" alt="레이나" />
+          <strong style="display:block;margin:10px 0 0;font-family:'Nanum Myeongjo',serif;font-size:16px;color:#061528;">레이나</strong>
+          <em style="display:block;margin:2px 0 0;font-style:normal;font-size:12px;letter-spacing:.12em;color:#c9b27a;font-weight:700;">Ocean View</em>
+          <p style="margin:6px 0 0;font-size:13px;color:#3d5568;">관광객 · 208호 손님</p>
+        </div>
+        <div style="min-width:0;padding:8px;background:#fffefa;border:1px solid #e8d9b0;">
+          <img src="https://bi.pharang.workers.dev/assets/cruise/%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8B%B0%EC%95%88.png" alt="크리스티안" />
+          <strong style="display:block;margin:10px 0 0;font-family:'Nanum Myeongjo',serif;font-size:16px;color:#061528;">크리스티안</strong>
+          <em style="display:block;margin:2px 0 0;font-style:normal;font-size:12px;letter-spacing:.12em;color:#c9b27a;font-weight:700;">Balcony</em>
+          <p style="margin:6px 0 0;font-size:13px;color:#3d5568;">조향사 · 804호 손님</p>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details style="margin:10px 0;background:linear-gradient(160deg,#fffefa,#f5f0e6);color:#2a5570;border:1px solid #e8d9b0;">
+    <summary style="cursor:pointer;padding:15px 18px;font-weight:800;font-size:15px;color:#0a1f3d;background:transparent;">에셋 코드 <span style="float:right;color:#e8d9b0;font-size:12px;">▾</span></summary>
+    <div style="padding:20px 22px 22px;border-top:1px solid rgba(212,184,106,.28);font-size:14px;line-height:1.9;color:#2a5570;">
+      <p style="margin:0 0 16px;"><b style="color:#061528;">이미지 출력</b><br>![](https://bi.pharang.workers.dev/c/캐릭터코드/상황코드?t=난수)</p>
+      <p style="margin:0 0 16px;"><b style="color:#061528;">캐릭터코드</b><br>SL(설하영), KR(크리스티안), CH(크리세이스), RN(레이나), LZ(리지), OV(올리비아)</p>
+      <p style="margin:0 0 18px;"><b style="color:#061528;">상황코드</b><br>1(기본), 2(웃음), 3(슬픔), 4(놀람), 5(충격), 6(설렘), 7(광기/이성 감소), 8(광기 심화/바다)<br>A1(갑판), A2(갑판/저녁), A3(식당), A4(아이스크림 하드), A5(소파, 나른), A6(라운지, 파티), B1(해안산책), B2(해변 비치베드), B3(수족관)</p>
+      <p style="margin:0;"><a href="https://cheongyeon-dev.github.io/CR/gallery.html" target="_blank" style="display:inline-block;padding:10px 20px;background:linear-gradient(135deg,#1d456a,#d4b86a);color:#fff;text-decoration:none;font-size:14px;font-weight:900;border-radius:12px;border:1px solid rgba(240,228,196,0.55);box-shadow:0 6px 16px rgba(10,50,80,0.2);">에셋 갤러리 미리보기 →</a></p>
+    </div>
+  </details>
+
+  <details style="margin:10px 0;background:linear-gradient(160deg,#fffefa,#f5f0e6);color:#2a5570;border:1px solid #e8d9b0;">
+    <summary style="cursor:pointer;padding:15px 18px;font-weight:800;font-size:15px;color:#0a1f3d;background:transparent;">업데이트 내역 <span style="float:right;color:#e8d9b0;font-size:12px;">▾</span></summary>
+    <div style="padding:20px 22px 22px;border-top:1px solid rgba(212,184,106,.28);"></div>
+  </details>
+
+  <div style="padding:36px 0 8px;text-align:center;font-size:12px;letter-spacing:.16em;color:rgba(10,31,61,.45);">THREE DAYS OF SUN · Summer Cruise</div>
+</div>
+</template>
+<script>
+(function(){var h=document.getElementById('charDescriptionHost'),t=document.getElementById('charDescriptionTemplate');if(h&&t){h.attachShadow({mode:'closed'}).innerHTML=t.innerHTML.trim();}})();
+</script>
